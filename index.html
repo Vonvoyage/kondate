@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="献立">
+<meta name="theme-color" content="#ffffff">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='38' fill='%23007AFF'/%3E%3Ctext x='96' y='130' font-size='100' text-anchor='middle'%3E🍱%3C/text%3E%3C/svg%3E">
+<title>献立アプリ</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --text: #000000;
+  --text2: #3c3c43;
+  --text3: #8e8e93;
+  --border: #e0e0e0;
+  --blue: #007AFF;
+  --green: #34C759;
+  --orange: #FF9500;
+  --red: #FF3B30;
+  --teal-bg: #E1F5EE; --teal-text: #085041;
+  --amber-bg: #FAEEDA; --amber-text: #854F0B;
+  --blue-bg: #E6F1FB; --blue-text: #0C447C;
+  --green-bg: #E9F8EF; --green-text: #1D7A47;
+  --gray-bg: #F1EFE8; --gray-text: #5F5E5A;
+  --pink-bg: #FBEAF0; --pink-text: #72243E;
+  --mint-bg: #EAF3DE; --mint-text: #27500A;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1c1c1e; --card:#2c2c2e; --text:#ffffff; --text2:#ebebf5;
+    --text3:#8e8e93; --border:#38383a;
+    --teal-bg:#0a3d2e; --teal-text:#5dcaa5;
+    --amber-bg:#3d2800; --amber-text:#EF9F27;
+    --blue-bg:#001f3d; --blue-text:#85b7eb;
+    --green-bg:#1a3a1a; --green-text:#97C459;
+    --gray-bg:#2a2a2a; --gray-text:#B4B2A9;
+    --pink-bg:#3a1020; --pink-text:#ED93B1;
+    --mint-bg:#1a2a10; --mint-text:#C0DD97;
+  }
+}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--text)}
+
+/* ── app shell ── */
+#app{display:flex;flex-direction:column;height:100%;padding-top:var(--safe-top)}
+.topbar{background:var(--card);border-bottom:0.5px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.topbar-title{font-size:17px;font-weight:600;flex:1}
+.wswitch{display:flex;border:0.5px solid var(--border);border-radius:8px;overflow:hidden}
+.wsb{padding:5px 12px;font-size:12px;font-weight:500;cursor:pointer;background:var(--card);color:var(--text3);border:none;color:var(--text3)}
+.wsb.on{background:var(--blue);color:#fff}
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.tabbar{background:var(--card);border-top:0.5px solid var(--border);display:flex;padding:8px 0;padding-bottom:calc(8px + var(--safe-bottom));flex-shrink:0}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 0}
+.tab .ti{font-size:22px;line-height:1}
+.tab .tl{font-size:10px;color:var(--text3)}
+.tab.active .tl{color:var(--blue)}
+.pg{display:none}.pg.on{display:block;padding-bottom:16px}
+
+/* ── strip ── */
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:10px 10px 6px}
+.dc{background:var(--card);border-radius:10px;padding:6px 2px;text-align:center;cursor:pointer;border:1.5px solid transparent;position:relative}
+.dc.sel{border-color:var(--blue)}
+.dc.today-c{background:var(--blue-bg)}
+.dc.today-c .dd{color:var(--blue)}
+.dn{font-size:9px;color:var(--text3);line-height:1.4}
+.dd{font-size:15px;font-weight:600;color:var(--text);line-height:1.2}
+.daydot{width:5px;height:5px;border-radius:50%;margin:3px auto 0}
+.today-pip{position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:7px;padding:1px 4px;border-radius:4px;white-space:nowrap}
+
+/* ── event / notice banners ── */
+.ev-banner{margin:0 10px 6px;background:var(--card);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:8px;border:0.5px solid var(--border)}
+.nwn{margin:0 10px 8px;background:var(--mint-bg);border-radius:10px;padding:9px 12px;border:0.5px solid #C0DD97}
+.nwn-t{font-size:13px;font-weight:500;color:var(--mint-text);margin-bottom:2px}
+.nwn-s{font-size:11px;color:var(--mint-text);opacity:.8}
+
+/* ── meal blocks ── */
+.sp{padding:0 10px}
+.mb{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.mh{padding:12px 14px 7px}
+.mt{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:2px}
+.mn{font-size:15px;font-weight:500;color:var(--text);margin-bottom:5px}
+.tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:11px;padding:2px 7px;border-radius:20px}
+.tp{background:var(--pink-bg);color:var(--pink-text)}
+.tg{background:var(--gray-bg);color:var(--gray-text)}
+.tw{background:var(--teal-bg);color:var(--teal-text)}
+.dev-row{display:flex;gap:4px;flex-wrap:wrap;padding:5px 14px 8px}
+.dchip{display:inline-flex;align-items:center;gap:3px;border-radius:6px;padding:2px 7px;font-size:11px}
+.link-banner{background:var(--amber-bg);padding:7px 14px;display:flex;align-items:center;gap:6px;border-top:0.5px solid rgba(186,116,23,.3)}
+.link-text{font-size:12px;color:var(--amber-text);flex:1;line-height:1.4}
+.soup-tog{background:var(--teal-bg);padding:8px 14px;border-top:0.5px solid rgba(29,158,117,.3);display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.soup-lbl{font-size:13px;color:var(--teal-text);display:flex;align-items:center;gap:5px;font-weight:500}
+.soup-body{padding:10px 14px 12px;background:var(--teal-bg);display:none}
+.soup-body.on{display:block}
+.soup-step{font-size:13px;color:var(--teal-text);line-height:1.6;padding-left:12px;position:relative;margin-bottom:3px}
+.soup-step::before{content:'·';position:absolute;left:3px;color:#1D9E75}
+.soup-dev{font-size:11px;font-weight:600;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:6px}
+.svrow{display:flex;border-top:0.5px solid var(--border)}
+.svseg{flex:1;padding:8px 8px;border-right:0.5px solid var(--border);display:flex;flex-direction:column;align-items:center}
+.svseg:last-child{border-right:none}
+.svlbl{font-size:10px;color:var(--text3);margin-bottom:2px}
+.svctrl{display:flex;align-items:center;gap:5px}
+.svbtn{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:none;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--blue);font-weight:500}
+.svnum{font-size:15px;font-weight:600;color:var(--text);min-width:16px;text-align:center}
+.rt{padding:9px 14px;border-top:0.5px solid var(--border);font-size:13px;color:var(--blue);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.rb{padding:12px 14px 14px;border-top:0.5px solid var(--border);display:none}
+.rb.on{display:block}
+.rl{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:8px}
+.step{display:flex;gap:8px;margin-bottom:7px;align-items:flex-start}
+.sn0{width:20px;height:20px;border-radius:50%;background:var(--bg);font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.st{font-size:13px;color:var(--text);line-height:1.55;flex:1}
+.bento-hd{background:var(--amber-bg);padding:10px 14px;border-top:0.5px solid rgba(186,116,23,.3);display:flex;justify-content:space-between;cursor:pointer;align-items:center}
+.bento-tl{font-size:13px;font-weight:500;color:var(--amber-text);display:flex;align-items:center;gap:5px}
+.bento-bd{padding:9px 14px 12px;background:var(--amber-bg);display:none}
+.bento-bd.on{display:block}
+.bstep{font-size:13px;color:var(--amber-text);line-height:1.6;padding-left:12px;position:relative;margin-bottom:3px}
+.bstep::before{content:'·';position:absolute;left:3px}
+
+/* ── PFC card (bottom) ── */
+.pfc-card{background:var(--card);border-radius:14px;margin-bottom:10px;padding:14px}
+.pfc-card-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:10px}
+.pfc-bar-big{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:7px}
+.pfc-pcts{display:flex;gap:10px;margin-bottom:12px}
+.pfc-pct{font-size:12px}
+.pfc-rows{display:flex;flex-direction:column;gap:7px}
+.pfc-row{display:flex;align-items:center;gap:8px}
+.pfc-lbl{font-size:12px;color:var(--text);width:72px}
+.pfc-trk{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.pfc-fil{height:100%;border-radius:3px}
+.pfc-val{font-size:11px;color:var(--text3);text-align:right;min-width:64px}
+
+/* ── 作り置き ── */
+.prep-intro{background:var(--mint-bg);border-radius:12px;padding:12px 14px;margin-bottom:12px;border:0.5px solid #C0DD97}
+.prep-intro-title{font-size:14px;font-weight:500;color:var(--mint-text);margin-bottom:4px}
+.prep-intro-sub{font-size:12px;color:var(--mint-text);opacity:.9;line-height:1.6}
+.prep-stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.prep-stat{background:var(--card);border-radius:10px;padding:10px;text-align:center}
+.prep-stat-num{font-size:20px;font-weight:500;color:var(--text)}
+.prep-stat-lbl{font-size:10px;color:var(--text3);margin-top:2px}
+.prep-card{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.prep-head{padding:12px 14px 10px;display:flex;align-items:flex-start;gap:10px}
+.prep-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:var(--bg)}
+.prep-info{flex:1}
+.prep-name{font-size:15px;font-weight:500;color:var(--text);margin-bottom:3px}
+.prep-meta{font-size:12px;color:var(--text3)}
+.prep-uses{display:flex;gap:5px;flex-wrap:wrap;padding:0 14px 10px}
+.prep-use-tag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--blue-bg);color:var(--blue-text)}
+.prep-recipe-tog{padding:9px 14px;border-top:0.5px solid var(--border);font-size:13px;color:var(--blue);cursor:pointer;display:flex;justify-content:space-between}
+.prep-recipe-body{padding:12px 14px 14px;border-top:0.5px solid var(--border);display:none}
+.prep-recipe-body.on{display:block}
+.prep-step{display:flex;gap:7px;margin-bottom:6px;align-items:flex-start}
+.prep-sn{width:19px;height:19px;border-radius:50%;background:var(--bg);font-size:11px;font-weight:600;color:var(--text2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.prep-st{font-size:13px;color:var(--text);line-height:1.5;flex:1}
+.plan-card{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.plan-head{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.plan-title{font-size:14px;font-weight:500;color:var(--text)}
+.plan-sub{font-size:12px;color:var(--text3);margin-top:1px}
+.plan-body{padding:0 14px 12px;display:none}
+.plan-body.on{display:block}
+.plan-item{padding:6px 0;border-bottom:0.5px solid var(--border);font-size:13px;color:var(--text);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.plan-item:last-child{border-bottom:none}
+.plan-dot{width:6px;height:6px;border-radius:50%;background:#1D9E75;margin-top:5px;flex-shrink:0}
+
+/* ── 買い物 ── */
+.shop-wtabs{display:flex;gap:8px;margin-bottom:12px;padding:12px 12px 0}
+.swt{flex:1;padding:9px;background:var(--card);border-radius:10px;text-align:center;cursor:pointer;border:1.5px solid transparent;font-size:13px;font-weight:500;color:var(--text3)}
+.swt.on{border-color:var(--blue);color:var(--blue)}
+.price-card{background:var(--card);border-radius:12px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;margin:0 12px 12px}
+.pc-price{font-size:22px;font-weight:500;color:var(--text)}
+.pc-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.shop-body{padding:0 12px}
+.sc{font-size:12px;font-weight:600;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:5px}
+.si{background:var(--card);border-radius:10px;padding:11px 13px;display:flex;align-items:center;gap:8px;margin-bottom:5px;cursor:pointer;-webkit-user-select:none}
+.ck{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;transition:all .15s}
+.ck.on{background:var(--green);border-color:var(--green)}
+.sn2{font-size:14px;color:var(--text);flex:1}
+.sn2.done{text-decoration:line-through;color:var(--text3)}
+.sq{font-size:12px;color:var(--text3);margin-right:4px}
+.sprice{font-size:12px;color:var(--blue);white-space:nowrap}
+
+/* ── 栄養 ── */
+.nw{padding:12px}
+.nc{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px}
+.nh{font-size:14px;font-weight:500;color:var(--text);margin-bottom:11px}
+.pfc-ring-wrap{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.pfc-legend{display:flex;flex-direction:column;gap:7px;flex:1}
+.pfc-leg-row{display:flex;align-items:center;gap:7px}
+.pfc-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.nrow{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.nlbl{font-size:13px;color:var(--text);width:72px}
+.ntrk{flex:1;height:7px;background:var(--bg);border-radius:4px;overflow:hidden}
+.nfil{height:100%;border-radius:4px}
+.nval{font-size:12px;color:var(--text3);width:40px;text-align:right}
+.ntgt{font-size:11px;color:var(--text3);opacity:.5;width:36px;text-align:right}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <span class="topbar-title" id="nav-t">今週の献立</span>
+    <div class="wswitch">
+      <div class="wsb on" id="wb0" onclick="switchWeek(0)">今週</div>
+      <div class="wsb" id="wb1" onclick="switchWeek(1)">来週</div>
+    </div>
+  </div>
+  <div class="content" id="content">
+    <div class="pg on" id="pg-menu">
+      <div class="strip" id="strip"></div>
+      <div id="ev-area"></div>
+      <div id="nwn-area"></div>
+      <div class="sp" id="day-content"></div>
+    </div>
+    <div class="pg" id="pg-prep" style="padding:12px">
+      <div id="prep-inner"></div>
+    </div>
+    <div class="pg" id="pg-shop">
+      <div class="shop-wtabs">
+        <div class="swt on" id="swt0" onclick="switchShopWeek(0)">今週</div>
+        <div class="swt" id="swt1" onclick="switchShopWeek(1)">来週</div>
+      </div>
+      <div class="price-card" id="price-card"></div>
+      <div class="shop-body" id="shop-inner"></div>
+    </div>
+    <div class="pg" id="pg-nutri">
+      <div class="nw" id="nutri-inner"></div>
+    </div>
+  </div>
+  <div class="tabbar">
+    <div class="tab active" id="t-menu" onclick="sw('menu','献立')"><span class="ti">🗓</span><span class="tl">献立</span></div>
+    <div class="tab" id="t-prep" onclick="sw('prep','作り置き')"><span class="ti">🥡</span><span class="tl">作り置き</span></div>
+    <div class="tab" id="t-shop" onclick="sw('shop','買い物')"><span class="ti">🛒</span><span class="tl">買い物</span></div>
+    <div class="tab" id="t-nutri" onclick="sw('nutri','栄養')"><span class="ti">📊</span><span class="tl">栄養</span></div>
+  </div>
+</div>
+
+<script>
+// ── データ ──────────────────────────────────────────
+const now=new Date();
+const month=now.getMonth()+1;
+const todayDow=now.getDay();
+const todayDate=now.getDate();
+const isFriEve=(todayDow===5&&now.getHours()>=17)||todayDow===6||todayDow===0;
+const DAYS=['月','火','水','木','金','土','日'];
+const WE=[5,6];
+const PFC_C={p:'#378ADD',f:'#FF9500',c:'#34C759'};
+const DC_STYLE={'ホットクック':{bg:'#E9F8EF',color:'#1D7A47'},'ヘルシオ':{bg:'#FAEEDA',color:'#854F0B'},'レンジ':{bg:'#E6F1FB',color:'#0C447C'}};
+
+function getMon(off=0){const d=new Date(now);const dw=d.getDay();d.setDate(d.getDate()+(dw===0?-6:1-dw)+off*7);d.setHours(0,0,0,0);return d;}
+function getSeason(){return month>=3&&month<=5?'spring':month>=6&&month<=8?'summer':month>=9&&month<=11?'autumn':'winter';}
+const season=getSeason();
+
+const SOUPS={
+  hc_wakame_tofu:{name:'わかめと豆腐のみそ汁',device:'ホットクック',recipe:['内鍋に水400ml・顆粒だし小さじ1/2・角切り豆腐を入れる','ホットクック「スープ」モードで沸かす（タイマー予約可）','わかめを加えみそを溶き入れ保温に切り替えて完成']},
+  hc_negi_daikon:{name:'大根とねぎのみそ汁',device:'ホットクック',recipe:['大根薄切り・ねぎ小口切りを内鍋へ','水400ml・顆粒だしでホットクック「スープ」8分','みそを溶き入れ完成']},
+  hc_nameko_tofu:{name:'なめこと豆腐のみそ汁',device:'ホットクック',recipe:['なめこ・角切り豆腐を内鍋へ','水400ml・顆粒だしでホットクック「スープ」6分','みそを溶き入れ完成']},
+  hc_kinoko:{name:'きのこと豆腐のみそ汁',device:'ホットクック',recipe:['しめじ・豆腐を内鍋へ','水400ml・顆粒だしでホットクック「スープ」8分','みそを溶き入れ小ねぎを散らす']},
+  hc_consomme:{name:'コンソメ野菜スープ',device:'ホットクック',recipe:['薄切り玉ねぎ・にんじんを内鍋へ','水400ml・コンソメでホットクック「スープ」10分','塩こしょうで調整']},
+  hc_corn:{name:'中華風コーンスープ',device:'ホットクック',recipe:['コーン缶汁ごと・水300ml・中華だしを内鍋へ','ホットクック「スープ」5分で温める','水溶き片栗粉でとろみ→溶き卵を流し入れ「スープ」2分']},
+  hls_onion:{name:'オニオングラタンスープ',device:'ヘルシオ',recipe:['薄切り玉ねぎをヘルシオ180℃で15分','水400ml・コンソメと合わせ耐熱カップへ','チーズのせヘルシオ230℃で5分']},
+};
+
+const dinnerDB={
+  spring:[
+    {name:'ホットクック 筍と鶏の煮物',kcal:520,p:30,f:18,c:44,type:'和',devices:['ホットクック','レンジ'],soupKey:'hc_wakame_tofu',recipe:['たけのこ水煮・鶏もも肉を食べやすく切る','しょうゆ・みりん・砂糖・だし汁でホットクック「煮物」25分','冷凍ほうれん草をレンジ2分で副菜に'],bento:{name:'筍ご飯弁当',steps:['煮汁ごとご飯に混ぜてレンジ1分','残りの煮物を詰める','朝5分で完成']}},
+    {name:'ヘルシオ 菜の花とサーモンのロースト',kcal:490,p:34,f:22,c:30,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',recipe:['サーモン2切れに塩こしょう・オリーブ油を振る','菜の花・ミニトマトとともに角皿へ','ヘルシオ220℃で13分'],bento:{name:'サーモン弁当',steps:['サーモンをレンジ1分温め','菜の花の残りと一緒に詰める','朝4分で完成']}},
+    {name:'ホットクック 豚とキャベツの蒸し煮',kcal:500,p:28,f:22,c:38,type:'和',devices:['ホットクック'],soupKey:'hc_negi_daikon',recipe:['豚バラ・春キャベツを食べやすく切る','ポン酢・ごま油・塩でホットクック「蒸し物」10分','ごまを散らして完成'],bento:{name:'豚キャベツ弁当',steps:['残りをレンジ1分温める','ポン酢を少しかけて詰める','朝4分で完成']}},
+    {name:'ヘルシオ アスパラと鶏のグリル',kcal:480,p:34,f:18,c:30,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',recipe:['鶏もも・アスパラに塩こしょう・オリーブ油を振る','ヘルシオ210℃で18分','レモンを絞って完成'],bento:{name:'チキングリル弁当',steps:['鶏肉をレンジ1分温め切り分ける','アスパラとともに詰める','朝5分で完成']}},
+    {name:'ホットクック 春野菜のポトフ',kcal:430,p:24,f:16,c:48,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',recipe:['新玉ねぎ・新じゃが・にんじん・鶏むね肉を大きく切る','コンソメ・水400mlでホットクック「スープ」25分','塩こしょうで味を調える'],bento:{name:'ポトフ弁当',steps:['残りをスープジャーへ温めて入れる','パンを添えると豪華に','朝5分で完成']}},
+    {name:'ヘルシオ 鯛のアクアパッツァ',kcal:460,p:36,f:14,c:32,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',recipe:['鯛・アサリ・ミニトマト・にんにくを耐熱容器に','白ワイン大さじ2・水大さじ2・塩こしょうを加える','ヘルシオ230℃で15分'],bento:{name:'鯛フレーク弁当',steps:['鯛をほぐしご飯に混ぜる','オリーブとトマトを添えて彩り','朝5分で完成']}},
+    {name:'ホットクック たけのこご飯',kcal:510,p:18,f:12,c:82,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',recipe:['米2合・たけのこ水煮・油揚げ・しょうゆ・みりん・だし汁を内鍋へ','ホットクック「炊飯」モードで完成','三つ葉を散らして春らしく'],bento:{name:'たけのこご飯弁当',steps:['そのままお弁当箱に詰めるだけ','前日の副菜を添えて完成','朝3分で完成']}},
+  ],
+  winter:[
+    {name:'ホットクック 豚の角煮',kcal:580,p:28,f:32,c:38,type:'和',devices:['ホットクック','レンジ'],soupKey:'hc_wakame_tofu',recipe:['豚バラ300g・大根1/3本を大きめに切る','しょうゆ・みりん・砂糖・水でホットクック「煮物」45分','冷凍ほうれん草をレンジ2分で副菜に'],bento:{name:'角煮弁当',steps:['角煮をレンジ1分30秒温める','たれごとご飯にかけて丼風に','朝5分で完成']}},
+    {name:'ホットクック 白菜と豚のミルフィーユ鍋',kcal:490,p:32,f:22,c:36,type:'和',devices:['ホットクック'],soupKey:'hc_nameko_tofu',recipe:['白菜と豚バラを交互に重ね内鍋へ','だし汁・塩・しょうゆ少々でホットクック「煮物」15分','ポン酢で食べる'],bento:{name:'白菜豚巻き弁当',steps:['残りをレンジ1分温める','ポン酢をかけてご飯と詰める','朝4分で完成']}},
+    {name:'ヘルシオ 鶏の照り焼き',kcal:520,p:34,f:20,c:36,type:'和',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',recipe:['鶏もも肉に照り焼きタレを揉み込み30分置く','ヘルシオ210℃で15分、裏返して5分','さつまいもを同じ庫内で同時調理'],bento:{name:'照り焼きチキン弁当',steps:['鶏肉をレンジ1分温め切り分ける','さつまいもとともに詰める','朝5分で完成']}},
+    {name:'ホットクック ビーフシチュー',kcal:620,p:30,f:28,c:58,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',recipe:['牛すね200g・玉ねぎ・にんじん・じゃがいもを切る','市販ルー1かけ・水300mlでホットクック「スープ」25分'],bento:{name:'シチュードリア弁当',steps:['シチューをレンジで温めご飯にかける','チーズをのせヘルシオで焼き色を','朝7分で完成']}},
+    {name:'ヘルシオ ローストチキン',kcal:680,p:44,f:36,c:28,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',recipe:['鶏もも2枚にハーブソルトを擦り込む','ヘルシオ230℃で20分','ズッキーニ・パプリカを同時ロースト'],bento:{name:'チキンサンド弁当',steps:['食パンをヘルシオで2分トースト','鶏肉・野菜・マヨネーズを挟む','朝10分で完成']}},
+    {name:'ホットクック 麻婆豆腐',kcal:540,p:22,f:24,c:52,type:'中',devices:['ホットクック','レンジ'],soupKey:'hc_corn',recipe:['豆腐1丁・豚ひき肉150g・市販の素を内鍋へ','ホットクック「炒め物」3分→水溶き片栗粉でとろみ','ご飯はレンジで温めて完成'],bento:{name:'麻婆丼弁当',steps:['麻婆豆腐をレンジ1分温める','ご飯の上にかけるだけ','朝5分で完成']}},
+    {name:'ホットクック すき焼き',kcal:720,p:38,f:34,c:62,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',recipe:['牛薄切り・白菜・長ねぎ・豆腐・しらたきを内鍋へ','割り下（しょうゆ:みりん:酒:砂糖=2:2:2:1）で「煮物」15分'],bento:{name:'すき焼き卵とじ弁当',steps:['残りにレンジで卵とじ30秒','ご飯に盛って親子丼風','朝5分で完成']}},
+  ],
+};
+dinnerDB.autumn=dinnerDB.winter; dinnerDB.summer=dinnerDB.spring;
+
+const wkLunches=[
+  {name:'ホットクック ペンネアラビアータ',kcal:580,p:18,f:16,c:88,devices:['ホットクック','レンジ'],recipe:['玉ねぎ・にんにく・トマト缶・鷹の爪をホットクック「炒め物」8分','ペンネはレンジ専用容器で茹でソースと和える','粉チーズをかけて完成']},
+  {name:'ヘルシオ 焼きカレー',kcal:620,p:22,f:18,c:90,devices:['ヘルシオ','レンジ'],recipe:['作り置きカレーをグラタン皿に盛りご飯をのせる','チーズをのせヘルシオ230℃で10〜12分','焦げ目がついたら完成']},
+];
+
+const breakfasts=[
+  {name:'レンジ蒸し野菜・目玉焼き',kcal:260,p:14,f:10,c:28,devices:['レンジ'],recipe:['キャベツ・にんじんを薄切りにして耐熱皿でラップしレンジ3分','塩・ごま油をかけて和える','卵を耐熱皿に黄身に楊枝で穴をあけラップしてレンジ1分']},
+  {name:'ヘルシオ トースト・ヨーグルト',kcal:300,p:12,f:8,c:46,devices:['ヘルシオ'],recipe:['食パンをヘルシオトーストで2〜3分','バター・ジャムを塗る','ヨーグルトにはちみつとフルーツを添える']},
+  {name:'レンジ 茶碗蒸し・みそ汁',kcal:250,p:16,f:8,c:30,devices:['レンジ'],recipe:['卵1個・だし汁150ml・しょうゆ小さじ1/2を混ぜ濾す','耐熱カップにラップして500Wで2分→30秒追加','みそ汁はホットクックでタイマー予約しておくと楽']},
+  {name:'ヘルシオ 蒸し豆腐プレート',kcal:230,p:14,f:10,c:22,devices:['ヘルシオ','レンジ'],recipe:['絹豆腐1/2丁をヘルシオ「蒸し物」5分','ポン酢・しょうが・刻みねぎをかける','冷凍ほうれん草をレンジ2分でしょうゆ和え']},
+  {name:'温泉卵ご飯・みそ汁',kcal:320,p:16,f:10,c:50,devices:['レンジ'],recipe:['市販温泉卵またはレンジ専用容器で作成','ご飯にのせてしょうゆ・めんつゆをかける','みそ汁はホットクックでタイマー予約']},
+  {name:'ヘルシオ フレンチトースト',kcal:380,p:14,f:14,c:52,devices:['ヘルシオ'],recipe:['卵1個・牛乳50ml・砂糖小さじ1を混ぜ食パンを10分浸す','角皿200℃で12〜15分（途中裏返す）','粉糖・メープルシロップをかけて完成']},
+  {name:'ホットクック お粥・梅干し',kcal:280,p:10,f:4,c:54,devices:['ホットクック'],recipe:['米1/2合・水700mlをホットクック内鍋へ','「お粥」メニューで約30分','梅干し・刻みのり・ごまを添える']},
+];
+
+const EVENTS=[
+  {m:2,d:3,icon:'👹',name:'節分',menu:'恵方巻・いわし'},{m:3,d:3,icon:'🎎',name:'ひな祭り',menu:'ちらし寿司・はまぐり汁'},
+  {m:4,d:7,icon:'🌸',name:'お花見シーズン',menu:'春の炊き込みご飯'},{m:4,d:13,icon:'🌸',name:'春 旬の食材',menu:'菜の花・たけのこ・春キャベツ'},
+  {m:5,d:5,icon:'🎏',name:'こどもの日',menu:'柏餅・ちまき'},{m:7,d:7,icon:'🎋',name:'七夕',menu:'そうめん'},
+  {m:10,d:31,icon:'🎃',name:'ハロウィン',menu:'かぼちゃスープ'},{m:12,d:24,icon:'🎄',name:'クリスマス',menu:'ローストチキン'},{m:12,d:31,icon:'🎍',name:'大晦日',menu:'年越しそば'},
+];
+
+const shopBaseItems=[
+  {cat:'肉・魚',items:[{n:'豚バラ薄切り',q:'300g',price:380},{n:'牛薄切り肉',q:'200g',price:480},{n:'鶏もも肉',q:'2枚',price:320},{n:'鮭切り身',q:'2切れ',price:360}]},
+  {cat:'野菜・きのこ',items:[{n:'白菜',q:'1/4個',price:100},{n:'長ねぎ',q:'2本',price:140},{n:'ほうれん草',q:'1束',price:148},{n:'さつまいも',q:'1本',price:128},{n:'しめじ',q:'1袋',price:108}]},
+  {cat:'汁物食材',items:[{n:'絹豆腐',q:'2丁',price:138},{n:'乾燥わかめ',q:'1袋',price:148},{n:'なめこ',q:'1袋',price:98},{n:'コンソメ',q:'1箱',price:198},{n:'コーン缶',q:'1缶',price:88},{n:'顆粒だし',q:'1袋',price:198}]},
+  {cat:'その他',items:[{n:'卵',q:'10個',price:238},{n:'冷凍ブロッコリー',q:'500g',price:298},{n:'みそ',q:'500g',price:298},{n:'市販麻婆豆腐の素',q:'2人分',price:148}]},
+];
+
+const prepItems=[
+  {icon:'🍗',name:'ホットクック サラダチキン',device:'ホットクック',time:'20分',keep:'冷蔵4日',uses:['月〜金の昼弁当のたんぱく質','朝食のトッピング','夜のサラダの主役'],recipe:['鶏むね肉1〜2枚に塩・こしょう・酒大さじ1を揉み込む','ホットクック内鍋に入れ「蒸し物」モードで20分','粗熱を取ってからラップで包み冷蔵保存']},
+  {icon:'🥕',name:'ヘルシオ 根菜のロースト',device:'ヘルシオ',time:'25分',keep:'冷蔵5日',uses:['弁当の副菜','みそ汁の具材','夕飯の付け合わせ'],recipe:['ごぼう・にんじん・れんこんを乱切りにし、しょうゆ・みりん・ごま油で和える','ヘルシオ角皿に広げて230℃で25分','多めに作って密閉容器に保存']},
+  {icon:'🍳',name:'ホットクック 煮卵',device:'ホットクック',time:'15分',keep:'冷蔵3日',uses:['毎朝の弁当おかず','朝ご飯のトッピング','小腹が空いたときに'],recipe:['卵6個を内鍋に並べ水100mlを加えホットクック「ゆで卵（かため）」','すぐ氷水で冷やして殻をむく','しょうゆ・みりん・砂糖の煮汁に一晩漬けると味付き煮卵に']},
+  {icon:'🌿',name:'ホットクック 切り干し大根の煮物',device:'ホットクック',time:'15分',keep:'冷蔵5日',uses:['弁当の副菜','夕飯の副菜','ご飯のお供'],recipe:['切り干し大根20gを水で戻し、にんじん・油揚げを細切りにする','しょうゆ・みりん・砂糖・だし汁と一緒にホットクック「煮物」10分','冷めたら容器に入れ冷蔵保存']},
+  {icon:'🥦',name:'レンジ ブロッコリーのまとめ蒸し',device:'レンジ',time:'5分',keep:'冷蔵3日',uses:['弁当の緑の副菜','朝食の付け合わせ','サラダのトッピング'],recipe:['冷凍ブロッコリー1袋を耐熱皿に入れてラップ','レンジ600Wで4分加熱','水気を切って塩・ごま油少々で和え密閉容器へ']},
+];
+
+const weeklyPrepPlan=[
+  {day:'日曜夜（30分）',icon:'☀️',tasks:['サラダチキン仕込み（ホットクック20分セット）','根菜ロースト（ヘルシオ25分セット）','ブロッコリー蒸し（レンジ5分）','この3品で月〜水の弁当おかずが全部揃う']},
+  {day:'水曜夜（15分）',icon:'🌙',tasks:['煮卵仕込み（ホットクック15分）','切り干し大根煮（ホットクック10分）','サラダチキンが残り少なければ追加仕込み','週後半の弁当・夕食副菜をここで補充']},
+];
+
+// ── State (localStorage で永続化) ──────────────────
+function loadState(){
+  try{return JSON.parse(localStorage.getItem('kondate_state')||'null');}catch{return null;}
+}
+function saveState(){
+  try{localStorage.setItem('kondate_state',JSON.stringify({shopSt,servD}));}catch{}
+}
+
+let curWeek=0,shopWeek=0,selDay=0;
+const saved=loadState();
+let servD=saved?.servD||[DAYS.map((_,i)=>({b:2,l:WE.includes(i)?2:1,d:2})),DAYS.map((_,i)=>({b:2,l:WE.includes(i)?2:1,d:2}))];
+let shopSt=saved?.shopSt||[shopBaseItems.map(c=>({...c,items:c.items.map(x=>({...x,done:false}))})),shopBaseItems.map(c=>({...c,items:c.items.map(x=>({...x,done:false}))}))];
+
+// ── Helpers ──────────────────────────────────────────
+function getWeekDates(off){const m=getMon(off);return DAYS.map((_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d;});}
+function getTodayIdx(off){return getWeekDates(off).findIndex(d=>d.getDate()===todayDate&&d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear());}
+function getDinners(off){const src=dinnerDB[season];return DAYS.map((_,i)=>src[(i+off*3)%src.length]);}
+function getLunchSrc(wk,di){
+  if(WE.includes(di))return null;
+  if(wk===1&&di===0){const d0=getDinners(0);return{din:d0[6],fromLabel:`今週日曜の夕飯「${d0[6].name}」の残りを活用`};}
+  const dins=getDinners(wk);const pi=(di+6)%7;
+  return{din:dins[pi],fromLabel:`前日（${DAYS[pi]}）の夕飯「${dins[pi].name}」の残りを活用`};
+}
+function dayPFC(wk,di){
+  const bf=breakfasts[di],dins=getDinners(wk),din=dins[di];
+  const ls=getLunchSrc(wk,di),wl=WE.includes(di)?wkLunches[di-5]:null;
+  const lP=ls?Math.round(ls.din.p*0.6):wl?wl.p:0;
+  const lF=ls?Math.round(ls.din.f*0.6):wl?wl.f:0;
+  const lC=ls?Math.round(ls.din.c*0.6):wl?wl.c:0;
+  const p=bf.p+lP+din.p,f=bf.f+lF+din.f,c=bf.c+lC+din.c,t=p+f+c;
+  const pPct=Math.round(p/t*100),fPct=Math.round(f/t*100),cPct=100-Math.round(p/t*100)-Math.round(f/t*100);
+  return{p,f,c,pPct,fPct,cPct};
+}
+function tog(id){
+  const el=document.getElementById(id),a=document.getElementById('a'+id);
+  if(!el||!a)return;
+  const on=el.classList.toggle('on');el.style.display=on?'block':'none';a.textContent=on?'▴':'▾';
+}
+function chg(wk,di,t,delta){
+  const sv=servD[wk][di];sv[t]=Math.max(1,Math.min(8,sv[t]+delta));
+  document.getElementById(`sv${wk}${di}${t}`).textContent=sv[t];
+  const dins=getDinners(wk);const ls=getLunchSrc(wk,di);
+  let base=t==='b'?breakfasts[di].kcal:t==='d'?dins[di].kcal:ls?Math.round(ls.din.kcal*0.6):WE.includes(di)?wkLunches[di-5].kcal:0;
+  document.getElementById(`kc${wk}${di}${t}`).textContent=Math.round(base*sv[t]);
+  saveState();
+}
+function dchips(devs){return(devs||[]).map(d=>{const s=DC_STYLE[d]||{bg:'#f2f2f7',color:'#555'};return`<div class="dchip" style="background:${s.bg};color:${s.color}">${d}</div>`;}).join('');}
+
+// ── Build blocks ──────────────────────────────────────
+function buildBlock(wk,di,label,name,kcal,svType,recipe,bentoData,linkText,isWknd,devices,soupKey){
+  const sv=servD[wk][di][svType];
+  const total=Math.round(kcal*sv);
+  const uid=`${wk}${di}${svType}`;
+  const rid='r'+uid,bid='b'+uid,sid='s'+uid;
+  const isBento=svType==='l'&&!isWknd;
+  const soup=soupKey?SOUPS[soupKey]:null;
+  const sDS=soup?DC_STYLE[soup.device]||{}:{};
+  return`<div class="mb">
+    <div class="mh">
+      <div class="mt">${label}</div>
+      <div class="mn">${name}</div>
+      <div class="tags">
+        ${isBento?'<span class="tag tp">弁当</span>':''}
+        ${isWknd&&svType==='l'?'<span class="tag tw">週末ランチ</span>':''}
+        <span class="tag tg">${kcal} kcal / 人</span>
+      </div>
+    </div>
+    ${devices&&devices.length?`<div class="dev-row">${dchips(devices)}</div>`:''}
+    ${linkText?`<div class="link-banner"><span style="font-size:14px">🍱</span><span class="link-text">${linkText}</span></div>`:''}
+    ${soup?`<div class="soup-tog" onclick="tog('${sid}')"><div class="soup-lbl"><span style="font-size:14px">🍵</span>${soup.name}</div><span id="a${sid}" style="font-size:12px">▾</span></div>
+    <div class="soup-body" id="${sid}">
+      <span class="soup-dev" style="background:${sDS.bg};color:${sDS.color}">${soup.device}</span>
+      ${soup.recipe.map(s=>`<div class="soup-step">${s}</div>`).join('')}
+    </div>`:''}
+    <div class="svrow">
+      <div class="svseg"><div class="svlbl">${isBento?'弁当数':'人数'}</div>
+        <div class="svctrl">
+          <button class="svbtn" onclick="chg(${wk},${di},'${svType}',-1)">−</button>
+          <span class="svnum" id="sv${uid}">${sv}</span>
+          <button class="svbtn" onclick="chg(${wk},${di},'${svType}',1)">+</button>
+        </div>
+      </div>
+      <div class="svseg"><div class="svlbl">合計 kcal</div>
+        <span style="font-size:14px;font-weight:600;color:var(--text)" id="kc${uid}">${total}</span>
+      </div>
+      <div class="svseg"><div class="svlbl">1人分</div>
+        <span style="font-size:13px;color:var(--text3)">${kcal}</span>
+      </div>
+    </div>
+    ${recipe?`<div class="rt" onclick="tog('${rid}')"><span>レシピを見る</span><span id="a${rid}">▾</span></div>
+    <div class="rb" id="${rid}">
+      <div class="rl">作り方</div>
+      ${recipe.map((s,j)=>`<div class="step"><div class="sn0">${j+1}</div><div class="st">${s}</div></div>`).join('')}
+    </div>`:''}
+    ${bentoData?`<div class="bento-hd" onclick="tog('${bid}')"><div class="bento-tl"><span style="font-size:14px">🍱</span>${bentoData.name}</div><span id="a${bid}">▾</span></div>
+    <div class="bento-bd" id="${bid}">
+      ${bentoData.steps.map(s=>`<div class="bstep">${s}</div>`).join('')}
+    </div>`:''}
+  </div>`;
+}
+
+function buildPFCCard(wk,di){
+  const pfc=dayPFC(wk,di);
+  const kcalEst=Math.round(pfc.p*4+pfc.f*9+pfc.c*4);
+  return`<div class="pfc-card">
+    <div class="pfc-card-title">今日の PFC バランス（1人分）</div>
+    <div class="pfc-bar-big">
+      <div style="width:${pfc.pPct}%;background:${PFC_C.p};height:100%"></div>
+      <div style="width:${pfc.fPct}%;background:${PFC_C.f};height:100%"></div>
+      <div style="width:${pfc.cPct}%;background:${PFC_C.c};height:100%"></div>
+    </div>
+    <div class="pfc-pcts">
+      <span class="pfc-pct" style="color:#0C447C">P ${pfc.pPct}%</span>
+      <span class="pfc-pct" style="color:#854F0B">F ${pfc.fPct}%</span>
+      <span class="pfc-pct" style="color:#1D7A47">C ${pfc.cPct}%</span>
+      <span class="pfc-pct" style="color:var(--text3);margin-left:auto">${kcalEst} kcal</span>
+    </div>
+    <div class="pfc-rows">
+      ${pfcRow('たんぱく質',PFC_C.p,pfc.p,80)}
+      ${pfcRow('脂質',PFC_C.f,pfc.f,65)}
+      ${pfcRow('炭水化物',PFC_C.c,pfc.c,300)}
+    </div>
+  </div>`;
+}
+function pfcRow(label,color,val,max){
+  const pct=Math.min(100,Math.round(val/max*100));
+  return`<div class="pfc-row"><div class="pfc-lbl">${label}</div><div class="pfc-trk"><div class="pfc-fil" style="width:${pct}%;background:${color}"></div></div><div class="pfc-val">${val}g / ${max}g</div></div>`;
+}
+
+function buildDay(){
+  const wk=curWeek,di=selDay;
+  const dins=getDinners(wk),bf=breakfasts[di],din=dins[di];
+  const isWknd=WE.includes(di);
+  const ls=getLunchSrc(wk,di),wl=isWknd?wkLunches[di-5]:null;
+  const lKcal=isWknd?wl.kcal:(ls?Math.round(ls.din.kcal*0.6):0);
+  const lName=isWknd?wl.name:(ls?ls.din.bento.name:'');
+  const lRecipe=isWknd?wl.recipe:null;
+  const lDevices=isWknd?wl.devices:['レンジ'];
+  const lBento=isWknd?null:(ls?ls.din.bento:null);
+  const lLink=isWknd?null:(ls?ls.fromLabel:null);
+  const dates=getWeekDates(wk);
+  const dm=dates[di].getMonth()+1,dd=dates[di].getDate();
+  const ev=EVENTS.find(e=>e.m===dm&&Math.abs(e.d-dd)<=2)||null;
+  document.getElementById('ev-area').innerHTML=ev?`<div class="ev-banner"><span style="font-size:16px">${ev.icon}</span><div><div style="font-size:12px;font-weight:500;color:var(--text)">${ev.name}</div><div style="font-size:11px;color:var(--text3)">おすすめ：${ev.menu}</div></div></div>`:'';
+  document.getElementById('nwn-area').innerHTML=(wk===0&&isFriEve)?`<div class="nwn"><div class="nwn-t">来週の献立が準備できています</div><div class="nwn-s">「来週」タブで確認・土日の買い物にどうぞ</div></div>`:'';
+  document.getElementById('day-content').innerHTML=
+    buildBlock(wk,di,'朝食',bf.name,bf.kcal,'b',bf.recipe,null,null,false,bf.devices,null)+
+    buildBlock(wk,di,isWknd?'昼食':'昼食（弁当）',lName,lKcal,'l',lRecipe,lBento,lLink,isWknd,lDevices,null)+
+    buildBlock(wk,di,'夕食',din.name,din.kcal,'d',din.recipe,null,null,false,din.devices,din.soupKey)+
+    buildPFCCard(wk,di);
+}
+
+function buildStrip(){
+  const wk=curWeek,dates=getWeekDates(wk),tidx=getTodayIdx(wk);
+  const g=document.getElementById('strip');g.innerHTML='';
+  DAYS.forEach((d,i)=>{
+    const isWk=WE.includes(i),isToday=i===tidx;
+    const c=document.createElement('div');
+    c.className='dc'+(i===selDay?' sel':'')+(isToday?' today-c':'');
+    c.innerHTML=`${isToday?'<div class="today-pip">今日</div>':''}
+      <div class="dn" style="${isWk?'color:var(--blue)':''}">${d}</div>
+      <div class="dd">${dates[i].getDate()}</div>
+      <div class="daydot" style="background:${isToday?'var(--blue)':isWk?'var(--blue)':'var(--border)'}"></div>`;
+    c.onclick=()=>{selDay=i;buildStrip();buildDay();document.getElementById('content').scrollTop=0;};
+    g.appendChild(c);
+  });
+}
+
+function switchWeek(wk){
+  curWeek=wk;
+  document.getElementById('wb0').classList.toggle('on',wk===0);
+  document.getElementById('wb1').classList.toggle('on',wk===1);
+  const ti=getTodayIdx(wk);
+  selDay=wk===0&&ti>=0?ti:0;
+  buildStrip();buildDay();
+  document.getElementById('nav-t').textContent=wk===0?'今週の献立':'来週の献立';
+  document.getElementById('content').scrollTop=0;
+}
+
+// ── 買い物 ──────────────────────────────────────────
+function buildShop(){
+  const wk=shopWeek,st=shopSt[wk];
+  const rem=st.flatMap(c=>c.items).filter(i=>!i.done).reduce((s,i)=>s+i.price,0);
+  const tot=st.flatMap(c=>c.items).reduce((s,i)=>s+i.price,0);
+  document.getElementById('price-card').innerHTML=`
+    <div>
+      <div style="font-size:12px;color:var(--text3)">${wk===0?'今週':'来週'}の食材費（目安・神奈川）</div>
+      <div class="pc-price">¥${rem.toLocaleString()}</div>
+      <div class="pc-sub">全体 ¥${tot.toLocaleString()}</div>
+    </div>
+    <div style="font-size:28px">🛒</div>`;
+  document.getElementById('shop-inner').innerHTML=st.map((cat,ci)=>`
+    <div style="margin-bottom:14px">
+      <div class="sc">${cat.cat}</div>
+      ${cat.items.map((it,ii)=>`<div class="si" onclick="tShop(${wk},${ci},${ii})">
+        <div class="ck${it.done?' on':''}">${it.done?'✓':''}</div>
+        <div class="sn2${it.done?' done':''}">${it.n}</div>
+        <div class="sq">${it.q}</div>
+        <div class="sprice">¥${it.price}</div>
+      </div>`).join('')}
+    </div>`).join('');
+}
+function tShop(wk,ci,ii){shopSt[wk][ci].items[ii].done=!shopSt[wk][ci].items[ii].done;buildShop();saveState();}
+function switchShopWeek(wk){shopWeek=wk;document.getElementById('swt0').classList.toggle('on',wk===0);document.getElementById('swt1').classList.toggle('on',wk===1);buildShop();}
+
+// ── 作り置き ──────────────────────────────────────────
+function buildPrep(){
+  document.getElementById('prep-inner').innerHTML=`
+    <div class="prep-intro">
+      <div class="prep-intro-title">週2回・計45分で平日が楽になる</div>
+      <div class="prep-intro-sub">日曜夜30分＋水曜夜15分だけ仕込めば、平日の朝は弁当を詰めるだけ。食材まとめ使いで無駄もほぼゼロ。</div>
+    </div>
+    <div class="prep-stat-row">
+      <div class="prep-stat"><div class="prep-stat-num">5品</div><div class="prep-stat-lbl">常備菜</div></div>
+      <div class="prep-stat"><div class="prep-stat-num">45分</div><div class="prep-stat-lbl">週の仕込み</div></div>
+      <div class="prep-stat"><div class="prep-stat-num">朝3分</div><div class="prep-stat-lbl">弁当完成</div></div>
+    </div>
+    ${prepItems.map((p,i)=>{
+      const rid='pr'+i;
+      const dStyle=DC_STYLE[p.device]||{bg:'#f2f2f7',color:'#555'};
+      return`<div class="prep-card">
+        <div class="prep-head">
+          <div class="prep-icon">${p.icon}</div>
+          <div class="prep-info">
+            <div class="prep-name">${p.name}</div>
+            <div class="prep-meta">
+              <span style="display:inline-flex;align-items:center;gap:3px;background:${dStyle.bg};color:${dStyle.color};font-size:11px;padding:1px 6px;border-radius:5px;margin-right:4px">${p.device}</span>
+              ${p.time}｜保存 ${p.keep}
+            </div>
+          </div>
+        </div>
+        <div class="prep-uses">${p.uses.map(u=>`<span class="prep-use-tag">${u}</span>`).join('')}</div>
+        <div class="prep-recipe-tog" onclick="tog('${rid}')"><span>レシピを見る</span><span id="a${rid}">▾</span></div>
+        <div class="prep-recipe-body" id="${rid}">
+          ${p.recipe.map((s,j)=>`<div class="prep-step"><div class="prep-sn">${j+1}</div><div class="prep-st">${s}</div></div>`).join('')}
+        </div>
+      </div>`;
+    }).join('')}
+    <div style="font-size:13px;font-weight:500;color:var(--text);margin:4px 0 8px">仕込みスケジュール</div>
+    ${weeklyPrepPlan.map((plan,i)=>{
+      const pid='pp'+i;
+      return`<div class="plan-card">
+        <div class="plan-head" onclick="tog('${pid}')">
+          <div><div class="plan-title">${plan.icon} ${plan.day}</div><div class="plan-sub">この日にまとめて仕込む</div></div>
+          <span id="a${pid}" style="font-size:12px;color:var(--text3)">▾</span>
+        </div>
+        <div class="plan-body" id="${pid}">
+          ${plan.tasks.map(t=>`<div class="plan-item"><div class="plan-dot"></div><div>${t}</div></div>`).join('')}
+        </div>
+      </div>`;
+    }).join('')}`;
+}
+
+// ── 栄養 ──────────────────────────────────────────────
+function buildNutri(){
+  const wk=curWeek,dins=getDinners(wk);
+  const weekP=Math.round(dins.reduce((s,d)=>s+d.p,0)/7+breakfasts.reduce((s,b)=>s+b.p,0)/7+10);
+  const weekF=Math.round(dins.reduce((s,d)=>s+d.f,0)/7+breakfasts.reduce((s,b)=>s+b.f,0)/7+8);
+  const weekC=Math.round(dins.reduce((s,d)=>s+d.c,0)/7+breakfasts.reduce((s,b)=>s+b.c,0)/7+30);
+  const tG=weekP+weekF+weekC;
+  const pPct=Math.round(weekP/tG*100),fPct=Math.round(weekF/tG*100),cPct=100-pPct-fPct;
+  const avgK=Math.round(dins.reduce((s,_,i)=>{const ls=getLunchSrc(wk,i);const lk=ls?Math.round(ls.din.kcal*0.6):WE.includes(i)?wkLunches[i-5].kcal:0;return s+breakfasts[i].kcal+lk+dins[i].kcal;},0)/7);
+  const sz=88,cx=44,cy=44,r=30,sw2=10;
+  function arc(pct,off,col){const c2=2*Math.PI*r,da=pct/100*c2,ga=c2-da,ro=-90+off*360/100;return`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${col}" stroke-width="${sw2}" stroke-dasharray="${da.toFixed(1)} ${ga.toFixed(1)}" transform="rotate(${ro} ${cx} ${cy})" stroke-linecap="round"/>`;}
+  document.getElementById('nutri-inner').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+      <div style="background:var(--card);border-radius:var(--border-radius-md,10px);padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:3px">週平均 1日</div>
+        <div style="font-size:26px;font-weight:500;color:var(--text)">${avgK}</div>
+        <div style="font-size:11px;color:var(--text3)">kcal / 人</div>
+      </div>
+      <div style="background:var(--card);border-radius:var(--border-radius-md,10px);padding:12px;text-align:center">
+        <div style="font-size:11px;color:var(--text3);margin-bottom:3px">弁当活用</div>
+        <div style="font-size:26px;font-weight:500;color:var(--green)">5/7日</div>
+        <div style="font-size:11px;color:var(--text3)">残り物活用</div>
+      </div>
+    </div>
+    <div class="nc">
+      <div class="nh">週平均 PFC（1人・1日）</div>
+      <div class="pfc-ring-wrap">
+        <svg width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}">
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--bg)" stroke-width="${sw2}"/>
+          ${arc(pPct,0,PFC_C.p)}${arc(fPct,pPct,PFC_C.f)}${arc(cPct,pPct+fPct,PFC_C.c)}
+          <text x="${cx}" y="${cy+1}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="var(--text3)">PFC</text>
+        </svg>
+        <div class="pfc-legend">
+          <div class="pfc-leg-row"><div class="pfc-dot" style="background:${PFC_C.p}"></div><span style="font-size:13px;color:var(--text);flex:1">たんぱく質</span><span style="font-size:13px;font-weight:500;color:var(--text)">${weekP}g</span><span style="font-size:11px;color:var(--text3);margin-left:2px">${pPct}%</span></div>
+          <div class="pfc-leg-row"><div class="pfc-dot" style="background:${PFC_C.f}"></div><span style="font-size:13px;color:var(--text);flex:1">脂質</span><span style="font-size:13px;font-weight:500;color:var(--text)">${weekF}g</span><span style="font-size:11px;color:var(--text3);margin-left:2px">${fPct}%</span></div>
+          <div class="pfc-leg-row"><div class="pfc-dot" style="background:${PFC_C.c}"></div><span style="font-size:13px;color:var(--text);flex:1">炭水化物</span><span style="font-size:13px;font-weight:500;color:var(--text)">${weekC}g</span><span style="font-size:11px;color:var(--text3);margin-left:2px">${cPct}%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="nc">
+      <div class="nh">各栄養素（週平均）</div>
+      ${nRow('たんぱく質',PFC_C.p,weekP,80)}${nRow('脂質',PFC_C.f,weekF,65)}${nRow('炭水化物',PFC_C.c,weekC,300)}${nRow('食物繊維','#1D9E75',14,18)}
+    </div>`;
+}
+function nRow(l,col,v,max){const p=Math.min(100,Math.round(v/max*100));return`<div class="nrow"><div class="nlbl">${l}</div><div class="ntrk"><div class="nfil" style="width:${p}%;background:${col}"></div></div><div class="nval">${v}g</div><div class="ntgt">/${max}</div></div>`;}
+
+// ── Tab / init ────────────────────────────────────────
+function sw(tab,title){
+  ['menu','prep','shop','nutri'].forEach(t=>{
+    document.getElementById('pg-'+t).classList.toggle('on',t===tab);
+    document.getElementById('t-'+t).classList.toggle('active',t===tab);
+  });
+  document.getElementById('nav-t').textContent=title;
+  document.getElementById('content').scrollTop=0;
+  if(tab==='shop')buildShop();
+  if(tab==='nutri')buildNutri();
+  if(tab==='prep')buildPrep();
+}
+
+// Service Worker 登録
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+
+// 初期化
+const ti=getTodayIdx(0);
+selDay=ti>=0?ti:0;
+buildStrip();
+buildDay();
+</script>
+</body>
+</html>
