@@ -557,12 +557,32 @@ const EVENTS=[
   {m:10,d:31,icon:'🎃',name:'ハロウィン',menu:'かぼちゃスープ'},{m:12,d:24,icon:'🎄',name:'クリスマス',menu:'ローストチキン'},{m:12,d:31,icon:'🎍',name:'大晦日',menu:'年越しそば'},
 ];
 
-const prepItems=[
-  {icon:'🍗',name:'ホットクック サラダチキン',device:'ホットクック',time:'20分',keep:'冷蔵4日',uses:['月〜金の昼弁当のたんぱく質','朝食のトッピング','夜のサラダの主役'],recipe:['鶏むね肉1〜2枚に塩・こしょう・酒大さじ1を揉み込む','ホットクック内鍋に入れ「蒸し物」モードで20分','粗熱を取ってからラップで包み冷蔵保存']},
-  {icon:'🥕',name:'ヘルシオ 根菜のロースト',device:'ヘルシオ',time:'25分',keep:'冷蔵5日',uses:['弁当の副菜','みそ汁の具材','夕飯の付け合わせ'],recipe:['ごぼう・にんじん・れんこんを乱切りにし、しょうゆ・みりん・ごま油で和える','ヘルシオ角皿に広げて230℃で25分','多めに作って密閉容器に保存']},
-  {icon:'🍳',name:'ホットクック 煮卵',device:'ホットクック',time:'15分',keep:'冷蔵3日',uses:['毎朝の弁当おかず','朝ご飯のトッピング','小腹が空いたときに'],recipe:['卵6個を内鍋に並べ水100mlを加えホットクック「ゆで卵（かため）」','すぐ氷水で冷やして殻をむく','しょうゆ・みりん・砂糖の煮汁に一晩漬けると味付き煮卵に']},
-  {icon:'🌿',name:'ホットクック 切り干し大根の煮物',device:'ホットクック',time:'15分',keep:'冷蔵5日',uses:['弁当の副菜','夕飯の副菜','ご飯のお供'],recipe:['切り干し大根20gを水で戻し、にんじん・油揚げを細切りにする','しょうゆ・みりん・砂糖・だし汁と一緒にホットクック「煮物」10分','冷めたら容器に入れ冷蔵保存']},
-  {icon:'🥦',name:'レンジ ブロッコリーのまとめ蒸し',device:'レンジ',time:'5分',keep:'冷蔵3日',uses:['弁当の緑の副菜','朝食の付け合わせ','サラダのトッピング'],recipe:['冷凍ブロッコリー1袋を耐熱皿に入れてラップ','レンジ600Wで4分加熱','水気を切って塩・ごま油少々で和え密閉容器へ']},
+// 作り置きプール（score関数で今週の献立に合わせて上位5品を自動選出）
+const prepItemsPool=[
+  {id:'chicken',icon:'🍗',name:'ホットクック サラダチキン',device:'ホットクック',time:'20分',keep:'冷蔵4日',
+    score:(dins)=>{const n=dins.filter(d=>(d.ing||[]).some(ig=>ig.n.includes('鶏'))).length;return n*4;},
+    recipe:['鶏むね肉1〜2枚に塩・こしょう・酒大さじ1を揉み込む','ホットクック内鍋に入れ「蒸し物」モードで20分','粗熱を取ってからラップで包み冷蔵保存']},
+  {id:'rootveg',icon:'🥕',name:'ヘルシオ 根菜のロースト',device:'ヘルシオ',time:'25分',keep:'冷蔵5日',
+    score:(dins)=>{const roots=['大根','にんじん','じゃがいも','さつまいも','ごぼう','里芋','長芋'];const n=dins.filter(d=>(d.ing||[]).some(ig=>roots.some(r=>ig.n.includes(r)))).length;return n*3;},
+    recipe:['ごぼう・にんじん・れんこんを乱切りにし、しょうゆ・みりん・ごま油で和える','ヘルシオ角皿に広げて230℃で25分','多めに作って密閉容器に保存']},
+  {id:'egg',icon:'🍳',name:'ホットクック 煮卵',device:'ホットクック',time:'15分',keep:'冷蔵3日',
+    score:()=>8,
+    recipe:['卵6個を内鍋に並べ水100mlを加えホットクック「ゆで卵（かため）」','すぐ氷水で冷やして殻をむく','しょうゆ・みりん・砂糖の煮汁に一晩漬けると味付き煮卵に']},
+  {id:'kiriboshi',icon:'🌿',name:'ホットクック 切り干し大根の煮物',device:'ホットクック',time:'15分',keep:'冷蔵5日',
+    score:(dins)=>{const fish=['サーモン','鯛','鮭','さんま','鯖','あじ','たら'];const n=dins.filter(d=>(d.ing||[]).some(ig=>fish.some(f=>ig.n.includes(f)))).length;return n*3+2;},
+    recipe:['切り干し大根20gを水で戻し、にんじん・油揚げを細切りにする','しょうゆ・みりん・砂糖・だし汁と一緒にホットクック「煮物」10分','冷めたら容器に入れ冷蔵保存']},
+  {id:'broccoli',icon:'🥦',name:'レンジ ブロッコリーのまとめ蒸し',device:'レンジ',time:'5分',keep:'冷蔵3日',
+    score:()=>6,
+    recipe:['冷凍ブロッコリー1袋を耐熱皿に入れてラップ','レンジ600Wで4分加熱','水気を切って塩・ごま油少々で和え密閉容器へ']},
+  {id:'pork',icon:'🥩',name:'豚の下味冷蔵',device:'なし',time:'5分（漬けるだけ）',keep:'冷蔵2日',
+    score:(dins)=>{const n=dins.filter(d=>(d.ing||[]).some(ig=>['豚バラ','豚ロース','豚ひき'].some(p=>ig.n.includes(p)))).length;return n>=3?12:n*3;},
+    recipe:['豚バラまたは豚ロースを食べやすく切る','しょうゆ・酒・みりん・しょうがを揉み込む','密閉袋に入れ冷蔵庫で一晩〜2日保存（調理前に取り出すだけ）']},
+  {id:'kinoko',icon:'🍄',name:'ホットクック きのこのまとめ炒め',device:'ホットクック',time:'10分',keep:'冷蔵4日',
+    score:(dins)=>{const kinoko=['しめじ','まいたけ','えのき','エリンギ','なめこ'];const n=dins.filter(d=>(d.ing||[]).some(ig=>kinoko.some(k=>ig.n.includes(k)))).length;return n*5;},
+    recipe:['しめじ・まいたけ・エリンギをほぐして内鍋へ','バター・しょうゆ・みりんでホットクック「炒め物」5分','冷めたら密閉容器へ・みそ汁やパスタにも使える']},
+  {id:'leafy',icon:'🥬',name:'レンジ 葉物のまとめ蒸し',device:'レンジ',time:'5分',keep:'冷蔵3日',
+    score:(dins)=>{const leafy=['ほうれん草','小松菜','菜の花','春キャベツ','キャベツ'];const n=dins.filter(d=>(d.ing||[]).some(ig=>leafy.some(l=>ig.n.includes(l)))).length;return n*4;},
+    recipe:['ほうれん草または小松菜を洗い耐熱皿へ','ラップしてレンジ600Wで3分','水気を絞りしょうゆ・ごまで和えて保存容器へ']},
 ];
 
 const weeklyPrepPlan=[
@@ -881,43 +901,64 @@ function getPrepTips(wk){
   return tips.slice(0,3);
 }
 
-// 今週の献立に基づいて各作り置きの活用例を生成
+// 今週の献立に合わせてスコアが高い上位5品を自動選出し、活用例も生成
 function getWeeklyPrepItems(wk){
   const dins=getDinners(wk);
   const withIdx=dins.map((d,i)=>({d,i}));
   const wkdayWithIdx=withIdx.filter(({i})=>!WE.includes(i));
-  const fishDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>['サーモン','鯛','鮭','アサリ'].some(f=>ig.n.includes(f))));
-  const rootDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>['大根','にんじん','じゃがいも','さつまいも'].some(r=>ig.n.includes(r))));
-  const chickenWkday=wkdayWithIdx.filter(({d})=>(d.ing||[]).some(ig=>ig.n.includes('鶏')));
-  const lowPWkday=wkdayWithIdx.filter(({d})=>d.p<22);
 
-  return [
-    {...prepItems[0], uses:[
-      chickenWkday.length>0?`${DAYS[chickenWkday[0].i]}「${sn(chickenWkday[0].d)}」弁当のたんぱく源に`:'平日弁当のたんぱく源に',
-      lowPWkday.length>1?`${DAYS[lowPWkday[1].i]}など低たんぱく食の補完に`:'朝食のトッピングに',
-      '夜のサラダのメイン食材に',
-    ]},
-    {...prepItems[1], uses:[
-      rootDays.length>0?`${DAYS[rootDays[0].i]}「${sn(rootDays[0].d)}」の付け合わせに`:'弁当の副菜に',
-      rootDays.length>1?`${DAYS[rootDays[1].i]}夕飯の付け合わせに`:'みそ汁の具材に',
-      '週後半の弁当の彩りに',
-    ]},
-    {...prepItems[2], uses:[
-      wkdayWithIdx.length>1?`${DAYS[wkdayWithIdx[0].i]}・${DAYS[wkdayWithIdx[1].i]}の弁当おかずに`:'平日弁当おかずに',
-      '朝ご飯のたんぱく補給に',
-      '小腹が空いたときの間食に',
-    ]},
-    {...prepItems[3], uses:[
-      fishDays.length>0?`${DAYS[fishDays[0].i]}「${sn(fishDays[0].d)}」に合う和の副菜に`:'弁当の副菜に',
-      '夕飯のご飯のお供に',
-      '週後半の常備菜として',
-    ]},
-    {...prepItems[4], uses:[
-      fishDays.length>0?`${DAYS[fishDays[0].i]}「${sn(fishDays[0].d)}」の付け合わせに`:'弁当の緑の副菜に',
-      '朝食の付け合わせに',
-      'サラダのトッピングに',
-    ]},
-  ];
+  // 各プールアイテムをスコアリングして上位5品選出
+  const scored=prepItemsPool.map(item=>({...item,_score:item.score(dins)}));
+  scored.sort((a,b)=>b._score-a._score);
+  const selected=scored.slice(0,5);
+
+  // 各アイテムの「活用例」をこの週の献立に合わせて動的生成
+  return selected.map(item=>{
+    const uses=[];
+    if(item.id==='chicken'){
+      const ck=wkdayWithIdx.filter(({d})=>(d.ing||[]).some(ig=>ig.n.includes('鶏')));
+      uses.push(ck.length>0?`${DAYS[ck[0].i]}「${sn(ck[0].d)}」弁当のたんぱく源に`:'平日弁当のたんぱく源に');
+      if(ck.length>1)uses.push(`${DAYS[ck[1].i]}「${sn(ck[1].d)}」にもそのまま活用`);
+      uses.push('朝食のトッピング・夜のサラダに');
+    } else if(item.id==='rootveg'){
+      const roots=['大根','にんじん','じゃがいも','さつまいも','ごぼう','里芋','長芋'];
+      const rd=withIdx.filter(({d})=>(d.ing||[]).some(ig=>roots.some(r=>ig.n.includes(r))));
+      uses.push(rd.length>0?`${DAYS[rd[0].i]}「${sn(rd[0].d)}」の副菜・付け合わせに`:'弁当の副菜に');
+      if(rd.length>1)uses.push(`${DAYS[rd[1].i]}夕飯の付け合わせにも使い回し`);
+      uses.push('週後半の弁当の彩りに');
+    } else if(item.id==='egg'){
+      uses.push(`${DAYS[wkdayWithIdx[0].i]}・${DAYS[wkdayWithIdx[1].i]}の弁当おかずに`);
+      uses.push('朝ご飯のたんぱく補給に');
+      uses.push('小腹が空いたときの間食に');
+    } else if(item.id==='kiriboshi'){
+      const fish=['サーモン','鯛','鮭','さんま','鯖','あじ','たら'];
+      const fd=withIdx.filter(({d})=>(d.ing||[]).some(ig=>fish.some(f=>ig.n.includes(f))));
+      uses.push(fd.length>0?`${DAYS[fd[0].i]}「${sn(fd[0].d)}」に合う和の副菜に`:'弁当の副菜に');
+      uses.push('夕飯のご飯のお供に');
+      uses.push('週後半の常備菜として');
+    } else if(item.id==='broccoli'){
+      const fd=withIdx.filter(({d})=>(d.ing||[]).some(ig=>['サーモン','鯛','鮭'].some(f=>ig.n.includes(f))));
+      uses.push(fd.length>0?`${DAYS[fd[0].i]}「${sn(fd[0].d)}」の付け合わせに`:'弁当の緑の副菜に');
+      uses.push('朝食の付け合わせに');
+      uses.push('サラダのトッピングに');
+    } else if(item.id==='pork'){
+      const pk=withIdx.filter(({d})=>(d.ing||[]).some(ig=>['豚バラ','豚ロース','豚ひき'].some(p=>ig.n.includes(p))));
+      uses.push(pk.length>0?`${DAYS[pk[0].i]}「${sn(pk[0].d)}」が朝は詰めるだけに`:'豚料理の下準備に');
+      if(pk.length>1)uses.push(`${DAYS[pk[1].i]}「${sn(pk[1].d)}」も前日漬けでOK`);
+      uses.push('漬けておくと味がしっかり染みる');
+    } else if(item.id==='kinoko'){
+      const kk=withIdx.filter(({d})=>{const ks=['しめじ','まいたけ','えのき','エリンギ','なめこ'];return(d.ing||[]).some(ig=>ks.some(k=>ig.n.includes(k)));});
+      uses.push(kk.length>0?`${DAYS[kk[0].i]}「${sn(kk[0].d)}」の副菜に`:'弁当の副菜に');
+      if(kk.length>1)uses.push(`${DAYS[kk[1].i]}夕飯にも使い回し`);
+      uses.push('みそ汁の具材やパスタにも');
+    } else if(item.id==='leafy'){
+      const lf=withIdx.filter(({d})=>{const ls=['ほうれん草','小松菜','菜の花','春キャベツ','キャベツ'];return(d.ing||[]).some(ig=>ls.some(l=>ig.n.includes(l)));});
+      uses.push(lf.length>0?`${DAYS[lf[0].i]}「${sn(lf[0].d)}」の付け合わせに`:'弁当の緑の副菜に');
+      if(lf.length>1)uses.push(`${DAYS[lf[1].i]}夕飯の副菜にも使い回し`);
+      uses.push('朝食のおひたしに');
+    }
+    return {...item, uses};
+  });
 }
 
 // 今週の献立に基づいて仕込みスケジュールを生成
