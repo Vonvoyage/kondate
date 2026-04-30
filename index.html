@@ -47,13 +47,11 @@
   }
 }
 html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:var(--bg);color:var(--text)}
-
-/* ── app shell ── */
 #app{display:flex;flex-direction:column;height:100%;padding-top:var(--safe-top)}
 .topbar{background:var(--card);border-bottom:0.5px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:8px;flex-shrink:0}
 .topbar-title{font-size:17px;font-weight:600;flex:1}
 .wswitch{display:flex;border:0.5px solid var(--border);border-radius:8px;overflow:hidden}
-.wsb{padding:5px 12px;font-size:12px;font-weight:500;cursor:pointer;background:var(--card);color:var(--text3);border:none;color:var(--text3)}
+.wsb{padding:5px 12px;font-size:12px;font-weight:500;cursor:pointer;background:var(--card);color:var(--text3);border:none}
 .wsb.on{background:var(--blue);color:#fff}
 .content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .tabbar{background:var(--card);border-top:0.5px solid var(--border);display:flex;padding:8px 0;padding-bottom:calc(8px + var(--safe-bottom));flex-shrink:0}
@@ -62,8 +60,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .tab .tl{font-size:10px;color:var(--text3)}
 .tab.active .tl{color:var(--blue)}
 .pg{display:none}.pg.on{display:block;padding-bottom:16px}
-
-/* ── strip ── */
 .strip{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:10px 10px 6px}
 .dc{background:var(--card);border-radius:10px;padding:6px 2px;text-align:center;cursor:pointer;border:1.5px solid transparent;position:relative}
 .dc.sel{border-color:var(--blue)}
@@ -73,14 +69,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .dd{font-size:15px;font-weight:600;color:var(--text);line-height:1.2}
 .daydot{width:5px;height:5px;border-radius:50%;margin:3px auto 0}
 .today-pip{position:absolute;top:-7px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:7px;padding:1px 4px;border-radius:4px;white-space:nowrap}
-
-/* ── event / notice banners ── */
 .ev-banner{margin:0 10px 6px;background:var(--card);border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:8px;border:0.5px solid var(--border)}
 .nwn{margin:0 10px 8px;background:var(--mint-bg);border-radius:10px;padding:9px 12px;border:0.5px solid #C0DD97}
 .nwn-t{font-size:13px;font-weight:500;color:var(--mint-text);margin-bottom:2px}
 .nwn-s{font-size:11px;color:var(--mint-text);opacity:.8}
-
-/* ── meal blocks ── */
 .sp{padding:0 10px}
 .mb{background:var(--card);border-radius:14px;margin-bottom:10px;overflow:hidden}
 .mh{padding:12px 14px 7px}
@@ -122,8 +114,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .bento-bd.on{display:block}
 .bstep{font-size:13px;color:var(--amber-text);line-height:1.6;padding-left:12px;position:relative;margin-bottom:3px}
 .bstep::before{content:'·';position:absolute;left:3px}
-
-/* ── PFC card (bottom) ── */
 .pfc-card{background:var(--card);border-radius:14px;margin-bottom:10px;padding:14px}
 .pfc-card-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:10px}
 .pfc-bar-big{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:7px}
@@ -135,8 +125,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .pfc-trk{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
 .pfc-fil{height:100%;border-radius:3px}
 .pfc-val{font-size:11px;color:var(--text3);text-align:right;min-width:64px}
-
-/* ── 作り置き ── */
 .prep-intro{background:var(--mint-bg);border-radius:12px;padding:12px 14px;margin-bottom:12px;border:0.5px solid #C0DD97}
 .prep-intro-title{font-size:14px;font-weight:500;color:var(--mint-text);margin-bottom:4px}
 .prep-intro-sub{font-size:12px;color:var(--mint-text);opacity:.9;line-height:1.6}
@@ -167,8 +155,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .plan-item{padding:6px 0;border-bottom:0.5px solid var(--border);font-size:13px;color:var(--text);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
 .plan-item:last-child{border-bottom:none}
 .plan-dot{width:6px;height:6px;border-radius:50%;background:#1D9E75;margin-top:5px;flex-shrink:0}
-
-/* ── 買い物 ── */
 .shop-wtabs{display:flex;gap:8px;margin-bottom:12px;padding:12px 12px 0}
 .swt{flex:1;padding:9px;background:var(--card);border-radius:10px;text-align:center;cursor:pointer;border:1.5px solid transparent;font-size:13px;font-weight:500;color:var(--text3)}
 .swt.on{border-color:var(--blue);color:var(--blue)}
@@ -184,8 +170,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .sn2.done{text-decoration:line-through;color:var(--text3)}
 .sq{font-size:12px;color:var(--text3);margin-right:4px}
 .sprice{font-size:12px;color:var(--blue);white-space:nowrap}
-
-/* ── 栄養 ── */
 .nw{padding:12px}
 .nc{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px}
 .nh{font-size:14px;font-weight:500;color:var(--text);margin-bottom:11px}
@@ -217,8 +201,12 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
       <div id="nwn-area"></div>
       <div class="sp" id="day-content"></div>
     </div>
-    <div class="pg" id="pg-prep" style="padding:12px">
-      <div id="prep-inner"></div>
+    <div class="pg" id="pg-prep">
+      <div class="shop-wtabs">
+        <div class="swt on" id="pwt0" onclick="switchPrepWeek(0)">今週</div>
+        <div class="swt" id="pwt1" onclick="switchPrepWeek(1)">来週</div>
+      </div>
+      <div style="padding:0 12px" id="prep-inner"></div>
     </div>
     <div class="pg" id="pg-shop">
       <div class="shop-wtabs">
@@ -229,6 +217,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
       <div class="shop-body" id="shop-inner"></div>
     </div>
     <div class="pg" id="pg-nutri">
+      <div class="shop-wtabs">
+        <div class="swt on" id="nwt0" onclick="switchNutriWeek(0)">今週</div>
+        <div class="swt" id="nwt1" onclick="switchNutriWeek(1)">来週</div>
+      </div>
       <div class="nw" id="nutri-inner"></div>
     </div>
   </div>
@@ -241,7 +233,6 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 </div>
 
 <script>
-// ── データ ──────────────────────────────────────────
 const now=new Date();
 const month=now.getMonth()+1;
 const todayDow=now.getDay();
@@ -255,52 +246,308 @@ const DC_STYLE={'ホットクック':{bg:'#E9F8EF',color:'#1D7A47'},'ヘルシ�
 function getMon(off=0){const d=new Date(now);const dw=d.getDay();d.setDate(d.getDate()+(dw===0?-6:1-dw)+off*7);d.setHours(0,0,0,0);return d;}
 function getSeason(){return month>=3&&month<=5?'spring':month>=6&&month<=8?'summer':month>=9&&month<=11?'autumn':'winter';}
 const season=getSeason();
+// 絶対週番号（2025-01-06月曜日を基準）でローテーション
+const EPOCH_MON=new Date(2025,0,6);
+function getAbsWeek(wk){return Math.round((getMon(wk)-EPOCH_MON)/(7*24*60*60*1000));}
 
+// ── スープDB（ingフィールド追加：1人分の食材） ──
 const SOUPS={
-  hc_wakame_tofu:{name:'わかめと豆腐のみそ汁',device:'ホットクック',recipe:['内鍋に水400ml・顆粒だし小さじ1/2・角切り豆腐を入れる','ホットクック「スープ」モードで沸かす（タイマー予約可）','わかめを加えみそを溶き入れ保温に切り替えて完成']},
-  hc_negi_daikon:{name:'大根とねぎのみそ汁',device:'ホットクック',recipe:['大根薄切り・ねぎ小口切りを内鍋へ','水400ml・顆粒だしでホットクック「スープ」8分','みそを溶き入れ完成']},
-  hc_nameko_tofu:{name:'なめこと豆腐のみそ汁',device:'ホットクック',recipe:['なめこ・角切り豆腐を内鍋へ','水400ml・顆粒だしでホットクック「スープ」6分','みそを溶き入れ完成']},
-  hc_kinoko:{name:'きのこと豆腐のみそ汁',device:'ホットクック',recipe:['しめじ・豆腐を内鍋へ','水400ml・顆粒だしでホットクック「スープ」8分','みそを溶き入れ小ねぎを散らす']},
-  hc_consomme:{name:'コンソメ野菜スープ',device:'ホットクック',recipe:['薄切り玉ねぎ・にんじんを内鍋へ','水400ml・コンソメでホットクック「スープ」10分','塩こしょうで調整']},
-  hc_corn:{name:'中華風コーンスープ',device:'ホットクック',recipe:['コーン缶汁ごと・水300ml・中華だしを内鍋へ','ホットクック「スープ」5分で温める','水溶き片栗粉でとろみ→溶き卵を流し入れ「スープ」2分']},
-  hls_onion:{name:'オニオングラタンスープ',device:'ヘルシオ',recipe:['薄切り玉ねぎをヘルシオ180℃で15分','水400ml・コンソメと合わせ耐熱カップへ','チーズのせヘルシオ230℃で5分']},
+  hc_wakame_tofu:{name:'わかめと豆腐のみそ汁',device:'ホットクック',
+    ing:[{cat:'汁物食材',n:'豆腐（絹）',amt:80,unit:'g',price:20},{cat:'汁物食材',n:'乾燥わかめ',amt:2,unit:'g',price:12}],
+    recipe:['内鍋に水400ml・顆粒だし小さじ1/2・角切り豆腐を入れる','ホットクック「スープ」モードで沸かす（タイマー予約可）','わかめを加えみそを溶き入れ保温に切り替えて完成']},
+  hc_negi_daikon:{name:'大根とねぎのみそ汁',device:'ホットクック',
+    ing:[{cat:'野菜・きのこ',n:'大根',amt:60,unit:'g',price:18},{cat:'野菜・きのこ',n:'長ねぎ',amt:20,unit:'g',price:14}],
+    recipe:['大根薄切り・ねぎ小口切りを内鍋へ','水400ml・顆粒だしでホットクック「スープ」8分','みそを溶き入れ完成']},
+  hc_nameko_tofu:{name:'なめこと豆腐のみそ汁',device:'ホットクック',
+    ing:[{cat:'汁物食材',n:'なめこ',amt:30,unit:'g',price:22},{cat:'汁物食材',n:'豆腐（絹）',amt:80,unit:'g',price:20}],
+    recipe:['なめこ・角切り豆腐を内鍋へ','水400ml・顆粒だしでホットクック「スープ」6分','みそを溶き入れ完成']},
+  hc_kinoko:{name:'きのこと豆腐のみそ汁',device:'ホットクック',
+    ing:[{cat:'野菜・きのこ',n:'しめじ',amt:30,unit:'g',price:20},{cat:'汁物食材',n:'豆腐（絹）',amt:60,unit:'g',price:15}],
+    recipe:['しめじ・豆腐を内鍋へ','水400ml・顆粒だしでホットクック「スープ」8分','みそを溶き入れ小ねぎを散らす']},
+  hc_consomme:{name:'コンソメ野菜スープ',device:'ホットクック',
+    ing:[{cat:'野菜・きのこ',n:'玉ねぎ',amt:40,unit:'g',price:18},{cat:'野菜・きのこ',n:'にんじん',amt:20,unit:'g',price:10}],
+    recipe:['薄切り玉ねぎ・にんじんを内鍋へ','水400ml・コンソメでホットクック「スープ」10分','塩こしょうで調整']},
+  hc_corn:{name:'中華風コーンスープ',device:'ホットクック',
+    ing:[{cat:'汁物食材',n:'コーン缶',amt:40,unit:'g',price:20}],
+    recipe:['コーン缶汁ごと・水300ml・中華だしを内鍋へ','ホットクック「スープ」5分で温める','水溶き片栗粉でとろみ→溶き卵を流し入れ「スープ」2分']},
+  hls_onion:{name:'オニオングラタンスープ',device:'ヘルシオ',
+    ing:[{cat:'野菜・きのこ',n:'玉ねぎ',amt:80,unit:'g',price:28}],
+    recipe:['薄切り玉ねぎをヘルシオ180℃で15分','水400ml・コンソメと合わせ耐熱カップへ','チーズのせヘルシオ230℃で5分']},
 };
 
+// ── 夕食DB（ingフィールド追加：1人分の食材） ──
 const dinnerDB={
   spring:[
-    {name:'ホットクック 筍と鶏の煮物',kcal:520,p:30,f:18,c:44,type:'和',devices:['ホットクック','レンジ'],soupKey:'hc_wakame_tofu',recipe:['たけのこ水煮・鶏もも肉を食べやすく切る','しょうゆ・みりん・砂糖・だし汁でホットクック「煮物」25分','冷凍ほうれん草をレンジ2分で副菜に'],bento:{name:'筍ご飯弁当',steps:['煮汁ごとご飯に混ぜてレンジ1分','残りの煮物を詰める','朝5分で完成']}},
-    {name:'ヘルシオ 菜の花とサーモンのロースト',kcal:490,p:34,f:22,c:30,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',recipe:['サーモン2切れに塩こしょう・オリーブ油を振る','菜の花・ミニトマトとともに角皿へ','ヘルシオ220℃で13分'],bento:{name:'サーモン弁当',steps:['サーモンをレンジ1分温め','菜の花の残りと一緒に詰める','朝4分で完成']}},
-    {name:'ホットクック 豚とキャベツの蒸し煮',kcal:500,p:28,f:22,c:38,type:'和',devices:['ホットクック'],soupKey:'hc_negi_daikon',recipe:['豚バラ・春キャベツを食べやすく切る','ポン酢・ごま油・塩でホットクック「蒸し物」10分','ごまを散らして完成'],bento:{name:'豚キャベツ弁当',steps:['残りをレンジ1分温める','ポン酢を少しかけて詰める','朝4分で完成']}},
-    {name:'ヘルシオ アスパラと鶏のグリル',kcal:480,p:34,f:18,c:30,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',recipe:['鶏もも・アスパラに塩こしょう・オリーブ油を振る','ヘルシオ210℃で18分','レモンを絞って完成'],bento:{name:'チキングリル弁当',steps:['鶏肉をレンジ1分温め切り分ける','アスパラとともに詰める','朝5分で完成']}},
-    {name:'ホットクック 春野菜のポトフ',kcal:430,p:24,f:16,c:48,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',recipe:['新玉ねぎ・新じゃが・にんじん・鶏むね肉を大きく切る','コンソメ・水400mlでホットクック「スープ」25分','塩こしょうで味を調える'],bento:{name:'ポトフ弁当',steps:['残りをスープジャーへ温めて入れる','パンを添えると豪華に','朝5分で完成']}},
-    {name:'ヘルシオ 鯛のアクアパッツァ',kcal:460,p:36,f:14,c:32,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',recipe:['鯛・アサリ・ミニトマト・にんにくを耐熱容器に','白ワイン大さじ2・水大さじ2・塩こしょうを加える','ヘルシオ230℃で15分'],bento:{name:'鯛フレーク弁当',steps:['鯛をほぐしご飯に混ぜる','オリーブとトマトを添えて彩り','朝5分で完成']}},
-    {name:'ホットクック たけのこご飯',kcal:510,p:18,f:12,c:82,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',recipe:['米2合・たけのこ水煮・油揚げ・しょうゆ・みりん・だし汁を内鍋へ','ホットクック「炊飯」モードで完成','三つ葉を散らして春らしく'],bento:{name:'たけのこご飯弁当',steps:['そのままお弁当箱に詰めるだけ','前日の副菜を添えて完成','朝3分で完成']}},
+    {name:'ホットクック 筍と鶏の煮物',kcal:520,p:30,f:18,c:44,type:'和',devices:['ホットクック','レンジ'],soupKey:'hc_wakame_tofu',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:120,unit:'g',price:100},{cat:'野菜・きのこ',n:'たけのこ水煮',amt:80,unit:'g',price:40},{cat:'野菜・きのこ',n:'ほうれん草（冷凍）',amt:40,unit:'g',price:18}],
+      recipe:['たけのこ水煮・鶏もも肉を食べやすく切る','しょうゆ・みりん・砂糖・だし汁でホットクック「煮物」25分','冷凍ほうれん草をレンジ2分で副菜に'],
+      bento:{name:'筍ご飯弁当',steps:['煮汁ごとご飯に混ぜてレンジ1分','残りの煮物を詰める','朝5分で完成']}},
+    {name:'ヘルシオ 菜の花とサーモンのロースト',kcal:490,p:34,f:22,c:30,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'サーモン',amt:100,unit:'g',price:180},{cat:'野菜・きのこ',n:'菜の花',amt:60,unit:'g',price:50}],
+      recipe:['サーモン2切れに塩こしょう・オリーブ油を振る','菜の花・ミニトマトとともに角皿へ','ヘルシオ220℃で13分'],
+      bento:{name:'サーモン弁当',steps:['サーモンをレンジ1分温め','菜の花の残りと一緒に詰める','朝4分で完成']}},
+    {name:'ホットクック 豚とキャベツの蒸し煮',kcal:500,p:28,f:22,c:38,type:'和',devices:['ホットクック'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:100,unit:'g',price:128},{cat:'野菜・きのこ',n:'春キャベツ',amt:100,unit:'g',price:28}],
+      recipe:['豚バラ・春キャベツを食べやすく切る','ポン酢・ごま油・塩でホットクック「蒸し物」10分','ごまを散らして完成'],
+      bento:{name:'豚キャベツ弁当',steps:['残りをレンジ1分温める','ポン酢を少しかけて詰める','朝4分で完成']}},
+    {name:'ヘルシオ アスパラと鶏のグリル',kcal:480,p:34,f:18,c:30,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:130,unit:'g',price:108},{cat:'野菜・きのこ',n:'アスパラガス',amt:60,unit:'g',price:48}],
+      recipe:['鶏もも・アスパラに塩こしょう・オリーブ油を振る','ヘルシオ210℃で18分','レモンを絞って完成'],
+      bento:{name:'チキングリル弁当',steps:['鶏肉をレンジ1分温め切り分ける','アスパラとともに詰める','朝5分で完成']}},
+    {name:'ホットクック 春野菜のポトフ',kcal:430,p:24,f:16,c:48,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'鶏むね肉',amt:100,unit:'g',price:80},{cat:'野菜・きのこ',n:'新玉ねぎ',amt:60,unit:'g',price:28},{cat:'野菜・きのこ',n:'新じゃがいも',amt:80,unit:'g',price:28},{cat:'野菜・きのこ',n:'にんじん',amt:40,unit:'g',price:18}],
+      recipe:['新玉ねぎ・新じゃが・にんじん・鶏むね肉を大きく切る','コンソメ・水400mlでホットクック「スープ」25分','塩こしょうで味を調える'],
+      bento:{name:'ポトフ弁当',steps:['残りをスープジャーへ温めて入れる','パンを添えると豪華に','朝5分で完成']}},
+    {name:'ヘルシオ 鯛のアクアパッツァ',kcal:460,p:36,f:14,c:32,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',
+      ing:[{cat:'肉・魚',n:'鯛（切り身）',amt:120,unit:'g',price:220},{cat:'肉・魚',n:'アサリ',amt:50,unit:'g',price:80}],
+      recipe:['鯛・アサリ・ミニトマト・にんにくを耐熱容器に','白ワイン大さじ2・水大さじ2・塩こしょうを加える','ヘルシオ230℃で15分'],
+      bento:{name:'鯛フレーク弁当',steps:['鯛をほぐしご飯に混ぜる','オリーブとトマトを添えて彩り','朝5分で完成']}},
+    {name:'ホットクック たけのこご飯',kcal:510,p:18,f:12,c:82,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',
+      ing:[{cat:'野菜・きのこ',n:'たけのこ水煮',amt:60,unit:'g',price:38},{cat:'その他',n:'油揚げ',amt:20,unit:'g',price:18}],
+      recipe:['米2合・たけのこ水煮・油揚げ・しょうゆ・みりん・だし汁を内鍋へ','ホットクック「炊飯」モードで完成','三つ葉を散らして春らしく'],
+      bento:{name:'たけのこご飯弁当',steps:['そのままお弁当箱に詰めるだけ','前日の副菜を添えて完成','朝3分で完成']}},
+    // ── 春 セットB ──
+    {name:'ホットクック 豚の生姜焼き',kcal:530,p:28,f:24,c:44,type:'和',devices:['ホットクック'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'豚ロース（薄切り）',amt:120,unit:'g',price:156},{cat:'野菜・きのこ',n:'春キャベツ',amt:80,unit:'g',price:22}],
+      recipe:['豚ロース・しょうゆ・みりん・しょうがをホットクック「炒め物」4分','春キャベツはレンジで2分蒸して付け合わせに','白ごまを振って完成'],
+      bento:{name:'生姜焼き弁当',steps:['残りをレンジ1分温める','キャベツと一緒に詰める','朝4分で完成']}},
+    {name:'ヘルシオ 鶏むねのレモンハーブ蒸し',kcal:420,p:38,f:14,c:26,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'鶏むね肉',amt:130,unit:'g',price:104},{cat:'野菜・きのこ',n:'アスパラガス',amt:60,unit:'g',price:48}],
+      recipe:['鶏むねにレモン汁・ハーブソルト・オリーブ油を揉み込む','アスパラとともにヘルシオ200℃で15分（スチームモード推奨）','レモンスライスを添えて完成'],
+      bento:{name:'ハーブチキン弁当',steps:['鶏肉をレンジ1分温め切り分ける','アスパラとともに詰める','朝5分で完成']}},
+    {name:'ホットクック 豆腐と豚のキムチ煮',kcal:490,p:28,f:22,c:40,type:'他',devices:['ホットクック'],soupKey:'hc_wakame_tofu',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:80,unit:'g',price:102},{cat:'汁物食材',n:'豆腐（絹）',amt:150,unit:'g',price:38},{cat:'野菜・きのこ',n:'白菜キムチ',amt:80,unit:'g',price:78}],
+      recipe:['豚バラ・豆腐・キムチを内鍋へ','ホットクック「煮物」10分','ごま油をまわしかけ小ねぎを散らす'],
+      bento:{name:'キムチ豆腐弁当',steps:['残りをレンジ1分温める','ご飯にのせて丼風に','朝5分で完成']}},
+    {name:'ヘルシオ 鱈のハーブパン粉焼き',kcal:450,p:34,f:16,c:38,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',
+      ing:[{cat:'肉・魚',n:'たら（切り身）',amt:120,unit:'g',price:168},{cat:'野菜・きのこ',n:'菜の花',amt:60,unit:'g',price:50}],
+      recipe:['たらにマスタード・パン粉・ハーブ・オリーブ油を塗る','菜の花とともにヘルシオ220℃で15分','レモンを絞って完成'],
+      bento:{name:'たら弁当',steps:['たらをレンジ1分温める','菜の花とともに詰める','朝5分で完成']}},
+    {name:'ホットクック 鶏そぼろと卵の二色丼',kcal:560,p:30,f:18,c:68,type:'和',devices:['ホットクック','レンジ'],soupKey:'hc_kinoko',
+      ing:[{cat:'肉・魚',n:'鶏ひき肉',amt:120,unit:'g',price:96},{cat:'その他',n:'卵',amt:1,unit:'個',price:24}],
+      recipe:['鶏ひき肉・しょうゆ・みりん・砂糖・しょうがをホットクック「炒め物」3分','卵はレンジで炒り卵に（30秒×2回）','ご飯に二色に盛り付けて完成'],
+      bento:{name:'そぼろ弁当',steps:['そぼろをレンジ30秒温める','ご飯に並べて詰める','朝3分で完成']}},
+    {name:'ヘルシオ 豚とキャベツのロール',kcal:480,p:28,f:22,c:40,type:'和',devices:['ヘルシオ'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:100,unit:'g',price:128},{cat:'野菜・きのこ',n:'春キャベツ',amt:120,unit:'g',price:34}],
+      recipe:['春キャベツを豚バラで巻きつまようじで固定する','しょうゆ・みりん・酒をかけヘルシオ210℃で15分','タレをかけて完成'],
+      bento:{name:'ロール弁当',steps:['残りをレンジ1分温める','切り分けて詰める','朝5分で完成']}},
+    {name:'ホットクック えびと新玉のトマト煮',kcal:440,p:26,f:12,c:50,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'えび（冷凍）',amt:100,unit:'g',price:180},{cat:'野菜・きのこ',n:'新玉ねぎ',amt:100,unit:'g',price:38},{cat:'汁物食材',n:'トマト缶',amt:100,unit:'g',price:35}],
+      recipe:['えび・新玉ねぎ・トマト缶・コンソメを内鍋へ','ホットクック「煮物」10分','バジルを散らして完成'],
+      bento:{name:'えびトマト弁当',steps:['残りをレンジ1分温める','ご飯にかけて詰める','朝5分で完成']}},
   ],
   winter:[
-    {name:'ホットクック 豚の角煮',kcal:580,p:28,f:32,c:38,type:'和',devices:['ホットクック','レンジ'],soupKey:'hc_wakame_tofu',recipe:['豚バラ300g・大根1/3本を大きめに切る','しょうゆ・みりん・砂糖・水でホットクック「煮物」45分','冷凍ほうれん草をレンジ2分で副菜に'],bento:{name:'角煮弁当',steps:['角煮をレンジ1分30秒温める','たれごとご飯にかけて丼風に','朝5分で完成']}},
-    {name:'ホットクック 白菜と豚のミルフィーユ鍋',kcal:490,p:32,f:22,c:36,type:'和',devices:['ホットクック'],soupKey:'hc_nameko_tofu',recipe:['白菜と豚バラを交互に重ね内鍋へ','だし汁・塩・しょうゆ少々でホットクック「煮物」15分','ポン酢で食べる'],bento:{name:'白菜豚巻き弁当',steps:['残りをレンジ1分温める','ポン酢をかけてご飯と詰める','朝4分で完成']}},
-    {name:'ヘルシオ 鶏の照り焼き',kcal:520,p:34,f:20,c:36,type:'和',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',recipe:['鶏もも肉に照り焼きタレを揉み込み30分置く','ヘルシオ210℃で15分、裏返して5分','さつまいもを同じ庫内で同時調理'],bento:{name:'照り焼きチキン弁当',steps:['鶏肉をレンジ1分温め切り分ける','さつまいもとともに詰める','朝5分で完成']}},
-    {name:'ホットクック ビーフシチュー',kcal:620,p:30,f:28,c:58,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',recipe:['牛すね200g・玉ねぎ・にんじん・じゃがいもを切る','市販ルー1かけ・水300mlでホットクック「スープ」25分'],bento:{name:'シチュードリア弁当',steps:['シチューをレンジで温めご飯にかける','チーズをのせヘルシオで焼き色を','朝7分で完成']}},
-    {name:'ヘルシオ ローストチキン',kcal:680,p:44,f:36,c:28,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',recipe:['鶏もも2枚にハーブソルトを擦り込む','ヘルシオ230℃で20分','ズッキーニ・パプリカを同時ロースト'],bento:{name:'チキンサンド弁当',steps:['食パンをヘルシオで2分トースト','鶏肉・野菜・マヨネーズを挟む','朝10分で完成']}},
-    {name:'ホットクック 麻婆豆腐',kcal:540,p:22,f:24,c:52,type:'中',devices:['ホットクック','レンジ'],soupKey:'hc_corn',recipe:['豆腐1丁・豚ひき肉150g・市販の素を内鍋へ','ホットクック「炒め物」3分→水溶き片栗粉でとろみ','ご飯はレンジで温めて完成'],bento:{name:'麻婆丼弁当',steps:['麻婆豆腐をレンジ1分温める','ご飯の上にかけるだけ','朝5分で完成']}},
-    {name:'ホットクック すき焼き',kcal:720,p:38,f:34,c:62,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',recipe:['牛薄切り・白菜・長ねぎ・豆腐・しらたきを内鍋へ','割り下（しょうゆ:みりん:酒:砂糖=2:2:2:1）で「煮物」15分'],bento:{name:'すき焼き卵とじ弁当',steps:['残りにレンジで卵とじ30秒','ご飯に盛って親子丼風','朝5分で完成']}},
+    {name:'ホットクック 豚の角煮',kcal:580,p:28,f:32,c:38,type:'和',devices:['ホットクック','レンジ'],soupKey:'hc_wakame_tofu',
+      ing:[{cat:'肉・魚',n:'豚バラ（かたまり）',amt:120,unit:'g',price:158},{cat:'野菜・きのこ',n:'大根',amt:100,unit:'g',price:28},{cat:'野菜・きのこ',n:'ほうれん草（冷凍）',amt:40,unit:'g',price:18}],
+      recipe:['豚バラ300g・大根1/3本を大きめに切る','しょうゆ・みりん・砂糖・水でホットクック「煮物」45分','冷凍ほうれん草をレンジ2分で副菜に'],
+      bento:{name:'角煮弁当',steps:['角煮をレンジ1分30秒温める','たれごとご飯にかけて丼風に','朝5分で完成']}},
+    {name:'ホットクック 白菜と豚のミルフィーユ鍋',kcal:490,p:32,f:22,c:36,type:'和',devices:['ホットクック'],soupKey:'hc_nameko_tofu',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:100,unit:'g',price:128},{cat:'野菜・きのこ',n:'白菜',amt:150,unit:'g',price:35}],
+      recipe:['白菜と豚バラを交互に重ね内鍋へ','だし汁・塩・しょうゆ少々でホットクック「煮物」15分','ポン酢で食べる'],
+      bento:{name:'白菜豚巻き弁当',steps:['残りをレンジ1分温める','ポン酢をかけてご飯と詰める','朝4分で完成']}},
+    {name:'ヘルシオ 鶏の照り焼き',kcal:520,p:34,f:20,c:36,type:'和',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:120,unit:'g',price:100},{cat:'野菜・きのこ',n:'さつまいも',amt:80,unit:'g',price:38}],
+      recipe:['鶏もも肉に照り焼きタレを揉み込み30分置く','ヘルシオ210℃で15分、裏返して5分','さつまいもを同じ庫内で同時調理'],
+      bento:{name:'照り焼きチキン弁当',steps:['鶏肉をレンジ1分温め切り分ける','さつまいもとともに詰める','朝5分で完成']}},
+    {name:'ホットクック ビーフシチュー',kcal:620,p:30,f:28,c:58,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'牛すね肉',amt:80,unit:'g',price:188},{cat:'野菜・きのこ',n:'玉ねぎ',amt:50,unit:'g',price:24},{cat:'野菜・きのこ',n:'にんじん',amt:30,unit:'g',price:14},{cat:'野菜・きのこ',n:'じゃがいも',amt:80,unit:'g',price:28}],
+      recipe:['牛すね200g・玉ねぎ・にんじん・じゃがいもを切る','市販ルー1かけ・水300mlでホットクック「スープ」25分'],
+      bento:{name:'シチュードリア弁当',steps:['シチューをレンジで温めご飯にかける','チーズをのせヘルシオで焼き色を','朝7分で完成']}},
+    {name:'ヘルシオ ローストチキン',kcal:680,p:44,f:36,c:28,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:150,unit:'g',price:125},{cat:'野菜・きのこ',n:'ズッキーニ',amt:50,unit:'g',price:38},{cat:'野菜・きのこ',n:'パプリカ',amt:40,unit:'g',price:48}],
+      recipe:['鶏もも2枚にハーブソルトを擦り込む','ヘルシオ230℃で20分','ズッキーニ・パプリカを同時ロースト'],
+      bento:{name:'チキンサンド弁当',steps:['食パンをヘルシオで2分トースト','鶏肉・野菜・マヨネーズを挟む','朝10分で完成']}},
+    {name:'ホットクック 麻婆豆腐',kcal:540,p:22,f:24,c:52,type:'中',devices:['ホットクック','レンジ'],soupKey:'hc_corn',
+      ing:[{cat:'肉・魚',n:'豚ひき肉',amt:60,unit:'g',price:78},{cat:'汁物食材',n:'豆腐（絹）',amt:150,unit:'g',price:38},{cat:'その他',n:'麻婆豆腐の素',amt:0.5,unit:'袋',price:48}],
+      recipe:['豆腐1丁・豚ひき肉150g・市販の素を内鍋へ','ホットクック「炒め物」3分→水溶き片栗粉でとろみ','ご飯はレンジで温めて完成'],
+      bento:{name:'麻婆丼弁当',steps:['麻婆豆腐をレンジ1分温める','ご飯の上にかけるだけ','朝5分で完成']}},
+    {name:'ホットクック すき焼き',kcal:720,p:38,f:34,c:62,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',
+      ing:[{cat:'肉・魚',n:'牛薄切り肉',amt:120,unit:'g',price:200},{cat:'野菜・きのこ',n:'白菜',amt:100,unit:'g',price:28},{cat:'野菜・きのこ',n:'長ねぎ',amt:30,unit:'g',price:22},{cat:'汁物食材',n:'豆腐（絹）',amt:100,unit:'g',price:25}],
+      recipe:['牛薄切り・白菜・長ねぎ・豆腐・しらたきを内鍋へ','割り下（しょうゆ:みりん:酒:砂糖=2:2:2:1）で「煮物」15分'],
+      bento:{name:'すき焼き卵とじ弁当',steps:['残りにレンジで卵とじ30秒','ご飯に盛って親子丼風','朝5分で完成']}},
+    // ── 冬 セットB ──
+    {name:'ホットクック 牛肉と大根の韓国風煮',kcal:560,p:30,f:24,c:48,type:'他',devices:['ホットクック'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'牛薄切り肉',amt:100,unit:'g',price:168},{cat:'野菜・きのこ',n:'大根',amt:150,unit:'g',price:42},{cat:'野菜・きのこ',n:'長ねぎ',amt:40,unit:'g',price:28}],
+      recipe:['牛肉・大根を食べやすく切る','コチュジャン・しょうゆ・みりん・ごま油でホットクック「煮物」20分','ごまと小ねぎを散らして完成'],
+      bento:{name:'牛大根丼弁当',steps:['残りをレンジ1分温める','ご飯にのせてたれを少しかける','朝5分で完成']}},
+    {name:'ヘルシオ 鶏のみそマヨ焼き',kcal:530,p:36,f:26,c:28,type:'和',devices:['ヘルシオ'],soupKey:'hc_wakame_tofu',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:130,unit:'g',price:108},{cat:'野菜・きのこ',n:'ブロッコリー（冷凍）',amt:60,unit:'g',price:30}],
+      recipe:['鶏ももにみそ・マヨネーズ・みりんを塗る','ブロッコリーとともにヘルシオ210℃で18分','こんがりしたら完成'],
+      bento:{name:'みそマヨチキン弁当',steps:['鶏肉をレンジ1分温め切り分ける','ブロッコリーとともに詰める','朝5分で完成']}},
+    {name:'ホットクック 豚とほうれん草のクリーム煮',kcal:540,p:30,f:28,c:38,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'豚ロース',amt:100,unit:'g',price:138},{cat:'野菜・きのこ',n:'ほうれん草（冷凍）',amt:80,unit:'g',price:36},{cat:'その他',n:'牛乳',amt:100,unit:'ml',price:22}],
+      recipe:['豚ロース・玉ねぎを食べやすく切りホットクック「炒め物」3分','コンソメ・水200ml・牛乳100mlを加え「スープ」10分','ほうれん草を加えひと煮立ちさせ塩こしょうで調整'],
+      bento:{name:'クリーム煮弁当',steps:['スープジャーに温めて入れる','パンを添えると豪華','朝5分で完成']}},
+    {name:'ヘルシオ たらのホイル蒸し',kcal:450,p:36,f:14,c:30,type:'和',devices:['ヘルシオ'],soupKey:'hc_nameko_tofu',
+      ing:[{cat:'肉・魚',n:'たら（切り身）',amt:120,unit:'g',price:168},{cat:'野菜・きのこ',n:'えのき',amt:40,unit:'g',price:28},{cat:'野菜・きのこ',n:'長ねぎ',amt:40,unit:'g',price:28}],
+      recipe:['たら・えのき・長ねぎをホイルで包む','バター・しょうゆ・みりん少々を加える','ヘルシオ200℃で15分'],
+      bento:{name:'たらホイル弁当',steps:['たらをほぐしてレンジ1分温める','えのきと一緒にご飯に混ぜて詰める','朝5分で完成']}},
+    {name:'ホットクック おでん風煮込み',kcal:480,p:24,f:14,c:58,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',
+      ing:[{cat:'肉・魚',n:'さつま揚げ',amt:80,unit:'g',price:98},{cat:'野菜・きのこ',n:'大根',amt:150,unit:'g',price:42},{cat:'野菜・きのこ',n:'こんにゃく',amt:80,unit:'g',price:28},{cat:'汁物食材',n:'豆腐（絹）',amt:100,unit:'g',price:25}],
+      recipe:['大根・こんにゃく・さつま揚げ・豆腐を切る','だし汁・しょうゆ・みりん・塩でホットクック「煮物」30分','からしを添えて完成'],
+      bento:{name:'おでん弁当',steps:['残りをレンジ1分温める','汁ごとスープジャーへ入れても','朝5分で完成']}},
+    {name:'ヘルシオ 鶏のゆず塩焼き',kcal:490,p:38,f:20,c:24,type:'和',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:130,unit:'g',price:108},{cat:'野菜・きのこ',n:'カブ',amt:80,unit:'g',price:45}],
+      recipe:['鶏ももにゆず塩・ごま油を揉み込む','カブとともにヘルシオ210℃で18分','ゆずの皮を散らして香りよく仕上げ'],
+      bento:{name:'ゆず塩チキン弁当',steps:['鶏肉をレンジ1分温め切り分ける','カブとともに詰める','朝5分で完成']}},
+    {name:'ホットクック 豚とキムチの炒め煮',kcal:520,p:26,f:24,c:44,type:'他',devices:['ホットクック'],soupKey:'hc_corn',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:100,unit:'g',price:128},{cat:'野菜・きのこ',n:'白菜キムチ',amt:80,unit:'g',price:78},{cat:'汁物食材',n:'豆腐（絹）',amt:150,unit:'g',price:38}],
+      recipe:['豚バラ・キムチ・豆腐を内鍋へ','ホットクック「炒め物」5分（ふたなしモードを活用）','ごま油をまわしかけて完成'],
+      bento:{name:'キムチ豚丼弁当',steps:['残りをレンジ1分温める','ご飯にのせて一味を少々','朝5分で完成']}},
   ],
 };
-dinnerDB.autumn=dinnerDB.winter; dinnerDB.summer=dinnerDB.spring;
+  dinnerDB.summer=[
+    {name:'ヘルシオ 鶏のスパイシーグリル',kcal:500,p:38,f:22,c:20,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:150,unit:'g',price:125},{cat:'野菜・きのこ',n:'パプリカ',amt:50,unit:'g',price:48},{cat:'野菜・きのこ',n:'ズッキーニ',amt:50,unit:'g',price:38}],
+      recipe:['鶏もも・パプリカ・ズッキーニにクミン・パプリカパウダー・オリーブ油を揉み込む','ヘルシオ230℃で18分','レモンを添えて完成'],
+      bento:{name:'スパイシーチキン弁当',steps:['鶏肉をレンジ1分温め切り分ける','パプリカとともに詰める','朝5分で完成']}},
+    {name:'ホットクック 麻婆ナス',kcal:480,p:20,f:22,c:46,type:'中',devices:['ホットクック'],soupKey:'hc_corn',
+      ing:[{cat:'肉・魚',n:'豚ひき肉',amt:80,unit:'g',price:104},{cat:'野菜・きのこ',n:'ナス',amt:200,unit:'g',price:60},{cat:'汁物食材',n:'豆腐（絹）',amt:100,unit:'g',price:25}],
+      recipe:['ナス・豆腐・豚ひき肉・市販の麻婆の素を内鍋へ','ホットクック「炒め物」5分','水溶き片栗粉でとろみをつけて完成'],
+      bento:{name:'麻婆ナス丼弁当',steps:['麻婆ナスをレンジ1分温める','ご飯の上にかけるだけ','朝5分で完成']}},
+    {name:'ヘルシオ ラタトゥイユ',kcal:380,p:18,f:14,c:40,type:'洋',devices:['ヘルシオ'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'鶏むね肉',amt:100,unit:'g',price:80},{cat:'野菜・きのこ',n:'ズッキーニ',amt:80,unit:'g',price:55},{cat:'野菜・きのこ',n:'ナス',amt:80,unit:'g',price:45},{cat:'汁物食材',n:'トマト缶',amt:100,unit:'g',price:35}],
+      recipe:['野菜・鶏むねを角切りにしてオリーブ油・ハーブで和える','ヘルシオ200℃で20分','バジルを添えて完成'],
+      bento:{name:'ラタトゥイユご飯弁当',steps:['ラタトゥイユをレンジ1分温める','ご飯の上にかけてチーズをのせる','朝5分で完成']}},
+    {name:'ホットクック ガパオライス',kcal:580,p:28,f:20,c:70,type:'他',devices:['ホットクック','レンジ'],soupKey:'hc_corn',
+      ing:[{cat:'肉・魚',n:'鶏ひき肉',amt:120,unit:'g',price:96},{cat:'野菜・きのこ',n:'ピーマン',amt:60,unit:'g',price:35},{cat:'野菜・きのこ',n:'パプリカ',amt:50,unit:'g',price:48}],
+      recipe:['鶏ひき肉・ピーマン・パプリカ・ナンプラー・オイスターソースを内鍋へ','ホットクック「炒め物」3分','目玉焼きをのせてご飯と一緒に盛る'],
+      bento:{name:'ガパオ弁当',steps:['ガパオをレンジ1分温める','ご飯にのせて詰める','朝5分で完成']}},
+    {name:'ヘルシオ 豚のハーブロースト',kcal:520,p:32,f:26,c:28,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',
+      ing:[{cat:'肉・魚',n:'豚ロース',amt:150,unit:'g',price:185},{cat:'野菜・きのこ',n:'アスパラガス',amt:60,unit:'g',price:48}],
+      recipe:['豚ロースにハーブソルト・オリーブ油を揉み込む','アスパラとともにヘルシオ210℃で18分','マスタードを添えて完成'],
+      bento:{name:'ポークロースト弁当',steps:['豚肉をレンジ1分温め切り分ける','アスパラとともに詰める','朝5分で完成']}},
+    {name:'ホットクック トマトと豆の煮込み',kcal:440,p:22,f:14,c:56,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:80,unit:'g',price:102},{cat:'汁物食材',n:'トマト缶',amt:100,unit:'g',price:35},{cat:'その他',n:'ミックスビーンズ',amt:80,unit:'g',price:48}],
+      recipe:['豚バラ・トマト缶・ミックスビーンズ・コンソメを内鍋へ','ホットクック「煮物」20分','パセリを散らして完成'],
+      bento:{name:'トマト煮込み弁当',steps:['残りをレンジ1分温める','スープジャーに入れてパンを添えても','朝5分で完成']}},
+    {name:'ヘルシオ シーフードグリル',kcal:420,p:34,f:14,c:34,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',
+      ing:[{cat:'肉・魚',n:'エビ',amt:80,unit:'g',price:160},{cat:'肉・魚',n:'ホタテ',amt:80,unit:'g',price:200},{cat:'野菜・きのこ',n:'パプリカ',amt:50,unit:'g',price:48}],
+      recipe:['エビ・ホタテ・パプリカをオリーブ油・塩こしょう・レモン汁で和える','ヘルシオ220℃で12分','ハーブを散らして完成'],
+      bento:{name:'シーフード弁当',steps:['シーフードをレンジ1分温める','パプリカとともに詰める','朝5分で完成']}},
+    // ── 夏 セットB ──
+    {name:'ホットクック 鶏とナスのカレー',kcal:570,p:32,f:20,c:64,type:'他',devices:['ホットクック'],soupKey:'hc_corn',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:120,unit:'g',price:100},{cat:'野菜・きのこ',n:'ナス',amt:150,unit:'g',price:45},{cat:'野菜・きのこ',n:'玉ねぎ',amt:60,unit:'g',price:24}],
+      recipe:['鶏もも・ナス・玉ねぎを食べやすく切る','カレールー・水300mlでホットクック「カレー」モード20分','ご飯にかけて完成'],
+      bento:{name:'チキンカレー弁当',steps:['カレーをレンジ1分温める','ご飯にかけて詰める','朝5分で完成']}},
+    {name:'ヘルシオ 豚のみそ漬け焼き',kcal:510,p:30,f:24,c:36,type:'和',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'豚ロース',amt:150,unit:'g',price:185},{cat:'野菜・きのこ',n:'アスパラガス',amt:60,unit:'g',price:48}],
+      recipe:['豚ロースをみそ・みりん・酒に一晩漬ける','みそを軽くふいてアスパラとともにヘルシオ210℃で15分','仕上げに白ごまを振る'],
+      bento:{name:'みそ漬け弁当',steps:['豚肉をレンジ1分温め切り分ける','アスパラとともに詰める','朝5分で完成']}},
+    {name:'ホットクック 豚の蒸ししゃぶ',kcal:460,p:28,f:20,c:38,type:'和',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:120,unit:'g',price:154},{cat:'野菜・きのこ',n:'レタス',amt:80,unit:'g',price:30},{cat:'野菜・きのこ',n:'きゅうり',amt:60,unit:'g',price:35}],
+      recipe:['豚バラを内鍋に入れ水100mlでホットクック「蒸し物」8分','レタス・きゅうり・ねぎを皿に盛り豚肉をのせる','ごまだれをかけて完成'],
+      bento:{name:'しゃぶしゃぶ弁当',steps:['豚肉をレンジ1分温める','野菜と一緒に詰めごまだれを添える','朝5分で完成']}},
+    {name:'ヘルシオ あじの塩焼き',kcal:430,p:32,f:18,c:24,type:'和',devices:['ヘルシオ'],soupKey:'hc_wakame_tofu',
+      ing:[{cat:'肉・魚',n:'あじ（一尾）',amt:150,unit:'g',price:168},{cat:'野菜・きのこ',n:'大根',amt:80,unit:'g',price:22}],
+      recipe:['あじに塩を振り30分置く','ヘルシオ230℃で12分','大根おろし・しょうゆ・レモンを添えて完成'],
+      bento:{name:'あじほぐし弁当',steps:['あじの身をほぐしてレンジ1分','しょうゆ少々でご飯に混ぜて詰める','朝5分で完成']}},
+    {name:'ホットクック ゴーヤチャンプルー',kcal:480,p:24,f:22,c:44,type:'他',devices:['ホットクック'],soupKey:'hc_corn',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:80,unit:'g',price:102},{cat:'野菜・きのこ',n:'ゴーヤ',amt:100,unit:'g',price:58},{cat:'汁物食材',n:'豆腐（絹）',amt:150,unit:'g',price:38}],
+      recipe:['ゴーヤ・豆腐・豚バラをホットクック「炒め物」5分（ふたなしモード）','卵を溶いて加えさっと混ぜる','かつお節・しょうゆで仕上げ'],
+      bento:{name:'チャンプルー弁当',steps:['残りをレンジ1分温める','ご飯と詰める','朝5分で完成']}},
+    {name:'ヘルシオ トマトチーズグラタン',kcal:520,p:28,f:24,c:48,type:'洋',devices:['ヘルシオ'],soupKey:'hls_onion',
+      ing:[{cat:'肉・魚',n:'鶏むね肉',amt:100,unit:'g',price:80},{cat:'汁物食材',n:'トマト缶',amt:100,unit:'g',price:35},{cat:'その他',n:'ミックスチーズ',amt:30,unit:'g',price:48}],
+      recipe:['鶏むね・玉ねぎを炒めトマト缶・塩こしょうで煮詰める','グラタン皿にご飯→ソース→チーズの順にのせる','ヘルシオ230℃で10分'],
+      bento:{name:'グラタン弁当',steps:['耐熱容器に移しチーズをのせヘルシオ2分','溶けたらお弁当箱へ','朝7分で完成']}},
+    {name:'ホットクック 夏野菜と豚の煮込み',kcal:490,p:26,f:20,c:50,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:100,unit:'g',price:128},{cat:'野菜・きのこ',n:'ズッキーニ',amt:80,unit:'g',price:55},{cat:'野菜・きのこ',n:'ナス',amt:80,unit:'g',price:45},{cat:'汁物食材',n:'トマト缶',amt:100,unit:'g',price:35}],
+      recipe:['豚バラ・ズッキーニ・ナスをざく切り','トマト缶・コンソメ・塩こしょうでホットクック「煮物」15分','バジルを散らして完成'],
+      bento:{name:'夏野菜煮込み弁当',steps:['残りをレンジ1分温める','ご飯にかけてチーズをのせる','朝5分で完成']}},
+  ];
+  dinnerDB.autumn=[
+    {name:'ホットクック きのこと鶏の炊き込みご飯',kcal:530,p:24,f:12,c:80,type:'和',devices:['ホットクック'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:120,unit:'g',price:100},{cat:'野菜・きのこ',n:'しめじ',amt:50,unit:'g',price:35},{cat:'野菜・きのこ',n:'まいたけ',amt:40,unit:'g',price:42}],
+      recipe:['米2合・鶏もも・しめじ・まいたけ・しょうゆ・みりん・だし汁を内鍋へ','ホットクック「炊飯」モードで完成','三つ葉・ごまを散らす'],
+      bento:{name:'きのこご飯弁当',steps:['そのままお弁当箱に詰めるだけ','前日の副菜を添えて完成','朝3分で完成']}},
+    {name:'ヘルシオ 鮭のホイル焼き',kcal:480,p:36,f:20,c:28,type:'和',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'鮭（切り身）',amt:120,unit:'g',price:180},{cat:'野菜・きのこ',n:'えのき',amt:40,unit:'g',price:28},{cat:'野菜・きのこ',n:'玉ねぎ',amt:50,unit:'g',price:22}],
+      recipe:['鮭・えのき・薄切り玉ねぎをホイルで包む','バター・しょうゆ少々を加えヘルシオ220℃で15分','レモンを絞って完成'],
+      bento:{name:'鮭フレーク弁当',steps:['鮭をほぐしてレンジ1分温める','えのきと一緒にご飯に混ぜて詰める','朝5分で完成']}},
+    {name:'ホットクック 豚と里芋の煮物',kcal:510,p:26,f:20,c:48,type:'和',devices:['ホットクック'],soupKey:'hc_kinoko',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:100,unit:'g',price:128},{cat:'野菜・きのこ',n:'里芋',amt:150,unit:'g',price:55}],
+      recipe:['里芋・豚バラを食べやすく切る','しょうゆ・みりん・砂糖・だし汁でホットクック「煮物」25分','冷凍えだまめで彩りを添える'],
+      bento:{name:'里芋豚煮弁当',steps:['残りをレンジ1分温める','煮汁ごとご飯と詰める','朝4分で完成']}},
+    {name:'ヘルシオ さつまいもと鶏のロースト',kcal:500,p:32,f:16,c:52,type:'洋',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:130,unit:'g',price:108},{cat:'野菜・きのこ',n:'さつまいも',amt:100,unit:'g',price:45}],
+      recipe:['鶏もも・さつまいもにハーブソルト・オリーブ油を振る','ヘルシオ220℃で20分','はちみつを少し垂らして甘みをプラス'],
+      bento:{name:'チキン＆さつまいも弁当',steps:['鶏肉をレンジ1分温め切り分ける','さつまいもとともに詰める','朝5分で完成']}},
+    {name:'ホットクック かぼちゃのミートソース煮',kcal:540,p:28,f:22,c:54,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'豚ひき肉',amt:80,unit:'g',price:104},{cat:'野菜・きのこ',n:'かぼちゃ',amt:150,unit:'g',price:48},{cat:'汁物食材',n:'トマト缶',amt:100,unit:'g',price:35}],
+      recipe:['かぼちゃ・豚ひき肉・トマト缶を内鍋へ','コンソメ・塩こしょうでホットクック「煮物」15分','粉チーズをかけて完成'],
+      bento:{name:'かぼちゃグラタン弁当',steps:['耐熱容器に移しチーズをのせヘルシオ2分','溶けたらお弁当箱へ','朝7分で完成']}},
+    {name:'ヘルシオ さんまの塩焼き',kcal:460,p:30,f:24,c:20,type:'和',devices:['ヘルシオ'],soupKey:'hc_nameko_tofu',
+      ing:[{cat:'肉・魚',n:'さんま',amt:150,unit:'g',price:198},{cat:'野菜・きのこ',n:'大根',amt:100,unit:'g',price:28}],
+      recipe:['さんまに塩を振り30分置く','ヘルシオ230℃で12分','大根おろし・すだちを添えて完成'],
+      bento:{name:'さんまほぐし弁当',steps:['さんまの身をほぐしてレンジ1分','しょうゆ少々でご飯と混ぜて詰める','朝5分で完成']}},
+    {name:'ホットクック 栗ご飯',kcal:520,p:10,f:8,c:98,type:'和',devices:['ホットクック'],soupKey:'hc_wakame_tofu',
+      ing:[{cat:'野菜・きのこ',n:'さつまいも',amt:60,unit:'g',price:27},{cat:'その他',n:'甘栗（市販）',amt:50,unit:'g',price:58},{cat:'その他',n:'油揚げ',amt:20,unit:'g',price:18}],
+      recipe:['米2合・甘栗・さつまいも・油揚げを内鍋へ','しょうゆ・みりん・塩でホットクック「炊飯」','黒ごまを散らして秋らしく'],
+      bento:{name:'栗ご飯弁当',steps:['そのままお弁当箱に詰めるだけ','前日の副菜を添えて完成','朝3分で完成']}},
+    // ── 秋 セットB ──
+    {name:'ホットクック 鶏と根菜の煮込み',kcal:510,p:30,f:16,c:54,type:'和',devices:['ホットクック'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:120,unit:'g',price:100},{cat:'野菜・きのこ',n:'ごぼう',amt:60,unit:'g',price:38},{cat:'野菜・きのこ',n:'にんじん',amt:60,unit:'g',price:24},{cat:'野菜・きのこ',n:'こんにゃく',amt:80,unit:'g',price:28}],
+      recipe:['鶏もも・ごぼう・にんじん・こんにゃくを食べやすく切る','しょうゆ・みりん・酒・だし汁でホットクック「煮物」25分','青ねぎを散らして完成'],
+      bento:{name:'鶏根菜弁当',steps:['残りをレンジ1分温める','煮汁ごとご飯と詰める','朝4分で完成']}},
+    {name:'ヘルシオ 鯖のみそ焼き',kcal:490,p:34,f:24,c:22,type:'和',devices:['ヘルシオ'],soupKey:'hc_kinoko',
+      ing:[{cat:'肉・魚',n:'鯖（切り身）',amt:130,unit:'g',price:168},{cat:'野菜・きのこ',n:'長ねぎ',amt:50,unit:'g',price:35}],
+      recipe:['鯖にみそ・みりん・砂糖を塗り15分置く','ヘルシオ220℃で12分','長ねぎを一緒にロースト'],
+      bento:{name:'鯖みそ弁当',steps:['鯖をレンジ1分温める','長ねぎとともに詰める','朝4分で完成']}},
+    {name:'ホットクック 豚と白菜のミルクスープ',kcal:480,p:28,f:22,c:38,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'肉・魚',n:'豚バラ薄切り',amt:100,unit:'g',price:128},{cat:'野菜・きのこ',n:'白菜',amt:150,unit:'g',price:35},{cat:'その他',n:'牛乳',amt:100,unit:'ml',price:22}],
+      recipe:['豚バラ・白菜を食べやすく切る','コンソメ・水300mlでホットクック「スープ」12分','牛乳100mlを加えひと煮立ちさせ塩こしょうで調整'],
+      bento:{name:'クリームスープ弁当',steps:['スープジャーに温めて入れる','パンを添えると豪華','朝5分で完成']}},
+    {name:'ヘルシオ 鶏と長芋のロースト',kcal:520,p:36,f:18,c:46,type:'和',devices:['ヘルシオ'],soupKey:'hc_negi_daikon',
+      ing:[{cat:'肉・魚',n:'鶏もも肉',amt:130,unit:'g',price:108},{cat:'野菜・きのこ',n:'長芋',amt:120,unit:'g',price:55}],
+      recipe:['鶏もも・長芋を食べやすく切りしょうゆ・みりん・ごま油で和える','ヘルシオ210℃で18分','七味をかけて完成'],
+      bento:{name:'鶏長芋弁当',steps:['鶏肉をレンジ1分温め切り分ける','長芋とともに詰める','朝5分で完成']}},
+    {name:'ホットクック きのこのリゾット',kcal:500,p:16,f:12,c:80,type:'洋',devices:['ホットクック'],soupKey:'hc_consomme',
+      ing:[{cat:'野菜・きのこ',n:'しめじ',amt:60,unit:'g',price:42},{cat:'野菜・きのこ',n:'エリンギ',amt:50,unit:'g',price:38},{cat:'その他',n:'パルメザンチーズ',amt:15,unit:'g',price:35}],
+      recipe:['米1合・しめじ・エリンギ・コンソメ・水500mlを内鍋へ','ホットクック「リゾット」モード（またはスープ20分）','バター・パルメザンチーズを混ぜて完成'],
+      bento:{name:'リゾット弁当',steps:['スープジャーに温めて入れる','粉チーズを添えると豪華','朝5分で完成']}},
+    {name:'ヘルシオ さばのカレー風味焼き',kcal:450,p:32,f:22,c:20,type:'洋',devices:['ヘルシオ'],soupKey:'hc_nameko_tofu',
+      ing:[{cat:'肉・魚',n:'鯖（切り身）',amt:130,unit:'g',price:168},{cat:'野菜・きのこ',n:'パプリカ',amt:50,unit:'g',price:48}],
+      recipe:['鯖にカレー粉・塩・オリーブ油を揉み込む','パプリカとともにヘルシオ220℃で13分','レモンを添えて完成'],
+      bento:{name:'さばカレー弁当',steps:['さばをレンジ1分温める','パプリカとともに詰める','朝4分で完成']}},
+    {name:'ホットクック 肉じゃが',kcal:530,p:24,f:16,c:66,type:'和',devices:['ホットクック'],soupKey:'hc_wakame_tofu',
+      ing:[{cat:'肉・魚',n:'牛薄切り肉',amt:80,unit:'g',price:168},{cat:'野菜・きのこ',n:'じゃがいも',amt:150,unit:'g',price:42},{cat:'野菜・きのこ',n:'玉ねぎ',amt:60,unit:'g',price:24},{cat:'野菜・きのこ',n:'にんじん',amt:40,unit:'g',price:16}],
+      recipe:['じゃがいも・玉ねぎ・にんじん・牛肉を食べやすく切る','しょうゆ・みりん・砂糖・だし汁でホットクック「煮物」20分','しらたきを加えてもおいしい'],
+      bento:{name:'肉じゃが弁当',steps:['残りをレンジ1分温める','煮汁ごとご飯と詰める','朝4分で完成']}},
+  ];
 
+// ── 週末ランチ ──
 const wkLunches=[
-  {name:'ホットクック ペンネアラビアータ',kcal:580,p:18,f:16,c:88,devices:['ホットクック','レンジ'],recipe:['玉ねぎ・にんにく・トマト缶・鷹の爪をホットクック「炒め物」8分','ペンネはレンジ専用容器で茹でソースと和える','粉チーズをかけて完成']},
-  {name:'ヘルシオ 焼きカレー',kcal:620,p:22,f:18,c:90,devices:['ヘルシオ','レンジ'],recipe:['作り置きカレーをグラタン皿に盛りご飯をのせる','チーズをのせヘルシオ230℃で10〜12分','焦げ目がついたら完成']},
+  {name:'ホットクック ペンネアラビアータ',kcal:580,p:18,f:16,c:88,devices:['ホットクック','レンジ'],
+    ing:[{cat:'その他',n:'ペンネ',amt:80,unit:'g',price:48},{cat:'汁物食材',n:'トマト缶',amt:100,unit:'g',price:35}],
+    recipe:['玉ねぎ・にんにく・トマト缶・鷹の爪をホットクック「炒め物」8分','ペンネはレンジ専用容器で茹でソースと和える','粉チーズをかけて完成']},
+  {name:'ヘルシオ 焼きカレー',kcal:620,p:22,f:18,c:90,devices:['ヘルシオ','レンジ'],
+    ing:[{cat:'その他',n:'カレールー',amt:25,unit:'g',price:48}],
+    recipe:['作り置きカレーをグラタン皿に盛りご飯をのせる','チーズをのせヘルシオ230℃で10〜12分','焦げ目がついたら完成']},
 ];
 
+// ── 朝食DB（ingフィールド追加：1人分の食材） ──
 const breakfasts=[
-  {name:'レンジ蒸し野菜・目玉焼き',kcal:260,p:14,f:10,c:28,devices:['レンジ'],recipe:['キャベツ・にんじんを薄切りにして耐熱皿でラップしレンジ3分','塩・ごま油をかけて和える','卵を耐熱皿に黄身に楊枝で穴をあけラップしてレンジ1分']},
-  {name:'ヘルシオ トースト・ヨーグルト',kcal:300,p:12,f:8,c:46,devices:['ヘルシオ'],recipe:['食パンをヘルシオトーストで2〜3分','バター・ジャムを塗る','ヨーグルトにはちみつとフルーツを添える']},
-  {name:'レンジ 茶碗蒸し・みそ汁',kcal:250,p:16,f:8,c:30,devices:['レンジ'],recipe:['卵1個・だし汁150ml・しょうゆ小さじ1/2を混ぜ濾す','耐熱カップにラップして500Wで2分→30秒追加','みそ汁はホットクックでタイマー予約しておくと楽']},
-  {name:'ヘルシオ 蒸し豆腐プレート',kcal:230,p:14,f:10,c:22,devices:['ヘルシオ','レンジ'],recipe:['絹豆腐1/2丁をヘルシオ「蒸し物」5分','ポン酢・しょうが・刻みねぎをかける','冷凍ほうれん草をレンジ2分でしょうゆ和え']},
-  {name:'温泉卵ご飯・みそ汁',kcal:320,p:16,f:10,c:50,devices:['レンジ'],recipe:['市販温泉卵またはレンジ専用容器で作成','ご飯にのせてしょうゆ・めんつゆをかける','みそ汁はホットクックでタイマー予約']},
-  {name:'ヘルシオ フレンチトースト',kcal:380,p:14,f:14,c:52,devices:['ヘルシオ'],recipe:['卵1個・牛乳50ml・砂糖小さじ1を混ぜ食パンを10分浸す','角皿200℃で12〜15分（途中裏返す）','粉糖・メープルシロップをかけて完成']},
-  {name:'ホットクック お粥・梅干し',kcal:280,p:10,f:4,c:54,devices:['ホットクック'],recipe:['米1/2合・水700mlをホットクック内鍋へ','「お粥」メニューで約30分','梅干し・刻みのり・ごまを添える']},
+  {name:'レンジ蒸し野菜・目玉焼き',kcal:260,p:14,f:10,c:28,devices:['レンジ'],
+    ing:[{cat:'野菜・きのこ',n:'キャベツ',amt:80,unit:'g',price:20},{cat:'その他',n:'卵',amt:1,unit:'個',price:24}],
+    recipe:['キャベツ・にんじんを薄切りにして耐熱皿でラップしレンジ3分','塩・ごま油をかけて和える','卵を耐熱皿に黄身に楊枝で穴をあけラップしてレンジ1分']},
+  {name:'ヘルシオ トースト・ヨーグルト',kcal:300,p:12,f:8,c:46,devices:['ヘルシオ'],
+    ing:[{cat:'その他',n:'食パン',amt:1,unit:'枚',price:28},{cat:'その他',n:'ヨーグルト',amt:100,unit:'g',price:38}],
+    recipe:['食パンをヘルシオトーストで2〜3分','バター・ジャムを塗る','ヨーグルトにはちみつとフルーツを添える']},
+  {name:'レンジ 茶碗蒸し・みそ汁',kcal:250,p:16,f:8,c:30,devices:['レンジ'],
+    ing:[{cat:'その他',n:'卵',amt:1,unit:'個',price:24}],
+    recipe:['卵1個・だし汁150ml・しょうゆ小さじ1/2を混ぜ濾す','耐熱カップにラップして500Wで2分→30秒追加','みそ汁はホットクックでタイマー予約しておくと楽']},
+  {name:'ヘルシオ 蒸し豆腐プレート',kcal:230,p:14,f:10,c:22,devices:['ヘルシオ','レンジ'],
+    ing:[{cat:'汁物食材',n:'豆腐（絹）',amt:100,unit:'g',price:25},{cat:'野菜・きのこ',n:'ほうれん草（冷凍）',amt:40,unit:'g',price:18}],
+    recipe:['絹豆腐1/2丁をヘルシオ「蒸し物」5分','ポン酢・しょうが・刻みねぎをかける','冷凍ほうれん草をレンジ2分でしょうゆ和え']},
+  {name:'温泉卵ご飯・みそ汁',kcal:320,p:16,f:10,c:50,devices:['レンジ'],
+    ing:[{cat:'その他',n:'卵',amt:1,unit:'個',price:24}],
+    recipe:['市販温泉卵またはレンジ専用容器で作成','ご飯にのせてしょうゆ・めんつゆをかける','みそ汁はホットクックでタイマー予約']},
+  {name:'ヘルシオ フレンチトースト',kcal:380,p:14,f:14,c:52,devices:['ヘルシオ'],
+    ing:[{cat:'その他',n:'食パン',amt:1,unit:'枚',price:28},{cat:'その他',n:'卵',amt:1,unit:'個',price:24}],
+    recipe:['卵1個・牛乳50ml・砂糖小さじ1を混ぜ食パンを10分浸す','角皿200℃で12〜15分（途中裏返す）','粉糖・メープルシロップをかけて完成']},
+  {name:'ホットクック お粥・梅干し',kcal:280,p:10,f:4,c:54,devices:['ホットクック'],
+    ing:[{cat:'その他',n:'梅干し',amt:1,unit:'個',price:28}],
+    recipe:['米1/2合・水700mlをホットクック内鍋へ','「お粥」メニューで約30分','梅干し・刻みのり・ごまを添える']},
 ];
 
 const EVENTS=[
@@ -308,13 +555,6 @@ const EVENTS=[
   {m:4,d:7,icon:'🌸',name:'お花見シーズン',menu:'春の炊き込みご飯'},{m:4,d:13,icon:'🌸',name:'春 旬の食材',menu:'菜の花・たけのこ・春キャベツ'},
   {m:5,d:5,icon:'🎏',name:'こどもの日',menu:'柏餅・ちまき'},{m:7,d:7,icon:'🎋',name:'七夕',menu:'そうめん'},
   {m:10,d:31,icon:'🎃',name:'ハロウィン',menu:'かぼちゃスープ'},{m:12,d:24,icon:'🎄',name:'クリスマス',menu:'ローストチキン'},{m:12,d:31,icon:'🎍',name:'大晦日',menu:'年越しそば'},
-];
-
-const shopBaseItems=[
-  {cat:'肉・魚',items:[{n:'豚バラ薄切り',q:'300g',price:380},{n:'牛薄切り肉',q:'200g',price:480},{n:'鶏もも肉',q:'2枚',price:320},{n:'鮭切り身',q:'2切れ',price:360}]},
-  {cat:'野菜・きのこ',items:[{n:'白菜',q:'1/4個',price:100},{n:'長ねぎ',q:'2本',price:140},{n:'ほうれん草',q:'1束',price:148},{n:'さつまいも',q:'1本',price:128},{n:'しめじ',q:'1袋',price:108}]},
-  {cat:'汁物食材',items:[{n:'絹豆腐',q:'2丁',price:138},{n:'乾燥わかめ',q:'1袋',price:148},{n:'なめこ',q:'1袋',price:98},{n:'コンソメ',q:'1箱',price:198},{n:'コーン缶',q:'1缶',price:88},{n:'顆粒だし',q:'1袋',price:198}]},
-  {cat:'その他',items:[{n:'卵',q:'10個',price:238},{n:'冷凍ブロッコリー',q:'500g',price:298},{n:'みそ',q:'500g',price:298},{n:'市販麻婆豆腐の素',q:'2人分',price:148}]},
 ];
 
 const prepItems=[
@@ -330,23 +570,31 @@ const weeklyPrepPlan=[
   {day:'水曜夜（15分）',icon:'🌙',tasks:['煮卵仕込み（ホットクック15分）','切り干し大根煮（ホットクック10分）','サラダチキンが残り少なければ追加仕込み','週後半の弁当・夕食副菜をここで補充']},
 ];
 
-// ── State (localStorage で永続化) ──────────────────
+// ── State ──────────────────────────────────────────
 function loadState(){
-  try{return JSON.parse(localStorage.getItem('kondate_state')||'null');}catch{return null;}
+  try{return JSON.parse(localStorage.getItem('kondate_state_v2')||'null');}catch{return null;}
 }
 function saveState(){
-  try{localStorage.setItem('kondate_state',JSON.stringify({shopSt,servD}));}catch{}
+  try{localStorage.setItem('kondate_state_v2',JSON.stringify({shopDone,servD}));}catch{}
 }
 
-let curWeek=0,shopWeek=0,selDay=0;
+let curWeek=0,shopWeek=0,prepWeek=0,nutriWeek=0,selDay=0;
 const saved=loadState();
 let servD=saved?.servD||[DAYS.map((_,i)=>({b:2,l:WE.includes(i)?2:1,d:2})),DAYS.map((_,i)=>({b:2,l:WE.includes(i)?2:1,d:2}))];
-let shopSt=saved?.shopSt||[shopBaseItems.map(c=>({...c,items:c.items.map(x=>({...x,done:false}))})),shopBaseItems.map(c=>({...c,items:c.items.map(x=>({...x,done:false}))}))];
+// shopDone[week][itemName] = true/false
+let shopDone=saved?.shopDone||[{},{}];
 
 // ── Helpers ──────────────────────────────────────────
 function getWeekDates(off){const m=getMon(off);return DAYS.map((_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d;});}
 function getTodayIdx(off){return getWeekDates(off).findIndex(d=>d.getDate()===todayDate&&d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear());}
-function getDinners(off){const src=dinnerDB[season];return DAYS.map((_,i)=>src[(i+off*3)%src.length]);}
+function getDinners(wk){
+  const src=dinnerDB[season]; // 14 dishes (A×7 + B×7)
+  const half=7;
+  const off=getAbsWeek(wk);
+  const grp=(off%2)*half;           // 0=セットA (偶数週), 7=セットB (奇数週)
+  const rot=Math.floor(off/2)%half; // 2週ごとに1ずつシフト
+  return DAYS.map((_,i)=>src[grp+(i+rot)%half]);
+}
 function getLunchSrc(wk,di){
   if(WE.includes(di))return null;
   if(wk===1&&di===0){const d0=getDinners(0);return{din:d0[6],fromLabel:`今週日曜の夕飯「${d0[6].name}」の残りを活用`};}
@@ -374,9 +622,56 @@ function chg(wk,di,t,delta){
   const dins=getDinners(wk);const ls=getLunchSrc(wk,di);
   let base=t==='b'?breakfasts[di].kcal:t==='d'?dins[di].kcal:ls?Math.round(ls.din.kcal*0.6):WE.includes(di)?wkLunches[di-5].kcal:0;
   document.getElementById(`kc${wk}${di}${t}`).textContent=Math.round(base*sv[t]);
+  // 買い物タブが表示中なら即更新
+  if(document.getElementById('pg-shop').classList.contains('on'))buildShop();
   saveState();
 }
 function dchips(devs){return(devs||[]).map(d=>{const s=DC_STYLE[d]||{bg:'#f2f2f7',color:'#555'};return`<div class="dchip" style="background:${s.bg};color:${s.color}">${d}</div>`;}).join('');}
+
+// ── 買い物リスト動的生成 ──────────────────────────────
+function fmtQty(amt,unit){
+  if(unit==='g')return Math.round(amt/10)*10+'g';
+  return Math.ceil(amt)+unit;
+}
+
+function getShopItems(wk){
+  const dins=getDinners(wk);
+  const acc={}; // key=itemName → {cat,n,unit,totalAmt,totalPrice}
+  function add(cat,n,amt,unit,price,sv){
+    if(!acc[n])acc[n]={cat,n,unit,totalAmt:0,totalPrice:0};
+    acc[n].totalAmt+=amt*sv;
+    acc[n].totalPrice+=price*sv;
+  }
+  DAYS.forEach((_,di)=>{
+    const sv=servD[wk][di];
+    const din=dins[di];
+    const bf=breakfasts[di];
+    // 夕食の食材
+    if(din.ing)din.ing.forEach(ig=>add(ig.cat,ig.n,ig.amt,ig.unit,ig.price,sv.d));
+    // スープの食材（夕食と同じ人数）
+    if(din.soupKey&&SOUPS[din.soupKey].ing)
+      SOUPS[din.soupKey].ing.forEach(ig=>add(ig.cat,ig.n,ig.amt,ig.unit,ig.price,sv.d));
+    // 朝食の食材
+    if(bf.ing)bf.ing.forEach(ig=>add(ig.cat,ig.n,ig.amt,ig.unit,ig.price,sv.b));
+    // 週末ランチの食材
+    if(WE.includes(di)){
+      const wl=wkLunches[di-5];
+      if(wl.ing)wl.ing.forEach(ig=>add(ig.cat,ig.n,ig.amt,ig.unit,ig.price,sv.l));
+    }
+  });
+  const catOrder=['肉・魚','野菜・きのこ','汁物食材','その他'];
+  const grouped={};catOrder.forEach(c=>{grouped[c]=[];});
+  Object.values(acc).forEach(item=>{
+    const c=catOrder.includes(item.cat)?item.cat:'その他';
+    grouped[c].push({
+      n:item.n,
+      q:fmtQty(item.totalAmt,item.unit),
+      price:Math.round(item.totalPrice),
+      done:shopDone[wk][item.n]||false
+    });
+  });
+  return catOrder.map(c=>({cat:c,items:grouped[c]})).filter(c=>c.items.length>0);
+}
 
 // ── Build blocks ──────────────────────────────────────
 function buildBlock(wk,di,label,name,kcal,svType,recipe,bentoData,linkText,isWknd,devices,soupKey){
@@ -492,7 +787,7 @@ function buildStrip(){
     c.innerHTML=`${isToday?'<div class="today-pip">今日</div>':''}
       <div class="dn" style="${isWk?'color:var(--blue)':''}">${d}</div>
       <div class="dd">${dates[i].getDate()}</div>
-      <div class="daydot" style="background:${isToday?'var(--blue)':isWk?'var(--blue)':'var(--border)'}"></div>`;
+      <div class="daydot" style="background:${isToday?'var(--blue)':'var(--border)'}"></div>`;
     c.onclick=()=>{selDay=i;buildStrip();buildDay();document.getElementById('content').scrollTop=0;};
     g.appendChild(c);
   });
@@ -511,44 +806,178 @@ function switchWeek(wk){
 
 // ── 買い物 ──────────────────────────────────────────
 function buildShop(){
-  const wk=shopWeek,st=shopSt[wk];
-  const rem=st.flatMap(c=>c.items).filter(i=>!i.done).reduce((s,i)=>s+i.price,0);
-  const tot=st.flatMap(c=>c.items).reduce((s,i)=>s+i.price,0);
+  const wk=shopWeek;
+  const cats=getShopItems(wk);
+  const allItems=cats.flatMap(c=>c.items);
+  const rem=allItems.filter(i=>!i.done).reduce((s,i)=>s+i.price,0);
+  const tot=allItems.reduce((s,i)=>s+i.price,0);
   document.getElementById('price-card').innerHTML=`
     <div>
-      <div style="font-size:12px;color:var(--text3)">${wk===0?'今週':'来週'}の食材費（目安・神奈川）</div>
+      <div style="font-size:12px;color:var(--text3)">${wk===0?'今週':'来週'}の食材費（目安）</div>
       <div class="pc-price">¥${rem.toLocaleString()}</div>
       <div class="pc-sub">全体 ¥${tot.toLocaleString()}</div>
     </div>
     <div style="font-size:28px">🛒</div>`;
-  document.getElementById('shop-inner').innerHTML=st.map((cat,ci)=>`
+  document.getElementById('shop-inner').innerHTML=cats.map(cat=>`
     <div style="margin-bottom:14px">
       <div class="sc">${cat.cat}</div>
-      ${cat.items.map((it,ii)=>`<div class="si" onclick="tShop(${wk},${ci},${ii})">
+      ${cat.items.map(it=>`<div class="si" onclick="tShop(${wk},'${it.n.replace(/'/g,"\\'")}')">
         <div class="ck${it.done?' on':''}">${it.done?'✓':''}</div>
         <div class="sn2${it.done?' done':''}">${it.n}</div>
         <div class="sq">${it.q}</div>
-        <div class="sprice">¥${it.price}</div>
+        <div class="sprice">¥${it.price.toLocaleString()}</div>
       </div>`).join('')}
     </div>`).join('');
 }
-function tShop(wk,ci,ii){shopSt[wk][ci].items[ii].done=!shopSt[wk][ci].items[ii].done;buildShop();saveState();}
-function switchShopWeek(wk){shopWeek=wk;document.getElementById('swt0').classList.toggle('on',wk===0);document.getElementById('swt1').classList.toggle('on',wk===1);buildShop();}
+function tShop(wk,key){
+  shopDone[wk][key]=!shopDone[wk][key];
+  buildShop();
+  saveState();
+}
+function switchShopWeek(wk){
+  shopWeek=wk;
+  document.getElementById('swt0').classList.toggle('on',wk===0);
+  document.getElementById('swt1').classList.toggle('on',wk===1);
+  buildShop();
+}
 
 // ── 作り置き ──────────────────────────────────────────
+function sn(d){return d.name.replace(/ホットクック |ヘルシオ /g,'');}
+
+// 今週の献立に基づいて仕込みポイントを生成
+function getPrepTips(wk){
+  const dins=getDinners(wk);
+  const tips=[];
+  const withIdx=dins.map((d,i)=>({d,i}));
+  // 鶏料理のある曜日
+  const chickenDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>ig.n.includes('鶏')));
+  if(chickenDays.length>=2){
+    const ref=chickenDays.slice(0,2).map(({d,i})=>`${DAYS[i]}の「${sn(d)}」`).join('と');
+    tips.push({icon:'🍗',text:`${ref}など鶏料理が${chickenDays.length}日。サラダチキンを多めに仕込んで弁当・朝食のたんぱく源に活用しましょう。`});
+  } else if(chickenDays.length===1){
+    const {d,i}=chickenDays[0];
+    tips.push({icon:'🍗',text:`${DAYS[i]}の「${sn(d)}」に合わせてサラダチキンを仕込んでおくと翌日の弁当のたんぱく源になります。`});
+  }
+  // 魚料理のある曜日
+  const fishDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>['サーモン','鯛','鮭','アサリ'].some(f=>ig.n.includes(f))));
+  if(fishDays.length>0){
+    const {d,i}=fishDays[0];
+    tips.push({icon:'🐟',text:`${DAYS[i]}の「${sn(d)}」がある週。ブロッコリー蒸しを仕込んでおくと緑の副菜として彩りよく添えられます。`});
+  }
+  // 根菜を使う曜日
+  const roots=['大根','にんじん','じゃがいも','さつまいも'];
+  const rootDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>roots.some(r=>ig.n.includes(r))));
+  if(rootDays.length>=2){
+    const ref=rootDays.slice(0,2).map(({i})=>DAYS[i]).join('・');
+    tips.push({icon:'🥕',text:`${ref}に根菜を使う夕食があります。ヘルシオで根菜をまとめてローストしておくと両日の副菜として使い回せます。`});
+  }
+  // 牛肉のある曜日
+  const beefDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>ig.n.includes('牛')));
+  if(beefDays.length>0&&tips.length<3){
+    const {d,i}=beefDays[0];
+    tips.push({icon:'🥩',text:`${DAYS[i]}の「${sn(d)}」は豪華な夕食。煮卵・切り干し大根を仕込んでおくと副菜の心配がなくなります。`});
+  }
+  if(tips.length===0)tips.push({icon:'🥚',text:'煮卵と切り干し大根は毎週仕込むと弁当が充実します。月曜と木曜の弁当のたんぱく源に。'});
+  return tips.slice(0,3);
+}
+
+// 今週の献立に基づいて各作り置きの活用例を生成
+function getWeeklyPrepItems(wk){
+  const dins=getDinners(wk);
+  const withIdx=dins.map((d,i)=>({d,i}));
+  const wkdayWithIdx=withIdx.filter(({i})=>!WE.includes(i));
+  const fishDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>['サーモン','鯛','鮭','アサリ'].some(f=>ig.n.includes(f))));
+  const rootDays=withIdx.filter(({d})=>(d.ing||[]).some(ig=>['大根','にんじん','じゃがいも','さつまいも'].some(r=>ig.n.includes(r))));
+  const chickenWkday=wkdayWithIdx.filter(({d})=>(d.ing||[]).some(ig=>ig.n.includes('鶏')));
+  const lowPWkday=wkdayWithIdx.filter(({d})=>d.p<22);
+
+  return [
+    {...prepItems[0], uses:[
+      chickenWkday.length>0?`${DAYS[chickenWkday[0].i]}「${sn(chickenWkday[0].d)}」弁当のたんぱく源に`:'平日弁当のたんぱく源に',
+      lowPWkday.length>1?`${DAYS[lowPWkday[1].i]}など低たんぱく食の補完に`:'朝食のトッピングに',
+      '夜のサラダのメイン食材に',
+    ]},
+    {...prepItems[1], uses:[
+      rootDays.length>0?`${DAYS[rootDays[0].i]}「${sn(rootDays[0].d)}」の付け合わせに`:'弁当の副菜に',
+      rootDays.length>1?`${DAYS[rootDays[1].i]}夕飯の付け合わせに`:'みそ汁の具材に',
+      '週後半の弁当の彩りに',
+    ]},
+    {...prepItems[2], uses:[
+      wkdayWithIdx.length>1?`${DAYS[wkdayWithIdx[0].i]}・${DAYS[wkdayWithIdx[1].i]}の弁当おかずに`:'平日弁当おかずに',
+      '朝ご飯のたんぱく補給に',
+      '小腹が空いたときの間食に',
+    ]},
+    {...prepItems[3], uses:[
+      fishDays.length>0?`${DAYS[fishDays[0].i]}「${sn(fishDays[0].d)}」に合う和の副菜に`:'弁当の副菜に',
+      '夕飯のご飯のお供に',
+      '週後半の常備菜として',
+    ]},
+    {...prepItems[4], uses:[
+      fishDays.length>0?`${DAYS[fishDays[0].i]}「${sn(fishDays[0].d)}」の付け合わせに`:'弁当の緑の副菜に',
+      '朝食の付け合わせに',
+      'サラダのトッピングに',
+    ]},
+  ];
+}
+
+// 今週の献立に基づいて仕込みスケジュールを生成
+function getWeeklySchedule(wk){
+  const dins=getDinners(wk);
+  const monWed=dins.slice(0,3).map(d=>sn(d)).join('・');
+  const thuSat=dins.slice(3,6).map(d=>sn(d)).join('・');
+  return[
+    {day:'日曜夜（30分）',icon:'☀️',tasks:[
+      'サラダチキン仕込み（ホットクック20分セット）',
+      '根菜ロースト（ヘルシオ25分セット）',
+      'ブロッコリー蒸し（レンジ5分）',
+      `月〜水（${monWed}）の副菜が揃う`,
+    ]},
+    {day:'水曜夜（15分）',icon:'🌙',tasks:[
+      '煮卵仕込み（ホットクック15分）',
+      '切り干し大根煮（ホットクック10分）',
+      'サラダチキンが残り少なければ追加仕込み',
+      `木〜土（${thuSat}）の副菜を補充`,
+    ]},
+  ];
+}
+
 function buildPrep(){
+  const wk=prepWeek;
+  const dins=getDinners(wk);
+  const dates=getWeekDates(wk);
+  const tips=getPrepTips(wk);
+  const weekItems=getWeeklyPrepItems(wk);
+  const schedule=getWeeklySchedule(wk);
   document.getElementById('prep-inner').innerHTML=`
-    <div class="prep-intro">
+    <div class="prep-intro" style="margin-bottom:10px">
       <div class="prep-intro-title">週2回・計45分で平日が楽になる</div>
       <div class="prep-intro-sub">日曜夜30分＋水曜夜15分だけ仕込めば、平日の朝は弁当を詰めるだけ。食材まとめ使いで無駄もほぼゼロ。</div>
+    </div>
+    <div class="nc" style="margin-bottom:10px">
+      <div class="nh">${wk===0?'今週':'来週'}の夕食ダイジェスト</div>
+      ${DAYS.map((d,i)=>{
+        const isWk=WE.includes(i);
+        return`<div style="display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:${i===6?'none':'0.5px solid var(--border)'}">
+          <div style="font-size:11px;color:${isWk?'var(--blue)':'var(--text3)'};width:22px;text-align:center;font-weight:500">${d}</div>
+          <div style="font-size:13px;color:var(--text);flex:1">${sn(dins[i])}</div>
+          <div style="font-size:11px;color:var(--text3)">${dates[i].getDate()}日</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="nc" style="margin-bottom:10px">
+      <div class="nh">${wk===0?'今週':'来週'}の仕込みポイント</div>
+      ${tips.map(t=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px">
+        <span style="font-size:16px;flex-shrink:0">${t.icon}</span>
+        <div style="font-size:13px;color:var(--text);line-height:1.55">${t.text}</div>
+      </div>`).join('')}
     </div>
     <div class="prep-stat-row">
       <div class="prep-stat"><div class="prep-stat-num">5品</div><div class="prep-stat-lbl">常備菜</div></div>
       <div class="prep-stat"><div class="prep-stat-num">45分</div><div class="prep-stat-lbl">週の仕込み</div></div>
       <div class="prep-stat"><div class="prep-stat-num">朝3分</div><div class="prep-stat-lbl">弁当完成</div></div>
     </div>
-    ${prepItems.map((p,i)=>{
-      const rid='pr'+i;
+    ${weekItems.map((p,i)=>{
+      const rid='pr'+i+wk;
       const dStyle=DC_STYLE[p.device]||{bg:'#f2f2f7',color:'#555'};
       return`<div class="prep-card">
         <div class="prep-head">
@@ -569,8 +998,8 @@ function buildPrep(){
       </div>`;
     }).join('')}
     <div style="font-size:13px;font-weight:500;color:var(--text);margin:4px 0 8px">仕込みスケジュール</div>
-    ${weeklyPrepPlan.map((plan,i)=>{
-      const pid='pp'+i;
+    ${schedule.map((plan,i)=>{
+      const pid='pp'+i+wk;
       return`<div class="plan-card">
         <div class="plan-head" onclick="tog('${pid}')">
           <div><div class="plan-title">${plan.icon} ${plan.day}</div><div class="plan-sub">この日にまとめて仕込む</div></div>
@@ -582,29 +1011,62 @@ function buildPrep(){
       </div>`;
     }).join('')}`;
 }
+function switchPrepWeek(wk){
+  prepWeek=wk;
+  document.getElementById('pwt0').classList.toggle('on',wk===0);
+  document.getElementById('pwt1').classList.toggle('on',wk===1);
+  buildPrep();
+  document.getElementById('content').scrollTop=0;
+}
 
 // ── 栄養 ──────────────────────────────────────────────
 function buildNutri(){
-  const wk=curWeek,dins=getDinners(wk);
+  const wk=nutriWeek,dins=getDinners(wk);
   const weekP=Math.round(dins.reduce((s,d)=>s+d.p,0)/7+breakfasts.reduce((s,b)=>s+b.p,0)/7+10);
   const weekF=Math.round(dins.reduce((s,d)=>s+d.f,0)/7+breakfasts.reduce((s,b)=>s+b.f,0)/7+8);
   const weekC=Math.round(dins.reduce((s,d)=>s+d.c,0)/7+breakfasts.reduce((s,b)=>s+b.c,0)/7+30);
   const tG=weekP+weekF+weekC;
   const pPct=Math.round(weekP/tG*100),fPct=Math.round(weekF/tG*100),cPct=100-pPct-fPct;
-  const avgK=Math.round(dins.reduce((s,_,i)=>{const ls=getLunchSrc(wk,i);const lk=ls?Math.round(ls.din.kcal*0.6):WE.includes(i)?wkLunches[i-5].kcal:0;return s+breakfasts[i].kcal+lk+dins[i].kcal;},0)/7);
+  // 1日ごとのkcal（1人分）
+  const dayKcals=DAYS.map((_,i)=>{
+    const ls=getLunchSrc(wk,i);
+    const lk=ls?Math.round(ls.din.kcal*0.6):WE.includes(i)?wkLunches[i-5].kcal:0;
+    return breakfasts[i].kcal+lk+dins[i].kcal;
+  });
+  const avgK=Math.round(dayKcals.reduce((s,k)=>s+k,0)/7);
+  const maxK=Math.max(...dayKcals);
   const sz=88,cx=44,cy=44,r=30,sw2=10;
   function arc(pct,off,col){const c2=2*Math.PI*r,da=pct/100*c2,ga=c2-da,ro=-90+off*360/100;return`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${col}" stroke-width="${sw2}" stroke-dasharray="${da.toFixed(1)} ${ga.toFixed(1)}" transform="rotate(${ro} ${cx} ${cy})" stroke-linecap="round"/>`;}
   document.getElementById('nutri-inner').innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-      <div style="background:var(--card);border-radius:var(--border-radius-md,10px);padding:12px;text-align:center">
+      <div style="background:var(--card);border-radius:10px;padding:12px;text-align:center">
         <div style="font-size:11px;color:var(--text3);margin-bottom:3px">週平均 1日</div>
         <div style="font-size:26px;font-weight:500;color:var(--text)">${avgK}</div>
         <div style="font-size:11px;color:var(--text3)">kcal / 人</div>
       </div>
-      <div style="background:var(--card);border-radius:var(--border-radius-md,10px);padding:12px;text-align:center">
+      <div style="background:var(--card);border-radius:10px;padding:12px;text-align:center">
         <div style="font-size:11px;color:var(--text3);margin-bottom:3px">弁当活用</div>
         <div style="font-size:26px;font-weight:500;color:var(--green)">5/7日</div>
         <div style="font-size:11px;color:var(--text3)">残り物活用</div>
+      </div>
+    </div>
+    <div class="nc">
+      <div class="nh">曜日別カロリー（1人分）</div>
+      <div style="display:flex;gap:4px;align-items:flex-end;height:90px;margin-bottom:6px">
+        ${DAYS.map((d,i)=>{
+          const isWk=WE.includes(i);
+          const h=Math.max(6,Math.round(dayKcals[i]/maxK*70));
+          const col=isWk?'var(--blue)':'var(--green)';
+          return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div style="font-size:8px;color:var(--text3);line-height:1">${dayKcals[i]}</div>
+            <div style="width:100%;height:${h}px;background:${col};border-radius:3px 3px 0 0;min-height:6px"></div>
+            <div style="font-size:10px;color:${isWk?'var(--blue)':'var(--text3)'};font-weight:${isWk?600:400}">${d}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="display:flex;gap:12px;margin-top:4px">
+        <div style="display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:var(--green)"></div><span style="font-size:11px;color:var(--text3)">平日</span></div>
+        <div style="display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:var(--blue)"></div><span style="font-size:11px;color:var(--text3)">週末</span></div>
       </div>
     </div>
     <div class="nc">
@@ -628,6 +1090,13 @@ function buildNutri(){
     </div>`;
 }
 function nRow(l,col,v,max){const p=Math.min(100,Math.round(v/max*100));return`<div class="nrow"><div class="nlbl">${l}</div><div class="ntrk"><div class="nfil" style="width:${p}%;background:${col}"></div></div><div class="nval">${v}g</div><div class="ntgt">/${max}</div></div>`;}
+function switchNutriWeek(wk){
+  nutriWeek=wk;
+  document.getElementById('nwt0').classList.toggle('on',wk===0);
+  document.getElementById('nwt1').classList.toggle('on',wk===1);
+  buildNutri();
+  document.getElementById('content').scrollTop=0;
+}
 
 // ── Tab / init ────────────────────────────────────────
 function sw(tab,title){
@@ -642,12 +1111,10 @@ function sw(tab,title){
   if(tab==='prep')buildPrep();
 }
 
-// Service Worker 登録
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 
-// 初期化
 const ti=getTodayIdx(0);
 selDay=ti>=0?ti:0;
 buildStrip();
