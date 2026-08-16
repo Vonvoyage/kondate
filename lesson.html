@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2F4B8F">
+<title>語学レッスンノート</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="語学ノート">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='38' fill='%232F4B8F'/%3E%3Ctext x='96' y='86' font-size='56' font-family='Helvetica,Arial,sans-serif' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EFR%3C/text%3E%3Crect x='52' y='100' width='88' height='5' rx='2.5' fill='%238FA8DC'/%3E%3Ctext x='96' y='160' font-size='56' font-family='Helvetica,Arial,sans-serif' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EEN%3C/text%3E%3C/svg%3E">
+<meta name="application-name" content="語学ノート">
+
+</head>
+<body>
+<style>
+  :root {
+    --paper:      #F6F8FB;
+    --card:       #FFFFFF;
+    --ink:        #141922;
+    --ink-soft:   #59647A;
+    --ink-faint:  #97A1B3;
+    --rule:       #E2E7EF;
+    --indigo:     #2F4B8F;
+    --madder:     #A6382F;
+    --sage:       #3F7A66;
+    --shadow:     0 1px 2px rgba(20,25,34,.05), 0 8px 24px -12px rgba(20,25,34,.14);
+
+    --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic Medium", "Noto Sans JP", sans-serif;
+    --serif: Georgia, "Times New Roman", "Hiragino Mincho ProN", serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:     #10141B;
+      --card:      #171D26;
+      --ink:       #E9ECF2;
+      --ink-soft:  #939EB0;
+      --ink-faint: #667286;
+      --rule:      #262E3A;
+      --indigo:    #93AAE4;
+      --madder:    #E58C82;
+      --sage:      #7FBBA5;
+      --shadow:    0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:     #10141B;
+    --card:      #171D26;
+    --ink:       #E9ECF2;
+    --ink-soft:  #939EB0;
+    --ink-faint: #667286;
+    --rule:      #262E3A;
+    --indigo:    #93AAE4;
+    --madder:    #E58C82;
+    --sage:      #7FBBA5;
+    --shadow:    0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  :root[data-theme="light"] {
+    --paper:     #F6F8FB;
+    --card:      #FFFFFF;
+    --ink:       #141922;
+    --ink-soft:  #59647A;
+    --ink-faint: #97A1B3;
+    --rule:      #E2E7EF;
+    --indigo:    #2F4B8F;
+    --madder:    #A6382F;
+    --sage:      #3F7A66;
+    --shadow:    0 1px 2px rgba(20,25,34,.05), 0 8px 24px -12px rgba(20,25,34,.14);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow {
+    font-size: .7rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+  .masthead h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+  }
+
+  .tally {
+    display: flex;
+    gap: 1.6rem;
+    padding-top: .8rem;
+    border-top: 1px solid var(--rule);
+    margin-top: .5rem;
+  }
+  .tally div { display: flex; flex-direction: column; gap: .1rem; }
+  .tally .num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--indigo);
+  }
+  .tally .lbl {
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: .6rem;
+    flex-wrap: wrap;
+  }
+  .sec-head h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: .01em;
+  }
+  .sec-head .count {
+    font-size: .75rem;
+    color: var(--ink-faint);
+    letter-spacing: .06em;
+  }
+  .date-line {
+    font-size: .82rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem .9rem;
+  }
+
+  /* ---------- french study cards ---------- */
+  .fr-list { display: flex; flex-direction: column; gap: .7rem; }
+  .fr {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    gap: .15rem .8rem;
+    align-items: baseline;
+  }
+  .fr .n {
+    grid-row: 1 / span 3;
+    font-family: var(--serif);
+    font-size: .9rem;
+    color: var(--ink-faint);
+    padding-top: .35rem;
+  }
+  .fr .phrase {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    line-height: 1.3;
+    color: var(--indigo);
+    text-wrap: balance;
+  }
+  .fr .kana { font-size: .88rem; color: var(--ink-soft); letter-spacing: .05em; }
+  .fr .ja { font-size: .95rem; color: var(--ink); padding-top: .2rem; }
+  .fr[data-review="1"] { border-color: color-mix(in srgb, var(--indigo) 40%, var(--rule)); }
+
+  .tag {
+    display: inline-block;
+    font-size: .66rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: .12rem .45rem;
+    border-radius: 3px;
+    vertical-align: .18em;
+    margin-left: .5rem;
+    background: color-mix(in srgb, var(--indigo) 14%, transparent);
+    color: var(--indigo);
+  }
+
+  /* ---------- cumulative phrasebook (compact) ---------- */
+  .book { display: flex; flex-direction: column; }
+  .book-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .1rem .8rem;
+    padding: .75rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .book-row:last-child { border-bottom: none; }
+  .book-fr {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    color: var(--indigo);
+    line-height: 1.35;
+  }
+  .book-ref {
+    font-size: .68rem;
+    color: var(--ink-faint);
+    letter-spacing: .08em;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .book-sub {
+    grid-column: 1 / -1;
+    font-size: .8rem;
+    color: var(--ink-soft);
+  }
+  .book-sub b { color: var(--ink); font-weight: 500; }
+
+  /* ---------- english corrections ---------- */
+  .en-list { display: flex; flex-direction: column; gap: 1rem; }
+  .en {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+  }
+  .q {
+    font-size: .85rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    padding-bottom: .55rem;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .line { display: flex; gap: .6rem; align-items: flex-start; font-size: 1rem; }
+  .mark {
+    font-family: var(--serif);
+    font-weight: 700;
+    line-height: 1.5;
+    flex: 0 0 auto;
+    width: 1rem;
+    text-align: center;
+  }
+  .bad .mark { color: var(--madder); }
+  .bad .txt  { color: var(--madder); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .good .mark, .ok .mark { color: var(--sage); }
+  .good .txt, .ok .txt { color: var(--ink); font-weight: 600; }
+  .note {
+    font-size: .82rem;
+    color: var(--ink-soft);
+    padding-left: 1.6rem;
+    margin-top: -.35rem;
+  }
+
+  /* ---------- panels ---------- */
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    box-shadow: var(--shadow);
+  }
+  .panel ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .5rem; }
+  .panel li::marker { color: var(--ink-faint); }
+  .fr-inline { font-family: var(--serif); color: var(--indigo); font-size: 1.08rem; }
+
+  .log { display: flex; flex-direction: column; gap: .75rem; }
+  .row { display: grid; grid-template-columns: 6.2rem 1fr; gap: .9rem; font-size: .92rem; align-items: baseline; }
+  .row dt {
+    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600; padding-top: .18rem;
+  }
+  .row dd { margin: 0; }
+
+  /* ---------- history (collapsible) ---------- */
+  details.hist {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  details.hist + details.hist { margin-top: .6rem; }
+  details.hist summary {
+    padding: .9rem 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: .8rem;
+    flex-wrap: wrap;
+    list-style: none;
+    font-size: .92rem;
+  }
+  details.hist summary::-webkit-details-marker { display: none; }
+  details.hist summary::before {
+    content: "＋";
+    color: var(--ink-faint);
+    font-size: .85rem;
+    flex: 0 0 auto;
+  }
+  details.hist[open] summary::before { content: "−"; }
+  details.hist summary:focus-visible {
+    outline: 2px solid var(--indigo);
+    outline-offset: -2px;
+  }
+  details.hist summary .h-date { font-weight: 600; }
+  details.hist summary .h-meta { font-size: .78rem; color: var(--ink-faint); }
+  .hist-body {
+    padding: 0 1.1rem 1.1rem;
+    border-top: 1px solid var(--rule);
+    padding-top: .9rem;
+    font-size: .9rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  .aside {
+    font-size: .82rem;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--rule);
+    padding-left: .85rem;
+    line-height: 1.6;
+  }
+
+  footer {
+    font-size: .76rem;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.1rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 26rem) {
+    .fr .phrase { font-size: 1.25rem; }
+    .row { grid-template-columns: 1fr; gap: .15rem; }
+    .tally { gap: 1.1rem; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">French &amp; English</div>
+    <h1>レッスンノート</h1>
+    <div class="tally">
+      <div><span class="num">1</span><span class="lbl">レッスン</span></div>
+      <div><span class="num">5</span><span class="lbl">仏 表現</span></div>
+      <div><span class="num">3</span><span class="lbl">英 訂正</span></div>
+    </div>
+  </header>
+
+  <!-- ============ 最新のレッスン（毎回ここを差し替え） ============ -->
+  <section>
+    <div class="sec-head">
+      <h2>最新のレッスン</h2>
+      <span class="count">Week 1 — 1回目</span>
+    </div>
+    <div class="date-line">
+      <span>2026年8月16日（日）</span>
+      <span>フランス語メイン</span>
+      <span>13分</span>
+    </div>
+
+    <div class="fr-list">
+      <div class="fr" data-review="1">
+        <div class="n">1</div>
+        <div class="phrase">Bonjour !<span class="tag">次回復習</span></div>
+        <div class="kana">ボンジュール</div>
+        <div class="ja">こんにちは</div>
+      </div>
+      <div class="fr" data-review="1">
+        <div class="n">2</div>
+        <div class="phrase">Ça me fait plaisir de vous revoir !<span class="tag">次回復習</span></div>
+        <div class="kana">サ ム フェ プレジール ドゥ ヴ ルヴォワール</div>
+        <div class="ja">また会えて嬉しいです</div>
+      </div>
+      <div class="fr" data-review="1">
+        <div class="n">3</div>
+        <div class="phrase">Comment allez-vous ?<span class="tag">次回復習</span></div>
+        <div class="kana">コモン タレ ヴー</div>
+        <div class="ja">お元気ですか</div>
+      </div>
+      <div class="fr">
+        <div class="n">4</div>
+        <div class="phrase">Ça va très bien, merci !</div>
+        <div class="kana">サ ヴァ トレ ビヤン メルシー</div>
+        <div class="ja">とても元気です、ありがとう</div>
+      </div>
+      <div class="fr">
+        <div class="n">5</div>
+        <div class="phrase">Et vous ?</div>
+        <div class="kana">エ ヴー</div>
+        <div class="ja">あなたは？</div>
+      </div>
+    </div>
+
+    <p class="aside">この5つは、再会したときに実際に言う順番に並んでいます。初対面ではないので「はじめまして（Enchantée）」は使いません。今日は丁寧形（vous）だけ。親しい相手に使う <em>tu</em> は後の週で覚えます。</p>
+  </section>
+
+  <!-- ============ 英語の訂正（累積・新しい順） ============ -->
+  <section>
+    <div class="sec-head">
+      <h2>英語 — 直されたところ</h2>
+      <span class="count">累積 3件</span>
+    </div>
+
+    <div class="en-list">
+      <div class="en">
+        <div class="q">What have you been up to? <span style="font-style:normal;color:var(--ink-faint)">— W1 #1</span></div>
+        <div class="line ok">
+          <div class="mark">✓</div>
+          <div class="txt">Not much, just working.</div>
+        </div>
+        <div class="note">修正なし。テンポも良かった。</div>
+      </div>
+
+      <div class="en">
+        <div class="q">How's work going? <span style="font-style:normal;color:var(--ink-faint)">— W1 #1</span></div>
+        <div class="line bad">
+          <div class="mark">✗</div>
+          <div class="txt">It's not special. Usually</div>
+        </div>
+        <div class="line good">
+          <div class="mark">✓</div>
+          <div class="txt">It's nothing special, just the usual.</div>
+        </div>
+        <div class="note">not special → <strong>nothing special</strong>／usually → <strong>just the usual</strong>（名詞のかたまりで言い切る）</div>
+      </div>
+
+      <div class="en">
+        <div class="q">Are you excited about your trip? <span style="font-style:normal;color:var(--ink-faint)">— W1 #1</span></div>
+        <div class="line bad">
+          <div class="mark">✗</div>
+          <div class="txt">Of course! I love trip</div>
+        </div>
+        <div class="line good">
+          <div class="mark">✓</div>
+          <div class="txt">I'm really excited about it.</div>
+        </div>
+        <div class="note">聞かれたのは「楽しみ？」なので、<strong>excited</strong> で受けて返す。</div>
+      </div>
+    </div>
+
+    <p class="aside"><strong>補足（レッスンでは触れられなかった点）：</strong>「I love trip」は文法的には <em>I love traveling</em> か <em>I love trips</em> になります。trip は数えられる名詞なので、単独では置けません。</p>
+  </section>
+
+  <!-- ============ 累積フレーズ集 ============ -->
+  <section>
+    <div class="sec-head">
+      <h2>フレーズ集</h2>
+      <span class="count">これまでの全表現 5</span>
+    </div>
+
+    <div class="panel book">
+      <div class="book-row">
+        <div class="book-fr">Bonjour !</div>
+        <div class="book-ref">W1 #1</div>
+        <div class="book-sub">ボンジュール — <b>こんにちは</b></div>
+      </div>
+      <div class="book-row">
+        <div class="book-fr">Ça me fait plaisir de vous revoir !</div>
+        <div class="book-ref">W1 #1</div>
+        <div class="book-sub">サ ム フェ プレジール ドゥ ヴ ルヴォワール — <b>また会えて嬉しいです</b></div>
+      </div>
+      <div class="book-row">
+        <div class="book-fr">Comment allez-vous ?</div>
+        <div class="book-ref">W1 #1</div>
+        <div class="book-sub">コモン タレ ヴー — <b>お元気ですか</b></div>
+      </div>
+      <div class="book-row">
+        <div class="book-fr">Ça va très bien, merci !</div>
+        <div class="book-ref">W1 #1</div>
+        <div class="book-sub">サ ヴァ トレ ビヤン メルシー — <b>とても元気です、ありがとう</b></div>
+      </div>
+      <div class="book-row">
+        <div class="book-fr">Et vous ?</div>
+        <div class="book-ref">W1 #1</div>
+        <div class="book-sub">エ ヴー — <b>あなたは？</b></div>
+      </div>
+    </div>
+
+    <p class="aside">レッスンを重ねるほどここに溜まっていきます。総復習は、このセクションだけ見れば足ります。</p>
+  </section>
+
+  <!-- ============ 次回の復習 ============ -->
+  <section>
+    <div class="sec-head">
+      <h2>次回の復習</h2>
+      <span class="count">冒頭に出題されます</span>
+    </div>
+    <div class="panel">
+      <ul>
+        <li><span class="fr-inline">Bonjour !</span></li>
+        <li><span class="fr-inline">Ça me fait plaisir de vous revoir !</span></li>
+        <li><span class="fr-inline">Comment allez-vous ?</span></li>
+        <li>英語ミニ — <strong>How have you been?</strong> に短く答える</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ レッスン履歴（過去分はここに畳まれる） ============ -->
+  <section>
+    <div class="sec-head">
+      <h2>レッスン履歴</h2>
+      <span class="count">1回</span>
+    </div>
+
+    <details class="hist" open>
+      <summary>
+        <span class="h-date">2026年8月16日（日）</span>
+        <span class="h-meta">Week 1 — 1回目 · フランス語メイン · 13分</span>
+      </summary>
+      <div class="hist-body">
+        <div><strong>できたこと</strong>　再会のあいさつをフランス語で一通り言えた。英語で短く即答できた。</div>
+        <div><strong>修正点</strong>　過去の話をするときは過去形にする。</div>
+        <div><strong>気づき</strong>　AI相手でも緊張する。慣れが要る。</div>
+        <div><strong>メモ</strong>　13分で終了（想定20分）。音声だけでは綴りが分からないことが判明。翌日テンプレートを改訂（綴りの文字表示・往復数の下限・瞬間英作文の追加・会話継続の明示）。</div>
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    寝る前にこのページを開いて、フランス語を声に出すだけで十分です。2分かかりません。<br>
+    黙読ではなく、必ず声に出してください。<br><br>
+    音声を聴きながら見る場合は、ファイルアプリで <code>.m4a</code> を再生 → ホームに戻る → Safariでこのページ、の順で。音声は裏で鳴り続けます。
+  </footer>
+
+</div>
+
+</body>
+</html>
