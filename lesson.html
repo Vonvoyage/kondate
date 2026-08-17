@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#2F4B8F">
 <title>語学レッスンノート</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./lesson-manifest.json">
 <meta name="apple-mobile-web-app-title" content="語学ノート">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='38' fill='%232F4B8F'/%3E%3Ctext x='96' y='86' font-size='56' font-family='Helvetica,Arial,sans-serif' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EFR%3C/text%3E%3Crect x='52' y='100' width='88' height='5' rx='2.5' fill='%238FA8DC'/%3E%3Ctext x='96' y='160' font-size='56' font-family='Helvetica,Arial,sans-serif' font-weight='bold' fill='%23FFFFFF' text-anchor='middle'%3EEN%3C/text%3E%3C/svg%3E">
-<meta name="application-name" content="語学ノート">
-
+<meta name="theme-color" content="#2F4B8F">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='38' fill='%232F4B8F'/%3E%3Ctext x='96' y='132' font-size='100' text-anchor='middle'%3E📓%3C/text%3E%3C/svg%3E">
 </head>
 <body>
+
 <style>
   :root {
     --paper:      #F6F8FB;
@@ -369,146 +367,13 @@
     <div class="eyebrow">French &amp; English</div>
     <h1>レッスンノート</h1>
     <div class="tally">
-      <div><span class="num">1</span><span class="lbl">レッスン</span></div>
-      <div><span class="num">5</span><span class="lbl">仏 表現</span></div>
-      <div><span class="num">3</span><span class="lbl">英 訂正</span></div>
+      <div><span class="num">2</span><span class="lbl">レッスン</span></div>
+      <div><span class="num">6</span><span class="lbl">仏 表現</span></div>
+      <div><span class="num">5</span><span class="lbl">英 訂正</span></div>
     </div>
   </header>
 
-  <!-- ============ 最新のレッスン（毎回ここを差し替え） ============ -->
-  <section>
-    <div class="sec-head">
-      <h2>最新のレッスン</h2>
-      <span class="count">Week 1 — 1回目</span>
-    </div>
-    <div class="date-line">
-      <span>2026年8月16日（日）</span>
-      <span>フランス語メイン</span>
-      <span>13分</span>
-    </div>
-
-    <div class="fr-list">
-      <div class="fr" data-review="1">
-        <div class="n">1</div>
-        <div class="phrase">Bonjour !<span class="tag">次回復習</span></div>
-        <div class="kana">ボンジュール</div>
-        <div class="ja">こんにちは</div>
-      </div>
-      <div class="fr" data-review="1">
-        <div class="n">2</div>
-        <div class="phrase">Ça me fait plaisir de vous revoir !<span class="tag">次回復習</span></div>
-        <div class="kana">サ ム フェ プレジール ドゥ ヴ ルヴォワール</div>
-        <div class="ja">また会えて嬉しいです</div>
-      </div>
-      <div class="fr" data-review="1">
-        <div class="n">3</div>
-        <div class="phrase">Comment allez-vous ?<span class="tag">次回復習</span></div>
-        <div class="kana">コモン タレ ヴー</div>
-        <div class="ja">お元気ですか</div>
-      </div>
-      <div class="fr">
-        <div class="n">4</div>
-        <div class="phrase">Ça va très bien, merci !</div>
-        <div class="kana">サ ヴァ トレ ビヤン メルシー</div>
-        <div class="ja">とても元気です、ありがとう</div>
-      </div>
-      <div class="fr">
-        <div class="n">5</div>
-        <div class="phrase">Et vous ?</div>
-        <div class="kana">エ ヴー</div>
-        <div class="ja">あなたは？</div>
-      </div>
-    </div>
-
-    <p class="aside">この5つは、再会したときに実際に言う順番に並んでいます。初対面ではないので「はじめまして（Enchantée）」は使いません。今日は丁寧形（vous）だけ。親しい相手に使う <em>tu</em> は後の週で覚えます。</p>
-  </section>
-
-  <!-- ============ 英語の訂正（累積・新しい順） ============ -->
-  <section>
-    <div class="sec-head">
-      <h2>英語 — 直されたところ</h2>
-      <span class="count">累積 3件</span>
-    </div>
-
-    <div class="en-list">
-      <div class="en">
-        <div class="q">What have you been up to? <span style="font-style:normal;color:var(--ink-faint)">— W1 #1</span></div>
-        <div class="line ok">
-          <div class="mark">✓</div>
-          <div class="txt">Not much, just working.</div>
-        </div>
-        <div class="note">修正なし。テンポも良かった。</div>
-      </div>
-
-      <div class="en">
-        <div class="q">How's work going? <span style="font-style:normal;color:var(--ink-faint)">— W1 #1</span></div>
-        <div class="line bad">
-          <div class="mark">✗</div>
-          <div class="txt">It's not special. Usually</div>
-        </div>
-        <div class="line good">
-          <div class="mark">✓</div>
-          <div class="txt">It's nothing special, just the usual.</div>
-        </div>
-        <div class="note">not special → <strong>nothing special</strong>／usually → <strong>just the usual</strong>（名詞のかたまりで言い切る）</div>
-      </div>
-
-      <div class="en">
-        <div class="q">Are you excited about your trip? <span style="font-style:normal;color:var(--ink-faint)">— W1 #1</span></div>
-        <div class="line bad">
-          <div class="mark">✗</div>
-          <div class="txt">Of course! I love trip</div>
-        </div>
-        <div class="line good">
-          <div class="mark">✓</div>
-          <div class="txt">I'm really excited about it.</div>
-        </div>
-        <div class="note">聞かれたのは「楽しみ？」なので、<strong>excited</strong> で受けて返す。</div>
-      </div>
-    </div>
-
-    <p class="aside"><strong>補足（レッスンでは触れられなかった点）：</strong>「I love trip」は文法的には <em>I love traveling</em> か <em>I love trips</em> になります。trip は数えられる名詞なので、単独では置けません。</p>
-  </section>
-
-  <!-- ============ 累積フレーズ集 ============ -->
-  <section>
-    <div class="sec-head">
-      <h2>フレーズ集</h2>
-      <span class="count">これまでの全表現 5</span>
-    </div>
-
-    <div class="panel book">
-      <div class="book-row">
-        <div class="book-fr">Bonjour !</div>
-        <div class="book-ref">W1 #1</div>
-        <div class="book-sub">ボンジュール — <b>こんにちは</b></div>
-      </div>
-      <div class="book-row">
-        <div class="book-fr">Ça me fait plaisir de vous revoir !</div>
-        <div class="book-ref">W1 #1</div>
-        <div class="book-sub">サ ム フェ プレジール ドゥ ヴ ルヴォワール — <b>また会えて嬉しいです</b></div>
-      </div>
-      <div class="book-row">
-        <div class="book-fr">Comment allez-vous ?</div>
-        <div class="book-ref">W1 #1</div>
-        <div class="book-sub">コモン タレ ヴー — <b>お元気ですか</b></div>
-      </div>
-      <div class="book-row">
-        <div class="book-fr">Ça va très bien, merci !</div>
-        <div class="book-ref">W1 #1</div>
-        <div class="book-sub">サ ヴァ トレ ビヤン メルシー — <b>とても元気です、ありがとう</b></div>
-      </div>
-      <div class="book-row">
-        <div class="book-fr">Et vous ?</div>
-        <div class="book-ref">W1 #1</div>
-        <div class="book-sub">エ ヴー — <b>あなたは？</b></div>
-      </div>
-    </div>
-
-    <p class="aside">レッスンを重ねるほどここに溜まっていきます。総復習は、このセクションだけ見れば足ります。</p>
-  </section>
-
-  <!-- ============ 次回の復習 ============ -->
+  <!-- ============ 次回の復習（いちばん上・すぐ使う） ============ -->
   <section>
     <div class="sec-head">
       <h2>次回の復習</h2>
@@ -517,32 +382,136 @@
     <div class="panel">
       <ul>
         <li><span class="fr-inline">Bonjour !</span></li>
-        <li><span class="fr-inline">Ça me fait plaisir de vous revoir !</span></li>
         <li><span class="fr-inline">Comment allez-vous ?</span></li>
-        <li>英語ミニ — <strong>How have you been?</strong> に短く答える</li>
+        <li><span class="fr-inline">Ravie de vous revoir !</span>（<strong>re</strong> をはっきり）</li>
+        <li>英語ミニ — <strong>How have you been lately?</strong> に短く答える</li>
       </ul>
     </div>
   </section>
 
-  <!-- ============ レッスン履歴（過去分はここに畳まれる） ============ -->
+  <!-- ============ レッスン記録（1日ごと・新しい順） ============ -->
   <section>
     <div class="sec-head">
-      <h2>レッスン履歴</h2>
-      <span class="count">1回</span>
+      <h2>レッスン記録</h2>
+      <span class="count">2回 ／ 音声と同じ単位</span>
     </div>
 
+    <!-- ---------- 2回目 ---------- -->
     <details class="hist" open>
       <summary>
-        <span class="h-date">2026年8月16日（日）</span>
-        <span class="h-meta">Week 1 — 1回目 · フランス語メイン · 13分</span>
+        <span class="h-date">2回目 — 2026年8月17日（月）</span>
+        <span class="h-meta">英語メイン · 17分 · 音声 レッスン02_2026-08-17.m4a</span>
       </summary>
       <div class="hist-body">
-        <div><strong>できたこと</strong>　再会のあいさつをフランス語で一通り言えた。英語で短く即答できた。</div>
-        <div><strong>修正点</strong>　過去の話をするときは過去形にする。</div>
-        <div><strong>気づき</strong>　AI相手でも緊張する。慣れが要る。</div>
-        <div><strong>メモ</strong>　13分で終了（想定20分）。音声だけでは綴りが分からないことが判明。翌日テンプレートを改訂（綴りの文字表示・往復数の下限・瞬間英作文の追加・会話継続の明示）。</div>
+
+        <p class="aside"><strong>この日の新しいフランス語</strong></p>
+        <div class="fr-list">
+          <div class="fr" data-review="1">
+            <div class="n">1</div>
+            <div class="phrase">Ravie de vous revoir !<span class="tag">次回復習</span></div>
+            <div class="kana">ラヴィ ドゥ ヴ ルヴォワール</div>
+            <div class="ja">またお会いできて嬉しいです</div>
+          </div>
+        </div>
+        <p class="aside">前に覚えた <em>Ça me fait plaisir de vous revoir !</em> より短くて言いやすい言い方。
+        <strong>Ravie</strong> は女性形。男性が言うときは <strong>Ravi</strong>（発音は同じ）。</p>
+
+        <p class="aside"><strong>この日の新しい英語 — 近況を聞かれたときの3点セット</strong></p>
+        <div class="panel">
+          <ul>
+            <li><strong>How have you been?</strong> — 最近どうしてた？</li>
+            <li><strong>I've been pretty good, just busy with work.</strong> — まあまあ元気、仕事が忙しいだけ</li>
+            <li><strong>Nothing much. How about you?</strong> — 特に何も。そっちは？</li>
+          </ul>
+        </div>
+
+        <p class="aside"><strong>直されたところ</strong></p>
+        <div class="en-list">
+          <div class="en">
+            <div class="q">How have you been?</div>
+            <div class="line bad"><div class="mark">✗</div><div class="txt">I'm pretty good.</div></div>
+            <div class="line good"><div class="mark">✓</div><div class="txt">I've been good.</div></div>
+            <div class="note">現在完了（have you been）で聞かれたら、答えも <strong>I've been</strong> で返すと自然。※会話では I'm good. も普通に使う</div>
+          </div>
+          <div class="en">
+            <div class="q">What have you been up to?</div>
+            <div class="line bad"><div class="mark">✗</div><div class="txt">It's nothing special, just the usual.</div></div>
+            <div class="line good"><div class="mark">✓</div><div class="txt">Not much, just working.</div></div>
+            <div class="note"><strong>up to</strong> は近況ぜんぶを聞いている。仕事だけを聞く <strong>How's work going?</strong> とは答え方が違う。</div>
+          </div>
+        </div>
+
+        <p class="aside"><strong>できたこと</strong>　自分から英語で質問を3つ出せた（<em>Do you know Akasuri?</em> ／
+        <em>Have you ever been to Okinawa?</em> ／ <em>I'm gonna go to Okinawa.</em>）。
+        短文3つとも自然。フランス語で <strong>aussi</strong>（〜も）を教わっていないのに自分で足せた。</p>
       </div>
     </details>
+
+    <!-- ---------- 1回目 ---------- -->
+    <details class="hist">
+      <summary>
+        <span class="h-date">1回目 — 2026年8月16日（日）</span>
+        <span class="h-meta">フランス語メイン · 13分 · 音声 レッスン01_2026-08-16.m4a</span>
+      </summary>
+      <div class="hist-body">
+
+        <p class="aside"><strong>この日の新しいフランス語</strong></p>
+        <div class="fr-list">
+          <div class="fr"><div class="n">1</div><div class="phrase">Bonjour !</div><div class="kana">ボンジュール</div><div class="ja">こんにちは</div></div>
+          <div class="fr"><div class="n">2</div><div class="phrase">Ça me fait plaisir de vous revoir !</div><div class="kana">サ ム フェ プレジール ドゥ ヴ ルヴォワール</div><div class="ja">また会えて嬉しいです</div></div>
+          <div class="fr"><div class="n">3</div><div class="phrase">Comment allez-vous ?</div><div class="kana">コモン タレ ヴー</div><div class="ja">お元気ですか</div></div>
+          <div class="fr"><div class="n">4</div><div class="phrase">Ça va très bien, merci !</div><div class="kana">サ ヴァ トレ ビヤン メルシー</div><div class="ja">とても元気です、ありがとう</div></div>
+          <div class="fr"><div class="n">5</div><div class="phrase">Et vous ?</div><div class="kana">エ ヴー</div><div class="ja">あなたは？</div></div>
+        </div>
+        <p class="aside">この5つは、再会したときに実際に言う順番に並んでいます。初対面ではないので
+        「はじめまして（Enchantée）」は使いません。この日は丁寧形（vous）だけ。
+        親しい相手に使う <em>tu</em> は後の週で覚えます。</p>
+
+        <p class="aside"><strong>直されたところ</strong></p>
+        <div class="en-list">
+          <div class="en">
+            <div class="q">What have you been up to?</div>
+            <div class="line ok"><div class="mark">✓</div><div class="txt">Not much, just working.</div></div>
+            <div class="note">修正なし。テンポも良かった。</div>
+          </div>
+          <div class="en">
+            <div class="q">How's work going?</div>
+            <div class="line bad"><div class="mark">✗</div><div class="txt">It's not special. Usually</div></div>
+            <div class="line good"><div class="mark">✓</div><div class="txt">It's nothing special, just the usual.</div></div>
+            <div class="note">not special → <strong>nothing special</strong>／usually → <strong>just the usual</strong>（名詞のかたまりで言い切る）</div>
+          </div>
+          <div class="en">
+            <div class="q">Are you excited about your trip?</div>
+            <div class="line bad"><div class="mark">✗</div><div class="txt">Of course! I love trip</div></div>
+            <div class="line good"><div class="mark">✓</div><div class="txt">I'm really excited about it.</div></div>
+            <div class="note">聞かれたのは「楽しみ？」なので <strong>excited</strong> で受けて返す。
+            なお <em>I love trip</em> は <em>I love traveling</em> か <em>I love trips</em>（trip は数えられる名詞）。</div>
+          </div>
+        </div>
+
+        <p class="aside"><strong>できたこと</strong>　再会のあいさつをフランス語で一通り言えた。英語で短く即答できた。<br>
+        <strong>気づき</strong>　AI相手でも緊張する。慣れが要る。</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ 累積フレーズ集 ============ -->
+  <section>
+    <div class="sec-head">
+      <h2>フレーズ集</h2>
+      <span class="count">フランス語 全6 ／ 積み上げ</span>
+    </div>
+
+    <div class="panel book">
+      <div class="book-row"><div class="book-fr">Bonjour !</div><div class="book-ref">1回目</div><div class="book-sub">ボンジュール — <b>こんにちは</b></div></div>
+      <div class="book-row"><div class="book-fr">Ça me fait plaisir de vous revoir !</div><div class="book-ref">1回目</div><div class="book-sub">サ ム フェ プレジール ドゥ ヴ ルヴォワール — <b>また会えて嬉しいです</b></div></div>
+      <div class="book-row"><div class="book-fr">Comment allez-vous ?</div><div class="book-ref">1回目</div><div class="book-sub">コモン タレ ヴー — <b>お元気ですか</b></div></div>
+      <div class="book-row"><div class="book-fr">Ça va très bien, merci !</div><div class="book-ref">1回目</div><div class="book-sub">サ ヴァ トレ ビヤン メルシー — <b>とても元気です、ありがとう</b></div></div>
+      <div class="book-row"><div class="book-fr">Et vous ?</div><div class="book-ref">1回目</div><div class="book-sub">エ ヴー — <b>あなたは？</b></div></div>
+      <div class="book-row"><div class="book-fr">Ravie de vous revoir !</div><div class="book-ref">2回目</div><div class="book-sub">ラヴィ ドゥ ヴ ルヴォワール — <b>またお会いできて嬉しいです</b></div></div>
+    </div>
+
+    <p class="aside">ここだけは積み上げのまま残しています。<strong>出発前の総復習は、このセクションだけ見れば足ります。</strong></p>
   </section>
 
   <footer>
