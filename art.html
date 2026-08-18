@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>美術ノート</title>
+<link rel="manifest" href="./art-manifest.json">
+<meta name="apple-mobile-web-app-title" content="美術ノート">
+<meta name="theme-color" content="#2F4B8F">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='38' fill='%232F4B8F'/%3E%3Ctext x='96' y='132' font-size='100' text-anchor='middle'%3E🎨%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<style>
+  :root {
+    --paper:      #F6F8FB;
+    --card:       #FFFFFF;
+    --ink:        #141922;
+    --ink-soft:   #59647A;
+    --ink-faint:  #97A1B3;
+    --rule:       #E2E7EF;
+    --indigo:     #2F4B8F;
+    --madder:     #A6382F;
+    --sage:       #3F7A66;
+    --shadow:     0 1px 2px rgba(20,25,34,.05), 0 8px 24px -12px rgba(20,25,34,.14);
+
+    --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic Medium", "Noto Sans JP", sans-serif;
+    --serif: Georgia, "Times New Roman", "Hiragino Mincho ProN", serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:     #10141B;
+      --card:      #171D26;
+      --ink:       #E9ECF2;
+      --ink-soft:  #939EB0;
+      --ink-faint: #667286;
+      --rule:      #262E3A;
+      --indigo:    #93AAE4;
+      --madder:    #E58C82;
+      --sage:      #7FBBA5;
+      --shadow:    0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:     #10141B;
+    --card:      #171D26;
+    --ink:       #E9ECF2;
+    --ink-soft:  #939EB0;
+    --ink-faint: #667286;
+    --rule:      #262E3A;
+    --indigo:    #93AAE4;
+    --madder:    #E58C82;
+    --sage:      #7FBBA5;
+    --shadow:    0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  :root[data-theme="light"] {
+    --paper:     #F6F8FB;
+    --card:      #FFFFFF;
+    --ink:       #141922;
+    --ink-soft:  #59647A;
+    --ink-faint: #97A1B3;
+    --rule:      #E2E7EF;
+    --indigo:    #2F4B8F;
+    --madder:    #A6382F;
+    --sage:      #3F7A66;
+    --shadow:    0 1px 2px rgba(20,25,34,.05), 0 8px 24px -12px rgba(20,25,34,.14);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; flex-direction: column; gap: .5rem; }
+  .eyebrow {
+    font-size: .7rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+  .masthead h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+  }
+
+  .tally {
+    display: flex;
+    gap: 1.6rem;
+    padding-top: .8rem;
+    border-top: 1px solid var(--rule);
+    margin-top: .5rem;
+  }
+  .tally div { display: flex; flex-direction: column; gap: .1rem; }
+  .tally .num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--indigo);
+  }
+  .tally .lbl {
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+  }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: .6rem;
+    flex-wrap: wrap;
+  }
+  .sec-head h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 650;
+    letter-spacing: .01em;
+  }
+  .sec-head .count {
+    font-size: .75rem;
+    color: var(--ink-faint);
+    letter-spacing: .06em;
+  }
+  .date-line {
+    font-size: .82rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem .9rem;
+  }
+
+  /* ---------- french study cards ---------- */
+  .fr-list { display: flex; flex-direction: column; gap: .7rem; }
+  .fr {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    gap: .15rem .8rem;
+    align-items: baseline;
+  }
+  .fr .n {
+    grid-row: 1 / span 3;
+    font-family: var(--serif);
+    font-size: .9rem;
+    color: var(--ink-faint);
+    padding-top: .35rem;
+  }
+  .fr .phrase {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    line-height: 1.3;
+    color: var(--indigo);
+    text-wrap: balance;
+  }
+  .fr .kana { font-size: .88rem; color: var(--ink-soft); letter-spacing: .05em; }
+  .fr .ja { font-size: .95rem; color: var(--ink); padding-top: .2rem; }
+  .fr[data-review="1"] { border-color: color-mix(in srgb, var(--indigo) 40%, var(--rule)); }
+
+  .tag {
+    display: inline-block;
+    font-size: .66rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: .12rem .45rem;
+    border-radius: 3px;
+    vertical-align: .18em;
+    margin-left: .5rem;
+    background: color-mix(in srgb, var(--indigo) 14%, transparent);
+    color: var(--indigo);
+  }
+
+  /* ---------- cumulative phrasebook (compact) ---------- */
+  .book { display: flex; flex-direction: column; }
+  .book-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .1rem .8rem;
+    padding: .75rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .book-row:last-child { border-bottom: none; }
+  .book-fr {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    color: var(--indigo);
+    line-height: 1.35;
+  }
+  .book-ref {
+    font-size: .68rem;
+    color: var(--ink-faint);
+    letter-spacing: .08em;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .book-sub {
+    grid-column: 1 / -1;
+    font-size: .8rem;
+    color: var(--ink-soft);
+  }
+  .book-sub b { color: var(--ink); font-weight: 500; }
+
+  /* ---------- english corrections ---------- */
+  .en-list { display: flex; flex-direction: column; gap: 1rem; }
+  .en {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+  }
+  .q {
+    font-size: .85rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    padding-bottom: .55rem;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .line { display: flex; gap: .6rem; align-items: flex-start; font-size: 1rem; }
+  .mark {
+    font-family: var(--serif);
+    font-weight: 700;
+    line-height: 1.5;
+    flex: 0 0 auto;
+    width: 1rem;
+    text-align: center;
+  }
+  .bad .mark { color: var(--madder); }
+  .bad .txt  { color: var(--madder); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .good .mark, .ok .mark { color: var(--sage); }
+  .good .txt, .ok .txt { color: var(--ink); font-weight: 600; }
+  .note {
+    font-size: .82rem;
+    color: var(--ink-soft);
+    padding-left: 1.6rem;
+    margin-top: -.35rem;
+  }
+
+  /* ---------- panels ---------- */
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    box-shadow: var(--shadow);
+  }
+  .panel ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: .5rem; }
+  .panel li::marker { color: var(--ink-faint); }
+  .fr-inline { font-family: var(--serif); color: var(--indigo); font-size: 1.08rem; }
+
+  .log { display: flex; flex-direction: column; gap: .75rem; }
+  .row { display: grid; grid-template-columns: 6.2rem 1fr; gap: .9rem; font-size: .92rem; align-items: baseline; }
+  .row dt {
+    font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600; padding-top: .18rem;
+  }
+  .row dd { margin: 0; }
+
+  /* ---------- history (collapsible) ---------- */
+  details.hist {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  details.hist + details.hist { margin-top: .6rem; }
+  details.hist summary {
+    padding: .9rem 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: .8rem;
+    flex-wrap: wrap;
+    list-style: none;
+    font-size: .92rem;
+  }
+  details.hist summary::-webkit-details-marker { display: none; }
+  details.hist summary::before {
+    content: "＋";
+    color: var(--ink-faint);
+    font-size: .85rem;
+    flex: 0 0 auto;
+  }
+  details.hist[open] summary::before { content: "−"; }
+  details.hist summary:focus-visible {
+    outline: 2px solid var(--indigo);
+    outline-offset: -2px;
+  }
+  details.hist summary .h-date { font-weight: 600; }
+  details.hist summary .h-meta { font-size: .78rem; color: var(--ink-faint); }
+  .hist-body {
+    padding: 0 1.1rem 1.1rem;
+    border-top: 1px solid var(--rule);
+    padding-top: .9rem;
+    font-size: .9rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  .aside {
+    font-size: .82rem;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--rule);
+    padding-left: .85rem;
+    line-height: 1.6;
+  }
+
+  footer {
+    font-size: .76rem;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.1rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 26rem) {
+    .fr .phrase { font-size: 1.25rem; }
+    .row { grid-template-columns: 1fr; gap: .15rem; }
+    .tally { gap: 1.1rem; }
+  }
+</style>
+<style>
+  .nav { display:flex; gap:.4rem; margin:0 0 2.2rem; border-bottom:1px solid var(--rule); }
+  .nav a { font-size:.82rem; font-weight:650; letter-spacing:.04em; text-decoration:none;
+           color:var(--ink-faint); padding:.5rem .9rem; border-bottom:2px solid transparent; margin-bottom:-1px; }
+  .nav a.on { color:var(--indigo); border-bottom-color:var(--indigo); }
+  .qa { border-left:2px solid var(--rule); padding-left:1rem; margin:1.3rem 0; }
+  .qa .qq { font-weight:650; margin-bottom:.35rem; }
+  .open { background:color-mix(in srgb, var(--madder) 7%, transparent);
+          border:1px solid color-mix(in srgb, var(--madder) 25%, var(--rule));
+          border-radius:10px; padding:1rem 1.1rem; }
+  .art p { margin:0 0 1rem; }
+  .art h3 { margin:1.6rem 0 .5rem; font-size:1rem; }
+</style>
+<div class="wrap" style="padding-top:1.4rem">
+<nav class="nav"><a href="./lesson.html">語学</a><a href="./art.html" class='on'>美術</a></nav>
+
+  <header class="masthead">
+    <div class="eyebrow">Art History</div>
+    <h1>美術ノート</h1>
+    <div class="tally">
+      <div><span class="num">1</span><span class="lbl">画家</span></div>
+      <div><span class="num">1</span><span class="lbl">未解決</span></div>
+    </div>
+  </header>
+
+  <section class="art">
+    <div class="sec-head">
+      <h2>パブロ・ピカソ</h2>
+      <span class="count">1881–1973 ／ スペイン</span>
+    </div>
+
+    <h3>晩年（1960年代〜）が、いちばん誤解された時期</h3>
+    <p>1960〜70年代の作品は、当時「もうろくした老人の乱作」と切り捨てられていました。
+    筆は荒く、絵の具は厚く、描きかけにしか見えない。「昔はあんなに上手かったのに」と言われた時期です。</p>
+    <p>1970年、アヴィニョンの法王庁宮殿で新作だけの大展覧会を開いたときも、批評はひどいものでした。
+    <strong>それを聞いた上で、彼は最後まで同じ調子で描き続けました。</strong>89歳から91歳で亡くなるまで、
+    制作量はむしろ増えています。</p>
+    <p>再評価されたのは死後、1980年代の回顧展からです。「あれは衰えではなく、到達だった」という見方に変わりました。
+    ちなみに当時から若い画家たちは熱狂していました。<strong>間違っていたのは批評のほうでした。</strong></p>
+
+    <h3>なぜ色が暖かいのか</h3>
+    <p>晩年のピカソは南フランス（ヴォーヴナルグ、のちムージャン）にいました。<strong>地中海の光の中</strong>です。
+    オークル、赤、黄。青の時代のパリの寒さとは、別の場所の色です。</p>
+    <p>技術的な理由もあります。<strong>速く、太い筆で、絵の具を混ぜずに置いている</strong>こと。
+    混ぜるほど色は濁ります。混ぜる時間をかけていないので、色がそのまま生きて残る。
+    <strong>「雑に見える」ことと「色が澄んで暖かい」ことは、同じ理由から来ています。</strong></p>
+
+    <h3>順序が逆の画家</h3>
+    <div class="panel">
+      <ul>
+        <li><strong>20代（青の時代）</strong>　親友の自殺、貧困、寒いパリ　→　青くて暗い</li>
+        <li><strong>80代（晩年）</strong>　名声も金もある、南仏の日差し　→　赤くて明るい</li>
+      </ul>
+    </div>
+    <p>ふつうは逆です。若いころ明るく、年を取って重くなる。<strong>ピカソは歳をとるほど軽くなりました。</strong></p>
+
+    <h3>マスケット銃兵（銃士）</h3>
+    <p>17世紀の兵士。羽根飾りの帽子、ひらひらした襟、口ひげ、腰に剣。『三銃士』の格好です。
+    ピカソは1960年代半ばから、これを何十枚も描き続けました。晩年の代表的なモチーフです。</p>
+    <p>妻ジャクリーヌによれば、療養中に<strong>レンブラントの画集</strong>を眺めていたら、そこから出てきたのだそうです。</p>
+
+    <h3>レンブラント（1606–1669・オランダ）</h3>
+    <p>光の画家。暗闇に一筋の光。ただし晩年ピカソとつながるのはそこではありません。</p>
+    <p><strong>レンブラントは晩年に人気を失った画家</strong>です。年を取るにつれて筆が荒くなり、
+    絵の具が厚くなり、細部が描き込まれなくなった。注文主は「雑になった」と受け取り、依頼が減り、
+    <strong>1656年に破産</strong>しています。生涯、自画像を描き続けた画家でもあります。</p>
+    <p>——まるごと晩年ピカソの話に見えます。<strong>「昔はうまかったのに雑になった」と言われた画家が、
+    300年後に同じことを言われている画家の画集の中から出てきた。</strong></p>
+
+    <h3>ベラスケス（1599–1660・スペイン）</h3>
+    <p>ピカソと同じスペイン人。スペイン王フェリペ4世の宮廷画家。代表作『ラス・メニーナス』（1656年・プラド美術館）。</p>
+    <p>変な絵です。王女と女官が描かれ、画面左端に<strong>この絵を描いているベラスケス本人</strong>が立ち、
+    奥の鏡に国王夫妻が映っている。つまり<strong>見ている私たちは国王夫妻の位置に立っている</strong>ことになります。
+    「絵を見る」という行為そのものが絵に仕込まれている。</p>
+    <p>ピカソは<strong>1957年にこの絵を58点描き直しました</strong>。模写ではなく、分解して自分のやり方で組み立て直したものです。
+    全点バルセロナのピカソ美術館にあります。</p>
+
+    <h3>「壊しにいった伝統に、正面から向き合う」の意味</h3>
+    <p>ルネサンス以降の西洋絵画には500年続いた約束事がありました。<strong>「一点から見た景色を、遠近法で正しく描く」</strong>。
+    キュビスムはこれを壊しました。正面と横顔を同じ顔に描く。<strong>「一つの視点から見る」という前提そのものを捨てた</strong>わけです。</p>
+    <p>そして80代のピカソが向き合った相手が、ベラスケス（あの約束事の頂点）とレンブラント（「雑になった」と捨てられた画家）でした。</p>
+    <p><strong>壊した本人が、最後に、壊した相手の家に帰っていった。</strong>ただし手ぶらではなく、自分が発明したやり方を持って。
+    降参でも回帰でもなく、対等な口をきける歳になってから、もう一度会いに行った——という感じでしょうか。</p>
+    <p class="aside">小さな符合。ベラスケスが『ラス・メニーナス』を描いた1656年は、レンブラントが破産した年でもあります。
+    同じ年に絵画史の頂点と転落があり、ピカソが晩年に呼び出したのはその二人でした。</p>
+
+    <h3>《アルルカンに扮したパウロ》（1924年）</h3>
+    <p>息子を描いた絵。<strong>パリのピカソ美術館</strong>にあります。ピカソは息子の絵を売りませんでした。</p>
+    <p>ピカソは家族・恋人・友人を生涯描き続けた画家です。風景も静物も描きましたが、圧倒的に人。
+    人にしか興味がなかったと言っていい。</p>
+    <p>ただし公平のために——<strong>愛が深いことと、相手を幸せにすることは別でした。</strong>
+    フランソワーズ・ジローは1964年に回想録を書き、ピカソは出版差し止めを試みて敗訴しています。
+    そばにいる人にとっては、かなり大変な人でもありました。両方本当なのだと思います。</p>
+
+    <h3>「許される芸術家」の時代</h3>
+    <div class="panel">
+      <ul>
+        <li><strong>〜1800年ごろ</strong>　画家＝職人。私生活は問われない（関心の対象外）</li>
+        <li><strong>1800〜1970年</strong>　画家＝天才。私生活は「許される」</li>
+        <li><strong>1970年〜</strong>　作品と人が、一緒に評価される</li>
+      </ul>
+    </div>
+    <p>ベラスケスは宮廷の役人、レンブラントは工房の経営者でした。「芸術家は社会の外側にいる」という物語が生まれたのは
+    <strong>19世紀のロマン主義</strong>からです。ピカソ（1881–1973）は、その時代をまるごと生きて、終わる直前に死にました。</p>
+    <p>ただ「許されていた」というより<strong>「問われなかった」</strong>のほうが近いかもしれません。
+    そばにいた人たちは当時から苦しんでいました。変わったのは彼女たちの感じ方ではなく、それを世間が聞くようになったかどうかです。</p>
+  </section>
+
+  <section class="art">
+    <div class="sec-head">
+      <h2>ピカソが見られる場所</h2>
+    </div>
+    <div class="panel">
+      <ul>
+        <li><strong>パリ ピカソ美術館</strong>（マレ地区・オテル・サレ）——遺族が相続税を作品で納めたもの。
+        <strong>ピカソが手放さなかった作品</strong>と、彼自身が集めた他の画家の作品（セザンヌ、マティス、ルソーなど）。
+        《アルルカンに扮したパウロ》もここ</li>
+        <li><strong>バルセロナ ピカソ美術館</strong>——修業時代〜青の時代。<strong>「まだピカソになる前のピカソ」</strong>。
+        10代の恐ろしくうまい写実画がある。＋『ラス・メニーナス』連作58点</li>
+        <li><strong>プラド美術館</strong>（マドリード）——ベラスケス『ラス・メニーナス』の本物</li>
+        <li><strong>箱根 彫刻の森美術館・ピカソ館</strong>——1984年開館。319点。娘マヤから購入した<strong>陶芸188点</strong>が中心</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="art">
+    <div class="sec-head">
+      <h2>未解決</h2>
+      <span class="count">思い出したら追記</span>
+    </div>
+    <div class="open">
+      <p><strong>箱根で見た、あの一枚は何だったのか。</strong></p>
+      <p>覚えていること：壁一面くらい大きい／ゲルニカっぽい／キュビスムだがマイルド／
+      戦争反対のような主張を感じた／ピカソ館ではなく通常の展示のほうだった。</p>
+      <p><strong>有力候補：《ゲルニカ》のタピスリー版。</strong>原画とほぼ同寸（約3.5m×7.8m）で織られたものが3枚あり、
+      1枚目はロックフェラー、2枚目はフランス、<strong>3枚目が日本（群馬県立近代美術館）</strong>。
+      織物なので輪郭がやわらかくなる＝「マイルド」の説明がつく。</p>
+      <p>ただし所蔵は<strong>群馬</strong>で、箱根ではない。記憶違いか、巡回展か、
+      あるいは彫刻の森が持つ別のタピスリー作品か。<strong>見たのがいつ頃かが分かれば絞れる。</strong></p>
+    </div>
+  </section>
+
+  <footer>
+    展覧会に行った日に「これ見た」と言えば、その場で話します。準備も予習も要りません。<br>
+    行く前に見どころを渡すこともできます。予習して行くと、同じ展覧会でも見え方が変わります。
+  </footer>
+
+</div>
+</body>
+</html>
